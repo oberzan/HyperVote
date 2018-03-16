@@ -1,0 +1,44 @@
+extends layout
+
+block links
+  link(rel="stylesheet", href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css")
+  script(defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js")
+
+block content
+  div.container(style="max-width: 700px")
+    h1 Create ballot
+    ul.options.list-group
+      each ballot in ballots
+        li.list-group-item.d-flex.justify-content-between.align-items-center= ballot.title
+          i.delete.far.fa-trash-alt
+    form#ballotForm(method="post")
+      div.form-group
+        label(for="title") Title
+        input#title.form-control(type="text", name="title" required)
+      div.form-group
+        label(for="description") Description
+        input#description.form-control(type="text", name="description" required)
+        div.invalid-feedback
+      div.form-group
+        label(for="enddatetimepicker") End of voting
+        div#enddatetimepicker.input-group.date( data-target-input="nearest")
+          input.form-control.datetimepicker-input( type="text", data-target="#enddatetimepicker" name="endTime" required)
+          div.input-group-append( data-target="#enddatetimepicker", data-toggle="datetimepicker")
+            div.input-group-text
+              i.far.fa-calendar-alt
+        
+      div.options.form-group
+        label Options
+        ul#optionsUl.list-group
+        div.input-group
+          input#optionInput.form-control(type="text" name="optionInput")
+          div.input-group-append
+            button#addOptionBtn.btn.btn-outline-secondary(type="button") Add
+          
+      input.btn.btn-primary(type="submit", value="Create")
+    
+block scripts
+  script(src='/components/moment/moment.js')
+  //- script(src='/components/jquery-validation/dist/jquery.validate.js')
+  script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js', crossorigin="anonymous")
+  script(type='text/javascript', src='/javascripts/admin.js')   

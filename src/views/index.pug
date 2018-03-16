@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  each ballot in ballots
+    div 
+  p Please insert your token
+  input#tokenInput.form-control(name="postid")
+  button Vote
