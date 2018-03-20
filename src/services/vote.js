@@ -13,7 +13,21 @@ function createVotes() {
     .then((result) => {
       console.log("Success!")
       businessNetworkDefinition = result;
-      console.log(result);
+      let serializer = this.businessNetworkDefinition.getSerializer();
+      console.log(serializer);
+
+      let resource = serializer.fromJSON({
+        '$class': 'org.vote.PublishToken',
+        'title': 'LID:1148'
+      });
+      console.log(resource);
+
+      bizNetworkConnection.submitTransaction(resource);
+
+      // bizNetworkConnection.getAssetRegistry('org.vote.PublishToken')
+      //   .then((registry) => {
+      //     return registry.get('LID:1148');
+      //   })
     });
 
 
