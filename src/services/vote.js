@@ -5,7 +5,19 @@ const crypto = require('crypto');
 const composerClient = require('../composer-client')
 
 function createVotes() {
-  console.log(composerClient.getDefinition());
+  console.log('Create votes');
+
+  let serializer = composerClient.getDefinition().getSerializer();
+  console.log(serializer);
+
+  let resource = serializer.fromJSON({
+    '$class': 'org.vote.PublishToken',
+    'title': 'LID:1148'
+  });
+  console.log(resource);
+
+  composerClient.getConnection().submitTransaction(resource);
+
   // console.log("createVotes")
   // console.log(this);
   // let bizNetworkConnection = new BusinessNetworkConnection();

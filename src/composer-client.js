@@ -2,6 +2,7 @@ const BusinessNetworkConnection = require('composer-client').BusinessNetworkConn
 
 var state = {
   bnDefinition: null,
+  bnConnection: null
 }
 
 exports.connect = (cardName, businessNetworkId, cb) => {
@@ -9,13 +10,20 @@ exports.connect = (cardName, businessNetworkId, cb) => {
   if(state.bnDefinition)
     return cb();
 
-  let bizNetworkConnection = new BusinessNetworkConnection();
-  state.connection = bizNetworkConnection.connect(cardName)
+  state.bnConnection = new BusinessNetworkConnection();
+  state.bnConnection.connect(cardName)
     .then((result) => {
       state.bnDefinition = result;
       return cb();
     });
 }
+
+exports.getConnection = () => {
+  console.log('returning connection')
+  console.log(state.bnConnection);
+  return state.bnConnection;
+}
+
 exports.getDefinition = () => {
   console.log('returning definition')
   console.log(state.bnDefinition);
