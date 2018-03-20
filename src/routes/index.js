@@ -3,7 +3,8 @@ var router = express.Router();
 
 var index = require('../controllers/index');
 var admin = require('../controllers/admin');
-var ballot = require('../controllers/ballot');
+
+var ballot = require('../services/ballot');
 
 // router.get('/', function(req, res, next) {
 //   res.redirect("/feed");
@@ -11,6 +12,7 @@ var ballot = require('../controllers/ballot');
 
 /* GET home page. */
 router.get('/', index.homepage);
+router.post('/', index.vote);
 
 /* ADMIN */
 router.get('/admin/ballots', admin.index)

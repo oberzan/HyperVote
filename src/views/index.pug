@@ -1,9 +1,29 @@
 extends layout
 
 block content
-  h1= title
-  each ballot in ballots
-    div 
-  p Please insert your token
-  input#tokenInput.form-control(name="postid")
-  button Vote
+  div.container(style="max-width: 800px")
+    h1= title
+    br
+    div#accordion
+      each ballot, i in ballots
+        div.card
+          div.card-header(id="heading"+i)
+            h5.mb-0
+              btn.btn.btn-link(data-toggle="collapse" data-target="#collapse"+i aria-expanded="false" aria-controls="collapse"+i)
+                =ballot.title
+          div.collapse(id="collapse"+i aria-labelledby="heading"+i data-parent="#accordion")
+            div.card-body
+              p 
+                =ballot.description
+              form(method="post")
+                div.form-group
+                  label(for=i) #{i18n.__("Choose an option")}:
+                  each option in ballot.options
+                    div.form-check
+                      input.form-check-input(type="radio" name="option" value=option.Name)
+                      label.form-check-label 
+                        =option.Name
+                div.form-group
+                  label(for="token"+i) #{i18n.__("Insert token")}
+                  input.form-control(id="token"+i name="token")
+                button.btn.btn-primary(type="submit") #{i18n.__("Vote")}

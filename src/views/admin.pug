@@ -7,10 +7,7 @@ block links
 block content
   div.container(style="max-width: 700px")
     h1 Create ballot
-    ul.options.list-group
-      each ballot in ballots
-        li.list-group-item.d-flex.justify-content-between.align-items-center= ballot.title
-          i.delete.far.fa-trash-alt
+    
     form#ballotForm(method="post")
       div.form-group
         label(for="title") Title
@@ -36,6 +33,14 @@ block content
             button#addOptionBtn.btn.btn-outline-secondary(type="button") Add
           
       input.btn.btn-primary(type="submit", value="Create")
+    
+    button#createVotes Create votes
+
+    br
+    ul.options.list-group
+      each ballot in ballots
+        li.list-group-item.d-flex.justify-content-between.align-items-center= ballot.title
+          i.delete.far.fa-trash-alt
     
 block scripts
   script(src='/components/moment/moment.js')

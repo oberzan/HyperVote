@@ -1,5 +1,14 @@
 $(function () {
   
+  $('#createVotes').click(() => {
+    let url = window.location.origin;
+    console.log(url);
+    $.ajax({
+      type: "POST",
+      url: url
+    })
+  });
+
   /** DATE PICKER **/ 
   let d = new Date();
   $('#enddatetimepicker').datetimepicker({

@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var i18n = require('i18n');
 
 var index = require('./src/routes/index');
 var api = require('./src/routes/api');
@@ -27,6 +28,14 @@ app.use(
     path.join(__dirname, 'src', 'public')
   )
 );
+
+// Locales
+i18n.configure({
+  locales:['si'],
+  directory: path.join(__dirname, 'src', 'locales'),
+  defaultLocale: 'si'
+});
+app.use(i18n.init);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");

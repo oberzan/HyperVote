@@ -10,14 +10,16 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "i18n": "^0.8.3",
     "moment": "^2.21.0",
     "morgan": "~1.9.0",
+    "nodemailer": "^4.6.3",
     "pug": "2.0.0-beta11",
     "request": "^2.85.0",
     "serve-favicon": "~2.4.5",
     "tempusdominus-bootstrap-4": "^5.0.0-alpha17"
   },
   "devDependencies": {
-    "nodemon": "^1.17.1"
+    "nodemon": "^1.17.2"
   }
 }
