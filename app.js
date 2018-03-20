@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var i18n = require('i18n');
 
+var composerClient = require('./src/composer-client');
 var index = require('./src/routes/index');
 var api = require('./src/routes/api');
 
@@ -28,6 +29,8 @@ app.use(
     path.join(__dirname, 'src', 'public')
   )
 );
+
+composerClient.connect('BNadmin-org1@voting-network', 'voting-network', () => {});
 
 // Locales
 i18n.configure({
