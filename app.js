@@ -30,7 +30,7 @@ app.use(
   )
 );
 
-composerClient.connect('BNadmin-org1@voting-network', 'voting-network', () => {});
+composerClient.connect('BNadmin-org1@voting-network', 'voting-network', () => {console.log('Connection established')});
 
 // Locales
 i18n.configure({

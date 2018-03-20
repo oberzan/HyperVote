@@ -2,10 +2,10 @@ const request = require('request');
 const uuidv4 = require('uuid/v4');
 const crypto = require('crypto');
 // const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
-const bnDefinition = require('../composer-client').getDefinition()
+const composerClient = require('../composer-client')
 
 function createVotes() {
-  console.log(bnDefinition);
+  console.log(composerClient.getDefinition());
   // console.log("createVotes")
   // console.log(this);
   // let bizNetworkConnection = new BusinessNetworkConnection();
