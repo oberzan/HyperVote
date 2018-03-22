@@ -13,7 +13,11 @@ function publishTokens(ballot, tokens) {
 
   let sha = crypto.createHash('sha256');
   let hashes = [];
+  for(let i = 0; i < tokens.length; i++) {
+    hashes.push(sha.update(tokens[i]).digest('hex'));
+  }
   tokens.forEach(thash => {
+    console.log("Hashing");
     hashes.push(sha.update(thash).digest('hex'));
   });
   
