@@ -1,24 +1,37 @@
 const request = require('request');
-const ballotController = require('../services/ballot')
+const ballot = require('../services/ballot')
+const vote = require('../services/vote')
 
-var returnJsonResponse = function(response, status, content) {
-  response.status(status);
-  response.json(content);
+var returnJsonResponse = function(res, status, content) {
+  res.status(status);
+  res.json(content);
 };
 
+function createTokens(req, res) {
+  console.log("createTokens for " + req.params.id);
+  vote.createVotes(req.params.id)
+    .then(() => {
 
+      returnJsonResponse(res, 200, "Success");
+    })
+    .catch(() => {
+      returnJsonResponse(res, 1, err);
+    });
+  
+}
 
-function deleteBallot(request, response) {
-  console.log("DELETE ballot: " + request.params.id);
-  ballotController.delete(request.params.id)
+function deleteBallot(req, res) {
+  console.log("DELETE ballot: " + req.params.id);
+  ballot.delete(req.params.id)
     .then( data => {
-      returnJsonResponse(response, 204, data);
+      returnJsonResponse(res, 204, data);
     })
     .catch( err => {
-      returnJsonResponse(response, 1, err)
+      returnJsonResponse(res, 1, err)
     });  
 }
+
 module.exports = {
   delete: deleteBallot,
-  //getBallots: getBallots
+  createTokens: createTokens
 }

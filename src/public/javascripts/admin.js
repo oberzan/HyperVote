@@ -1,7 +1,14 @@
 $(function () {
   
-  $('#createVotes').click(() => {
-    let url = window.location.origin;
+  $('.btn.tokens').click((x) => {
+    let ballot = $(x.target).siblings('.title').first().text();
+    let url = [window.location.origin,
+      'api',
+      'ballot',
+       ballot,
+       'tokens'
+    ].join('/');
+    
     console.log(url);
     $.ajax({
       type: "POST",
@@ -131,9 +138,9 @@ $(function () {
     let li = $(this).parent();
 
     li.addClass('list-group-item-secondary');
-    li.children().last().before('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+    li.children().first().after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
-    let option = li.text();
+    let option = li.find('span').text();
     let url = [window.location.origin,
               'api',
               'ballot',

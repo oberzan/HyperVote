@@ -34,12 +34,14 @@ block content
           
       input.btn.btn-primary(type="submit", value="Create")
     
-    button#createVotes Create votes
+    
 
     br
     ul.options.list-group
       each ballot in ballots
-        li.list-group-item.d-flex.justify-content-between.align-items-center= ballot.title
+        li.list-group-item.d-flex.align-items-center
+          span.mr-auto.title= ballot.title
+          button.btn.tokens.mx-2 Create tokens
           i.delete.far.fa-trash-alt
     
 block scripts

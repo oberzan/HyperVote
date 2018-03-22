@@ -17,5 +17,6 @@ router.post('/', index.vote);
 /* ADMIN */
 router.get('/admin/ballots', admin.index)
 router.post('/admin/ballots', ballot.createBallot)
+//router.post('/admin/ballots/:id/tokens', ballot.createTokens)
 
 module.exports = router;

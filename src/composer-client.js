@@ -15,6 +15,9 @@ exports.connect = (cardName, businessNetworkId, cb) => {
     .then((result) => {
       state.bnDefinition = result;
       return cb();
+    }).catch((err) => {
+      console.log("Composer-client connection has failed")
+      console.log(err);
     });
 }
 

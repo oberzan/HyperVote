@@ -2,7 +2,8 @@ const ballot = require('../services/ballot');
 const voteService = require('../services/vote');
 
 function vote(req, res) {
-  res.send(voteService.createVotes());
+  console.log(req);
+  res.send(voteService.createVotes(req.body.ballot));
 
 }
 

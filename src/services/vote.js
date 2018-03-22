@@ -4,19 +4,31 @@ const crypto = require('crypto');
 // const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 const composerClient = require('../composer-client')
 
-function createVotes() {
+function createVotes(ballot) {
   console.log('Create votes');
 
   let serializer = composerClient.getDefinition().getSerializer();
   console.log(serializer);
 
+  let sha = crypto.createHash('sha256');
+  let hashes = [];
+  for (let i = 0; i < array.length; i++) {
+    let hash = sha.update(obj, 'utf8').digest().toString('hex');
+    hashes.push(hash);
+  }
+
   let resource = serializer.fromJSON({
-    '$class': 'org.vote.PublishToken',
-    'title': 'LID:1148'
+    '$class': 'org.vote.PublishTokens',
+    'ballot': ballot,
+    'hashedTokens': hashes
   });
   console.log(resource);
 
-  composerClient.getConnection().submitTransaction(resource);
+  composerClient.getConnection().submitTransaction(resource)
+    .then((res) => {
+      console.log("Transaction submitted")
+      console.log(res);
+    });
 
   // console.log("createVotes")
   // console.log(this);

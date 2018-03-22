@@ -77,8 +77,7 @@ function deleteBallot(id) {
     
     request.del(
       'http://172.16.67.238:3000/api/org.vote.Ballot/' + id,
-      function (err, response, body) {       
-        console.log(response);
+      function (err, response, body) {
         console.log(response.statusCode);
         
         if (!err && response.statusCode == 204) {
