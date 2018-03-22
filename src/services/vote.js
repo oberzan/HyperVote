@@ -16,7 +16,7 @@ function createVotes(ballot) {
     let hash = sha.update(obj, 'utf8').digest().toString('hex');
     hashes.push(hash);
   }
-
+  console.log(hashes);
   let resource = serializer.fromJSON({
     '$class': 'org.vote.PublishTokens',
     'ballot': ballot,
@@ -34,7 +34,7 @@ function createVotes(ballot) {
         console.log(err);
         reject(err);
       });
-  }
+  });
 
   // console.log("createVotes")
   // console.log(this);
