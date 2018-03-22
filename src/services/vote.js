@@ -13,10 +13,10 @@ function publishTokens(ballot, tokens) {
 
   let sha = crypto.createHash('sha256');
   let hashes = [];
-  for (let i = 0; i < array.length; i++) {
-    let hash = sha.update(obj, 'utf8').digest().toString('hex');
-    hashes.push(hash);
-  }
+  tokens.forEach(thash => {
+    hashes.push(sha.update(thash, 'utf8').digest().toString('hex'));
+  });
+  
   console.log(hashes);
   let resource = serializer.fromJSON({
     '$class': 'org.vote.PublishTokens',
