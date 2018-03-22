@@ -22,13 +22,19 @@ function createVotes(ballot) {
     'ballot': ballot,
     'hashedTokens': hashes
   });
+  console.log("resource");
   console.log(resource);
-
-  composerClient.getConnection().submitTransaction(resource)
-    .then((res) => {
-      console.log("Transaction submitted")
-      console.log(res);
-    });
+  return new Promise(function(resolve, reject) {
+    composerClient.getConnection().submitTransaction(resource)
+      .then(res => {
+        console.log("Transaction submitted")
+        console.log(res);
+        resolve(res);
+      }).catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  }
 
   // console.log("createVotes")
   // console.log(this);
