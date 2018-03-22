@@ -4,8 +4,8 @@ const crypto = require('crypto');
 // const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 const composerClient = require('../composer-client')
 
-function createVotes(ballot) {
-  console.log('Create votes');
+function publishTokens(ballot, tokens) {
+  console.log('PublishTokens');
 
   let serializer = composerClient.getDefinition().getSerializer();
   console.log("after serializer")
@@ -95,5 +95,5 @@ function createVotes(ballot) {
 }
 
 module.exports = {
-  createVotes: createVotes
+  publishTokens: publishTokens
 }
