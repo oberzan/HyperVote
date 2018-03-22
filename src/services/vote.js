@@ -14,7 +14,7 @@ function publishTokens(ballot, tokens) {
   let sha = crypto.createHash('sha256');
   let hashes = [];
   tokens.forEach(thash => {
-    hashes.push(sha.update(thash, 'utf8').digest().toString('hex'));
+    hashes.push(sha.update(thash).digest('hex'));
   });
   
   console.log(hashes);
