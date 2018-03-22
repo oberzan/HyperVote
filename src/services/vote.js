@@ -11,13 +11,14 @@ function publishTokens(ballot, tokens) {
   console.log("after serializer")
   console.log(serializer);
 
-  let sha = crypto.createHash('sha256');
+  
   let hashes = [];
-  for(let i = 0; i < tokens.length; i++) {
-    hashes.push(sha.update(tokens[i]).digest('hex'));
-  }
+  // for(let i = 0; i < tokens.length; i++) {
+  //   hashes.push(sha.update(tokens[i]).digest('hex'));
+  // }
   tokens.forEach(thash => {
     console.log("Hashing");
+    let sha = crypto.createHash('sha256');
     hashes.push(sha.update(thash).digest('hex'));
   });
   
