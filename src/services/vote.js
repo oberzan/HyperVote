@@ -8,6 +8,7 @@ function createVotes(ballot) {
   console.log('Create votes');
 
   let serializer = composerClient.getDefinition().getSerializer();
+  console.log("after serializer")
   console.log(serializer);
 
   let sha = crypto.createHash('sha256');
