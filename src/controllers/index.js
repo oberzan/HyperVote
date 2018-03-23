@@ -6,15 +6,28 @@ function vote(req, res, next) {
   let option = req.body.option;
   voteService.publishVote(ballot, req.body.token, option)
     .then(() => {
-      res.render('voted', {
-        ballot: ballot,
-        option: option,
-        i18n: res
+      res.status(200).send({
+        message: `${i18.__("You successfully voted")} ${ballot}. ${i18.__("Your vote was")} ${option}.`
       });
+      // res.render('voted', {
+      //   ballot: ballot,
+      //   option: option,
+      //   i18n: res
+      // });
     })
     .catch((err) => {
-      console.log(err);
-      next(err);
+      res.status(400).send({
+        message: `${i18.__("Invalid token")}`
+      });
+
+      // if(err.toString().indexOf("does not exist") > -1){
+      //   console.log("Does not exist");
+      // }
+      // res.render('error', {
+      //   error: {
+      //     stack: err.stack
+      //   }
+      // });
     });
 }
 

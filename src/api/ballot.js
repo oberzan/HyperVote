@@ -7,12 +7,12 @@ const { URL } = require('url');
 const nodemailer = require('nodemailer');
 const uuidv4 = require('uuid/v4');
 
-var returnJsonResponse = function(res, status, content) {
+returnJsonResponse = (res, status, content) => {
   res.status(status);
   res.json(content);
 };
 
-function createTokens(req, res) {
+createTokens = (req, res) => {
   let ballot = req.params.id;
 
   fs.readFile(process.env.NODEMAILER_LIST_PATH, 'utf8', (err, fileData) => {
@@ -77,7 +77,7 @@ function createTokens(req, res) {
   });    
 }
 
-function deleteBallot(req, res) {
+deleteBallot = (req, res) => {
   console.log("DELETE ballot: " + req.params.id);
   ballot.delete(req.params.id)
     .then( data => {

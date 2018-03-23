@@ -3,7 +3,7 @@ const uuidv4 = require('uuid/v4');
 const crypto = require('crypto');
 const composerClient = require('../composer-client')
 
-function publishTokens(ballot, tokens) {
+publishTokens = (ballot, tokens) => {
   console.log('PublishTokens');
 
   let serializer = composerClient.getDefinition().getSerializer();
@@ -23,7 +23,7 @@ function publishTokens(ballot, tokens) {
   });
   console.log("resource");
   console.log(resource);
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     composerClient.getConnection().submitTransaction(resource)
       .then(res => {
         console.log("Transaction submitted")
@@ -36,7 +36,7 @@ function publishTokens(ballot, tokens) {
   });
 }
 
-function publishVote(ballot, token, option) {
+publishVote = (ballot, token, option) => {
   console.log('PublishVote');
 
   let serializer = composerClient.getDefinition().getSerializer();
@@ -47,7 +47,7 @@ function publishVote(ballot, token, option) {
     'selection': option
   });
 
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     composerClient.getConnection().submitTransaction(resource)
       .then(res => {
         console.log("Vote published successfully")

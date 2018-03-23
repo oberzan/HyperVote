@@ -3,5 +3,6 @@
 	"Vote": "Oddaj glas",
 	"Choose an option": "Izberite",
 	"You successfully voted": "Uspešno ste oddali glas na",
-	"Your vote was": "Glasovali ste za"
+	"Your vote was": "Glasovali ste za",
+	"Invalid token": "Neveljaven žeton"
 }

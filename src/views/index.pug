@@ -1,17 +1,20 @@
 extends layout
 
+block head
+  script(defer type='text/javascript', src='/javascripts/index.js')
+
 block content
   div.container(style="max-width: 800px")
     h1= title
     br
-    div#accordion
+    div#ballots
       each ballot, i in ballots
         div.card
           div.card-header(id="heading"+i)
             h5.mb-0
               btn.btn.btn-link(data-toggle="collapse" data-target="#collapse"+i aria-expanded="false" aria-controls="collapse"+i)
                 =ballot.title
-          div.collapse(id="collapse"+i aria-labelledby="heading"+i data-parent="#accordion")
+          div.collapse(id="collapse"+i aria-labelledby="heading"+i data-parent="#ballots")
             div.card-body
               p 
                 =ballot.description

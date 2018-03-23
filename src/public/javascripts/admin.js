@@ -72,11 +72,9 @@ $(function () {
       $('.options .invalid-feedback').show().text("A ballot needs at least 2 options");
       return false;
     }
-    //console.log($(this));
-    // $('#enddatetimepicker').val("dd");
-    // $('#enddatetimepicker > input').val("ee");
     return true;
   });
+
 
   // jQuery.validator.addMethod("minoptions", function(value, element, params) {
   //   console.log('minoptions')
