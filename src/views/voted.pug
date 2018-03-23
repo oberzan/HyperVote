@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  div.container(style="max-width: 700px")
+    h1 Create ballot
+
+    p #{i18.__("You successfully voted")} #{ballot}. #{i18.__("Your vote was")} #{option}.
+
+    input(type="button" value="Go Back From Whence You Came!" onclick="history.back(-1)")

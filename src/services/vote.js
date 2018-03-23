@@ -1,21 +1,14 @@
 const request = require('request');
 const uuidv4 = require('uuid/v4');
 const crypto = require('crypto');
-// const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 const composerClient = require('../composer-client')
 
 function publishTokens(ballot, tokens) {
   console.log('PublishTokens');
 
   let serializer = composerClient.getDefinition().getSerializer();
-  console.log("after serializer")
-  console.log(serializer);
-
   
   let hashes = [];
-  // for(let i = 0; i < tokens.length; i++) {
-  //   hashes.push(sha.update(tokens[i]).digest('hex'));
-  // }
   tokens.forEach(thash => {
     console.log("Hashing");
     let sha = crypto.createHash('sha256');
@@ -41,7 +34,30 @@ function publishTokens(ballot, tokens) {
         reject(err);
       });
   });
+}
 
+function publishVote(ballot, token, option) {
+  console.log('PublishVote');
+
+  let serializer = composerClient.getDefinition().getSerializer();
+
+  let resource = serializer.fromJSON({
+    '$class': 'org.vote.PublishVote',
+    'token': token,
+    'selection': option
+  });
+
+  return new Promise(function(resolve, reject) {
+    composerClient.getConnection().submitTransaction(resource)
+      .then(res => {
+        console.log("Vote published successfully")
+        resolve(res);
+      }).catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+}
   // console.log("createVotes")
   // console.log(this);
   // let bizNetworkConnection = new BusinessNetworkConnection();
@@ -97,8 +113,8 @@ function publishTokens(ballot, tokens) {
 
   //   );
   // });
-}
 
 module.exports = {
-  publishTokens: publishTokens
+  publishTokens: publishTokens,
+  publishVote: publishVote
 }

@@ -12,7 +12,7 @@ var ballot = require('../services/ballot');
 
 /* GET home page. */
 router.get('/', index.homepage);
-router.post('/', index.vote);
+router.post('/:id', index.vote);
 
 /* ADMIN */
 router.get('/admin/ballots', admin.index)

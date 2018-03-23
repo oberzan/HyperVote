@@ -2,9 +2,16 @@ const ballot = require('../services/ballot');
 const voteService = require('../services/vote');
 
 function vote(req, res) {
-  console.log(req);
-  res.send(voteService.createVotes(req.body.ballot));
-
+  let ballot = req.params.id;
+  let option = res.body.option;
+  res.send(voteService.publishVote(ballot, res.body.token, option))
+    .then(() => {
+      res.render('voted', {
+        ballot: ballot,
+        option: option,
+        i18n: res
+      });
+    });
 }
 
 function homepage(req, res, next) {

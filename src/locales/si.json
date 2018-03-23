@@ -1,5 +1,7 @@
 {
 	"Insert token": "Vpišite žeton",
 	"Vote": "Oddaj glas",
-	"Choose an option": "Izberite"
+	"Choose an option": "Izberite",
+	"You successfully voted": "Uspešno ste oddali glas na",
+	"Your vote was": "Glasovali ste za"
 }
