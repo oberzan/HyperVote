@@ -18,7 +18,7 @@ block content
             div.card-body
               p 
                 =ballot.description
-              form(action=ballot.title, method="post")
+              form(action=`api/vote/${ballot.title}`, method="post")
                 div.form-group
                   label(for=i) #{i18n.__("Choose an option")}:
                   each option in ballot.options

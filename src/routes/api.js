@@ -11,4 +11,6 @@ router.delete('/ballot/:id', ballot.delete);
 
 router.post('/ballot/:id/tokens', ballot.createTokens);
 
+router.post('/vote/:id', ballot.publishVote);
+
 module.exports = router;

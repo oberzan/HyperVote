@@ -88,7 +88,38 @@ deleteBallot = (req, res) => {
     });  
 }
 
+publishVote = (req, res, next) => {
+  let ballot = req.params.id;
+  let option = req.body.option;
+  voteService.publishVote(ballot, req.body.token, option)
+    .then(() => {
+      res.status(200).send({
+        message: `${res.__("You successfully voted")} ${ballot}. ${res.__("Your vote was")} ${option}.`
+      });
+      // res.render('voted', {
+      //   ballot: ballot,
+      //   option: option,
+      //   i18n: res
+      // });
+    })
+    .catch((err) => {
+      res.status(400).send({
+        message: `${res.__("Invalid token")}`
+      });
+
+      // if(err.toString().indexOf("does not exist") > -1){
+      //   console.log("Does not exist");
+      // }
+      // res.render('error', {
+      //   error: {
+      //     stack: err.stack
+      //   }
+      // });
+    });
+}
+
 module.exports = {
   delete: deleteBallot,
-  createTokens: createTokens
+  createTokens: createTokens,
+  publishVote: publishVote
 }
