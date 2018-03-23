@@ -21,7 +21,6 @@ function getBallots() {
     }).on('data', (data) => {
       //console.log("DATA: ")
       //console.log(JSON.parse(data.toString()))
-      console.log(1111111111111111111111111111111);
       console.log(data.toString());
       resolve(JSON.parse(data.toString()));
     });
