@@ -17,7 +17,7 @@ function vote(req, res, next) {
     })
     .catch((err) => {
       res.status(400).send({
-        message: `${i18.__("Invalid token")}`
+        message: `${res.__("Invalid token")}`
       });
 
       // if(err.toString().indexOf("does not exist") > -1){
