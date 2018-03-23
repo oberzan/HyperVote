@@ -1,7 +1,7 @@
 const ballot = require('../services/ballot');
 const voteService = require('../services/vote');
 
-function vote(req, res) {
+function vote(req, res, next) {
   let ballot = req.params.id;
   let option = req.body.option;
   voteService.publishVote(ballot, req.body.token, option)
@@ -11,6 +11,10 @@ function vote(req, res) {
         option: option,
         i18n: res
       });
+    })
+    .catch((err) => {
+      console.log(err);
+      next(err);
     });
 }
 
