@@ -7,7 +7,7 @@ function vote(req, res, next) {
   voteService.publishVote(ballot, req.body.token, option)
     .then(() => {
       res.status(200).send({
-        message: `${i18.__("You successfully voted")} ${ballot}. ${i18.__("Your vote was")} ${option}.`
+        message: `${res.__("You successfully voted")} ${ballot}. ${res.__("Your vote was")} ${option}.`
       });
       // res.render('voted', {
       //   ballot: ballot,
