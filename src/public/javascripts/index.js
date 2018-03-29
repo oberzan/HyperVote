@@ -1,7 +1,10 @@
 $(() => {
 
-  $('.card').each(e => {
-    let ballot = $(e.currentTarget).find('.card-body > p').text();
+  $('.card').each((i, element) => {
+    console.log($(element));
+    if ($(element).find('.chart').length < 1)
+      return;
+    let ballot = $(element).find('.card-body > p').text().trim();
     console.log(ballot);
     
     $.ajax({
