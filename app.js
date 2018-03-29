@@ -32,6 +32,8 @@ app.use(
 
 composerClient.connect('BNadmin-org1@voting-network', 'voting-network', () => {console.log('Connection established')});
 
+app.locals.moment = require('moment');
+
 // Locales
 i18n.configure({
   locales:['si'],

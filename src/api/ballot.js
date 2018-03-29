@@ -91,7 +91,7 @@ deleteBallot = (req, res) => {
 publishVote = (req, res, next) => {
   let ballot = req.params.id;
   let option = req.body.option;
-  voteService.publishVote(ballot, req.body.token, option)
+  vote.publishVote(ballot, req.body.token, option)
     .then(() => {
       res.status(200).send({
         message: `${res.__("You successfully voted")} ${ballot}. ${res.__("Your vote was")} ${option}.`

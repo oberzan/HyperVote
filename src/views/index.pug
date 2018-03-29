@@ -18,15 +18,16 @@ block content
             div.card-body
               p 
                 =ballot.description
-              form(action=`api/vote/${ballot.title}`, method="post")
-                div.form-group
-                  label(for=i) #{i18n.__("Choose an option")}:
-                  each option in ballot.options
-                    div.form-check
-                      input.form-check-input(type="radio" name="option" value=option.Name)
-                      label.form-check-label 
-                        =option.Name
-                div.form-group
-                  label(for="token"+i) #{i18n.__("Insert token")}
-                  input.form-control.token(id="token"+i name="token")
-                button.btn.btn-primary(type="submit") #{i18n.__("Vote")}
+              if ballot.end >= moment()
+                form(action=`api/vote/${ballot.title}`, method="post")
+                  div.form-group
+                    label(for=i) #{i18n.__("Choose an option")}:
+                    each option in ballot.options
+                      div.form-check
+                        input.form-check-input(type="radio" name="option" value=option.Name)
+                        label.form-check-label 
+                          =option.Name
+                  div.form-group
+                    label(for="token"+i) #{i18n.__("Insert token")}
+                    input.form-control.token(id="token"+i name="token")
+                  button.btn.btn-primary(type="submit") #{i18n.__("Vote")}
