@@ -92,9 +92,11 @@ getResults = (req, res) => {
   console.log('getResults');
   ballot.getResults(req.params.id)
     .then( data => {
+      console.log('getResultsResponse');
       returnJsonResponse(res, 200, data);
     })
     .catch( err => {
+      console.log('getResultsError');
       returnJsonResponse(res, 400, err)
     });
 }
