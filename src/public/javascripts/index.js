@@ -2,9 +2,10 @@ $(() => {
 
   $('.card').each(e => {
     let ballot = $(e.currentTarget).find('.card-body > p').text();
+    console.log(ballot);
     
     $.ajax({
-      url: '/api/results/' + ballot, //ballot.title,
+      url: '/api/ballot/' + ballot + '/results', //ballot.title,
       type:'get',
       success: data => {
         console.log("success");
