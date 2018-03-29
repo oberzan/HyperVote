@@ -103,8 +103,9 @@ getResults = (ballot) => {
         SELECT org.vote.Vote 
         WHERE (ballot == _$ballot)
     `);
-    connection.query(query, { ballot: ballot })
-    
+    let bId = encodeURI('resource:org.vote.Ballot#'+ballot);
+    console.log(bId);
+    connection.query(query, { ballot: bId })
     
     // connection.query('getResults', { ballot: ballot })
       .then(response => {

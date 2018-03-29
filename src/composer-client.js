@@ -23,13 +23,13 @@ exports.connect = (cardName, businessNetworkId, cb) => {
 
 exports.getConnection = () => {
   console.log('returning connection')
-  console.log(state.bnConnection);
+  // console.log(state.bnConnection);
   return state.bnConnection;
 }
 
 exports.getDefinition = () => {
   console.log('returning definition')
-  console.log(state.bnDefinition);
+  // console.log(state.bnDefinition);
   return state.bnDefinition;
 }
 
