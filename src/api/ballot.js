@@ -84,8 +84,19 @@ deleteBallot = (req, res) => {
       returnJsonResponse(res, 204, data);
     })
     .catch( err => {
-      returnJsonResponse(res, 1, err)
+      returnJsonResponse(res, 400, err)
     });  
+}
+
+getResults = (req, res) => {
+  console.log('getResults');
+  ballot.getResults(req.params.id)
+    .then( data => {
+      returnJsonResponse(res, 200, data);
+    })
+    .catch( err => {
+      returnJsonResponse(res, 400, err)
+    });
 }
 
 publishVote = (req, res, next) => {
@@ -121,5 +132,6 @@ publishVote = (req, res, next) => {
 module.exports = {
   delete: deleteBallot,
   createTokens: createTokens,
-  publishVote: publishVote
+  publishVote: publishVote,
+  getResults: getResults
 }

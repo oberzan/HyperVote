@@ -1,12 +1,14 @@
 const request = require('request');
 const moment = require('moment');
 
-var returnJsonResponse = function(response, status, content) {
+const composerClient = require('../composer-client')
+
+returnJsonResponse = (response, status, content) => {
   response.status(status);
   response.json(content);
 };
 
-function getBallots() {  
+getBallots = () => {  
   return new Promise(function(resolve, reject) {
     request.get({
       headers: {'Accept': 'application/json'},
@@ -27,7 +29,7 @@ function getBallots() {
   });  
 }
 
-function createBallot(req, res, next) {
+createBallot = (req, res, next) => {
   console.log(req.body);
   console.log(req.body.endTime);
   var options = [];
@@ -71,7 +73,7 @@ function createBallot(req, res, next) {
   );  
 }
 
-function deleteBallot(id) {  
+deleteBallot = (id) => {  
   return new Promise(function(resolve, reject) {
     
     request.del(
@@ -91,8 +93,27 @@ function deleteBallot(id) {
   });  
 }
 
+getResults = (ballot) => {
+  console.log('Get votes');
+
+  let connection = composerClient.getConnection();
+
+  return new Promise((resolve, reject) => {
+    connection.query('getResults', { ballot: ballot })
+      .then(response => {
+        console.log(response);
+        resolve(response);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+}
+
 module.exports = {
   getBallots: getBallots,
   createBallot: createBallot,
-  delete: deleteBallot
+  delete: deleteBallot,
+  getResults: getResults
 }

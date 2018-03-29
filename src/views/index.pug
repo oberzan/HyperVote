@@ -9,7 +9,7 @@ block content
     br
     div#ballots
       each ballot, i in ballots
-        div.card
+        div.card(class=i)
           div.card-header(id="heading"+i)
             h5.mb-0
               btn.btn.btn-link(data-toggle="collapse" data-target="#collapse"+i aria-expanded="false" aria-controls="collapse"+i)
@@ -18,7 +18,7 @@ block content
             div.card-body
               p 
                 =ballot.description
-              if ballot.end >= moment()
+              if moment(ballot.end) >= moment()
                 form(action=`api/vote/${ballot.title}`, method="post")
                   div.form-group
                     label(for=i) #{i18n.__("Choose an option")}:
@@ -31,3 +31,5 @@ block content
                     label(for="token"+i) #{i18n.__("Insert token")}
                     input.form-control.token(id="token"+i name="token")
                   button.btn.btn-primary(type="submit") #{i18n.__("Vote")}
+              else
+                div.chart
