@@ -106,11 +106,9 @@ getResults = (ballot) => {
     let bId = encodeURI('resource:org.vote.Ballot#'+ballot);
     console.log(bId);
     connection.query(query, { ballot: bId })
-    
-    // connection.query('getResults', { ballot: ballot })
       .then(response => {
-        console.log(response);
-        resolve(response);
+        console.log(response);        
+        resolve(getSerializer().toJSON(response));
       })
       .catch(err => {
         console.log(err);
