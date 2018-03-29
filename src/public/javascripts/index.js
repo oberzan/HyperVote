@@ -4,7 +4,7 @@ $(() => {
     console.log($(element));
     if ($(element).find('.chart').length < 1)
       return;
-    let ballot = $(element).find('.card-body > p').text().trim();
+    let ballot = $(element).find('.card-header btn').text().trim();
     console.log(ballot);
     
     $.ajax({
