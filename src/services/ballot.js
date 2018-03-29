@@ -107,8 +107,9 @@ getResults = (ballot) => {
     console.log(bId);
     connection.query(query, { ballot: bId })
       .then(response => {
-        console.log(response);        
-        resolve(getSerializer().toJSON(response));
+        console.log(response);  
+        let serializer = composerClient.getDefinition().getSerializer();      
+        resolve(serializer.toJSON(response));
       })
       .catch(err => {
         console.log(err);
