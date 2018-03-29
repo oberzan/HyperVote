@@ -99,7 +99,14 @@ getResults = (ballot) => {
   let connection = composerClient.getConnection();
 
   return new Promise((resolve, reject) => {
-    connection.query('getResults', { ballot: ballot })
+    let query = connection.buildQuery(`
+        SELECT org.vote.Vote 
+        WHERE (ballot == _$ballot)
+    `);
+    connection.query(query, { ballot: ballot })
+    
+    
+    // connection.query('getResults', { ballot: ballot })
       .then(response => {
         console.log(response);
         resolve(response);
