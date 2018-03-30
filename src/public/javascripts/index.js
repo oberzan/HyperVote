@@ -20,7 +20,13 @@ $(() => {
         }
         
         drawChart = () => {
-          let data = google.visualization.arrayToDataTable(processedData);
+          let data = new google.visualization.DataTable();
+          data.addColumn('string', 'Option');
+          data.addColumn('number', 'Number of votes');
+          data.addRows(processedData);
+
+
+          // let data = google.visualization.arrayToDataTable(processedData);
 
           let options = {
             title: 'Results of a ballot'
