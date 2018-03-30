@@ -107,7 +107,6 @@ getResults = (ballot) => {
     console.log(bId);
     connection.query(query, { ballot: bId })
       .then(response => {
-        console.log(response);
         let selections = response.map(x => x.selection);
         console.log(selections);
         let selCounts = {};

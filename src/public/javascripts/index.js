@@ -15,25 +15,26 @@ $(() => {
         console.log(data);
 
         google.charts.load('current', {'packages':['corechart']});
-        //google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawChart);
 
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
+        drawChart = () => {
+          var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Work',     11],
+            ['Eat',      2],
+            ['Commute',  2],
+            ['Watch TV', 2],
+            ['Sleep',    7]
+          ]);
 
-        var options = {
-          title: 'My Daily Activities'
-        };
+          var options = {
+            title: 'My Daily Activities'
+          };
 
-        var chart = new google.visualization.PieChart($(element).find('.chart'));
+          var chart = new google.visualization.PieChart($(element).find('.chart'));
 
-        chart.draw(data, options);
-
+          chart.draw(data, options);
+        }
       },
       error: err => {
         console.log("error");
