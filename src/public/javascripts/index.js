@@ -14,26 +14,22 @@ $(() => {
         console.log("success");
         console.log(data);
 
+        let processedData = [];
+        for (let key in data) {
+          processedData.push([key, data[key]]);
+        }
         
-
         drawChart = () => {
-          var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            ['Work',     11],
-            ['Eat',      2],
-            ['Commute',  2],
-            ['Watch TV', 2],
-            ['Sleep',    7]
-          ]);
+          let data = google.visualization.arrayToDataTable(processedData);
 
-          var options = {
-            title: 'My Daily Activities'
+          let options = {
+            title: 'Results of a ballot'
           };
 
-          var chart = new google.visualization.PieChart(element.querySelector('.chart'));
-
+          let chart = new google.visualization.PieChart(element.querySelector('.chart'));
           chart.draw(data, options);
         }
+
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
