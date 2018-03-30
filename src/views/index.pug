@@ -2,6 +2,8 @@ extends layout
 
 block head
   script(defer type='text/javascript', src='/javascripts/index.js')
+  script(defer type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+  script(defer type='text/javascript', src='/javascripts/index.js')
 
 block content
   div.container(style="max-width: 800px")
@@ -32,4 +34,4 @@ block content
                     input.form-control.token(id="token"+i name="token")
                   button.btn.btn-primary(type="submit") #{i18n.__("Vote")}
               else
-                div.chart
+                div.chart(style="width: 500px; height: 500px)
