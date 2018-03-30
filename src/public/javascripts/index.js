@@ -14,8 +14,7 @@ $(() => {
         console.log("success");
         console.log(data);
 
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
+        
 
         drawChart = () => {
           var data = google.visualization.arrayToDataTable([
@@ -31,10 +30,13 @@ $(() => {
             title: 'My Daily Activities'
           };
 
-          var chart = new google.visualization.PieChart($(element).find('.chart'));
+          var chart = new google.visualization.PieChart(element.querySelector('.chart'));
 
           chart.draw(data, options);
         }
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
       },
       error: err => {
         console.log("error");
