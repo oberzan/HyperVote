@@ -77,7 +77,7 @@ deleteBallot = (id) => {
   return new Promise(function(resolve, reject) {
     
     request.del(
-      'http://172.16.67.238:3000/api/org.vote.Ballot/' + id,
+      encodeURI('http://172.16.67.238:3000/api/org.vote.Ballot/' + id),
       function (err, response, body) {
         console.log(response.statusCode);
         
@@ -107,9 +107,19 @@ getResults = (ballot) => {
     console.log(bId);
     connection.query(query, { ballot: bId })
       .then(response => {
-        console.log(response);  
-        let serializer = composerClient.getDefinition().getSerializer();      
-        resolve(serializer.toJSON(response));
+        console.log(response);
+        let selections = response.map(x => x.selection);
+        console.log(selections);
+        let selCounts = {};
+        selections.forEach(x => {
+          if(selCounts[x])
+            selCounts[x] += 1
+          else
+            selCounts[x] = 1
+        });
+        console.log(selCounts);
+        // let serializer = composerClient.getDefinition().getSerializer();      
+        resolve(selCounts);
       })
       .catch(err => {
         console.log(err);
