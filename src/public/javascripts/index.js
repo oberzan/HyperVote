@@ -29,7 +29,9 @@ $(() => {
           // let data = google.visualization.arrayToDataTable(processedData);
 
           let options = {
-            title: 'Results of a ballot'
+            title: 'Results of a ballot',
+            pieSliceText: 'none',
+            chartArea:{height:250}
           };
 
           let chart = new google.visualization.PieChart(element.querySelector('.chart'));
