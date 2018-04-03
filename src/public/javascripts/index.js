@@ -65,7 +65,9 @@ $(() => {
     makeChart(ballot);    
   });
   // Draw chart for /:id
-  makeChart($('#ballot h1').text().trim());
+  let bId = $('#ballot h1').text().trim();
+  if(bId)
+    makeChart(bId);
 
 
 
