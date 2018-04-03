@@ -8,6 +8,27 @@ returnJsonResponse = (response, status, content) => {
   response.json(content);
 };
 
+getBallot = (id) => {  
+  return new Promise(function(resolve, reject) {
+    request.get({
+      headers: {'Accept': 'application/json'},
+      url: 'http://172.16.67.238:3000/api/org.vote.Ballot' + '/' + id
+    }).on('error', (err) =>{
+      console.log("ERROR: ");
+      console.error(err);
+      if (err.errno == 'ECONNREFUSED') {
+        console.log("Connection with rest-server refused.");
+      }
+      reject(err);
+    }).on('data', (data) => {
+      //console.log("DATA: ")
+      //console.log(JSON.parse(data.toString()))
+      console.log(data.toString());
+      resolve(JSON.parse(data.toString()));
+    });
+  });  
+}
+
 getBallots = () => {  
   return new Promise(function(resolve, reject) {
     request.get({
@@ -128,6 +149,7 @@ getResults = (ballot) => {
 }
 
 module.exports = {
+  getBallot: getBallot,
   getBallots: getBallots,
   createBallot: createBallot,
   delete: deleteBallot,

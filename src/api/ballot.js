@@ -40,7 +40,7 @@ createTokens = (req, res) => {
           }
         });
     
-        let votingUrl = new URL(req.headers.referer).origin;
+        let votingUrl = new URL(req.headers.referer).origin + '/' + ballot;
         tokens.forEach((token, i) => {
           let mailOptions = {
             from: '"Admin 👻" <a>',

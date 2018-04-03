@@ -1,0 +1,30 @@
+extends layout
+
+block head
+  script(defer type='text/javascript', src='/javascripts/index.js')
+  script(defer type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+  script(defer type='text/javascript', src='/javascripts/index.js')
+
+block content
+  div#ballot.container(style="max-width: 800px")
+    h1
+      =ballot.title
+    p 
+      =ballot.description
+    if moment(ballot.end) >= moment()
+      form(action=`api/vote/${ballot.title}`, method="post")
+        div.form-group
+          label(for=i) #{i18n.__("Choose an option")}:
+          each option in ballot.options
+            div.form-check
+              input.form-check-input(type="radio" name="option" value=option.Name)
+              label.form-check-label 
+                =option.Name
+        div.form-group
+          label(for="token"+i) #{i18n.__("Insert token")}
+          input.form-control.token(id="token"+i name="token")
+          div.valid-feedback #{i18n.__("Vote successfull")}
+          div.invalid-feedback #{i18n.__("Vote unsuccessfull")}
+        button.btn.btn-primary(type="submit" disabled=true) #{i18n.__("Vote")}
+    else
+      div.chart

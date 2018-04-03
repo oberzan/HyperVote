@@ -62,17 +62,15 @@ $(() => {
     });
   });
 
+  // Remove token too short/long message when a valid token is entered
   $(document).on('change', '.token.is-invalid',e => {
-  //$('.token.is-invalid').change(e => {
     let tokenInput = $(e.currentTarget);
-    console.log(1);
     if(tokenInput.val().length == 36) {
-      console.log(2);
       tokenInput.removeClass('is-invalid');
     }
   })
 
-  $('#ballots form').submit(e => {
+  $('#ballots form, #ballot form').submit(e => {
     let form = $(e.currentTarget);
     let token = form.find('.token');
     e.preventDefault();
