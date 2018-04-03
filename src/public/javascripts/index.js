@@ -6,7 +6,7 @@ $(() => {
     $(e.currentTarget).parent().parent().parent().find('button').prop('disabled', false);
   });
 
-  makeChart = (ballot) => {
+  makeChart = (ballot, element) => {
     $.ajax({
       url: '/api/ballot/' + ballot + '/results', //ballot.title,
       type:'get',
@@ -62,12 +62,12 @@ $(() => {
       return;
     let ballot = $(element).find('.card-header btn').text().trim();
     console.log(ballot);
-    makeChart(ballot);    
+    makeChart(ballot, element);    
   });
   // Draw chart for /:id
   let bId = $('#ballot h1').text().trim();
   if(bId)
-    makeChart(bId);
+    makeChart(bId, $('#ballot'));
 
 
 
