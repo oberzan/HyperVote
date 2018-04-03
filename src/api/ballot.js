@@ -15,6 +15,18 @@ returnJsonResponse = (res, status, content) => {
 createTokens = (req, res) => {
   let ballot = req.params.id;
 
+  if(process.env.NODEMAILER_LIST_PATH == undefined) {
+    returnJsonResponse(res, 500, "NODEMAILER_LIST_PATH is undefined");
+    return;
+  }
+  if(process.env.NODEMAILER_USER == undefined) {
+    returnJsonResponse(res, 500, "NODEMAILER_USER is undefined");
+    return;
+  }
+  if(process.env.NODEMAILER_PASS == undefined) {
+    returnJsonResponse(res, 500, "NODEMAILER_PASS is undefined");
+    return;
+  }
   fs.readFile(process.env.NODEMAILER_LIST_PATH, 'utf8', (err, fileData) => {
     if (err) {
       console.log(err);

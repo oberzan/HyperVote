@@ -1,5 +1,6 @@
 $(function () {
   
+  /** SEND TOKENS **/
   $('.btn.tokens').click((x) => {
     let ballot = $(x.target).siblings('.title').first().text();
     let url = [window.location.origin,
@@ -9,10 +10,23 @@ $(function () {
        'tokens'
     ].join('/');
     
-    console.log(url);
+    let errBar = $('#ballotErrorBar');
+    let successBar = $('#ballotSuccessBar');
     $.ajax({
       type: "POST",
-      url: url
+      url: url,
+      error: err => {
+        console.log(err);
+        if(err.status == 500) {
+          errBar.text(err.responseJSON);
+          errBar.show();
+        }
+      },
+      success: data => {
+        console.log(data);
+        errBar.text(data);
+        successBar.show();
+      }
     })
   });
 

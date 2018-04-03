@@ -37,10 +37,10 @@ block content
             button#addOptionBtn.btn.btn-outline-secondary(type="button") #{i18n.__("Add")}
           
       input.btn.btn-primary(type="submit", value=i18n.__("Create"))
-    
-    
 
     hr
+    div#ballotErrorBar.alert.alert-danger(role="alert", style="display: none")
+    div#ballotSuccessBar.alert.alert-success(role="alert", style="display: none")
     ul.options.list-group
       each ballot in ballots
         li.list-group-item.d-flex.align-items-center
