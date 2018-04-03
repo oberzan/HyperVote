@@ -67,7 +67,7 @@ $(() => {
   // Draw chart for /:id
   let bId = $('#ballot h1').text().trim();
   if(bId)
-    makeChart(bId, $('#ballot'));
+    makeChart(bId, document.querySelector('#ballot'));
 
 
 
