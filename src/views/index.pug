@@ -32,6 +32,8 @@ block content
                   div.form-group
                     label(for="token"+i) #{i18n.__("Insert token")}
                     input.form-control.token(id="token"+i name="token")
-                  button.btn.btn-primary(type="submit") #{i18n.__("Vote")}
+                    div.valid-feedback #{i18n.__("Vote successfull")}
+                    div.invalid-feedback #{i18n.__("Vote unsuccessfull")}
+                  button.btn.btn-primary(type="submit" disabled=true) #{i18n.__("Vote")}
               else
                 div.chart

@@ -1,5 +1,12 @@
 $(() => {
 
+  // Enable form submitting, when an option is selected
+  $("input[type=radio]").change(e => {
+    console.log($(e.currentTarget).parent().parent().parent().find('button'));
+    $(e.currentTarget).parent().parent().parent().find('button').prop('disabled', false);
+  });
+
+  // Draw charts for finished ballots
   $('.card').each((i, element) => {
     console.log($(element));
     if ($(element).find('.chart').length < 1)
@@ -55,20 +62,46 @@ $(() => {
     });
   });
 
-  // for(ballot in $('.card')) {
-  //   console.log
-  // }
+  $(document).on('change', '.token.is-invalid',e => {
+  //$('.token.is-invalid').change(e => {
+    let tokenInput = $(e.currentTarget);
+    console.log(1);
+    if(tokenInput.val().length == 36) {
+      console.log(2);
+      tokenInput.removeClass('is-invalid');
+    }
+  })
 
   $('#ballots form').submit(e => {
     let form = $(e.currentTarget);
+    let token = form.find('.token');
     e.preventDefault();
 
     console.log(form);
     var url = form.closest('form').attr('action'),
         data = form.closest('form').serialize();
 
+    if(form.find('.token').val().length < 36) {
+      // form.find('.invalid-feedback').text("Token too short");
+      form.find('.invalid-feedback').text("Prekratek žeton");
+      token.addClass('is-invalid');
+      token.removeClass('is-valid');
+      return;
+    }
+    if(form.find('.token').val().length > 36) {
+      // form.find('.invalid-feedback').text("Token too long");
+      form.find('.invalid-feedback').text("Predolg žeton");
+      token.addClass('is-invalid');
+      token.removeClass('is-valid');
+      return;
+    }
+    if(form.find("input[type=radio]:checked").length <= 0) {
+      // Shouldn't happen
+      return;
+    }
+
     form.find('button').prop('disabled', true);
-    form.find('.token').prop('disabled', true);
+    token.prop('disabled', true);
 
     $.ajax({
       url: url, //ballot.title,
@@ -77,16 +110,22 @@ $(() => {
       success: data => {
         console.log("success");
         console.log(data);
+
+        token.addClass('is-valid');
+        token.removeClass('is-invalid');
       },
       error: err => {
         console.log("error");
         console.log(err);
+
+        token.addClass('is-invalid');
+        token.removeClass('is-valid');
       },
       complete: x => {
         console.log("complete");
         console.log(x);
         form.find('button').prop('disabled', false);
-        form.find('.token').prop('disabled', false);
+        token.prop('disabled', false);
       }
     });
   });

@@ -4,5 +4,8 @@
 	"Choose an option": "Izberite",
 	"You successfully voted": "Uspešno ste oddali glas na",
 	"Your vote was": "Glasovali ste za",
-	"Invalid token": "Neveljaven žeton"
+	"Invalid token": "Neveljaven žeton",
+	"Successfull vote": "Glas uspešno oddan..",
+	"Vote successfull": "Glas uspešno oddan",
+	"Vote unsuccessfull": "Glas je neveljaven. Prišlo je do napake."
 }
