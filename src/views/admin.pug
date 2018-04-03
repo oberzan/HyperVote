@@ -5,7 +5,7 @@ block head
   script(defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js")
   script(src='/components/moment/moment.js')
   //- script(src='/components/jquery-validation/dist/jquery.validate.js')
-  script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js', crossorigin="anonymous")
+  script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha18/js/tempusdominus-bootstrap-4.min.js', crossorigin="anonymous")
   script(defer type='text/javascript', src='/javascripts/admin.js')
 
 block content
@@ -40,10 +40,10 @@ block content
     
     
 
-    br
+    hr
     ul.options.list-group
       each ballot in ballots
         li.list-group-item.d-flex.align-items-center
           span.mr-auto.title= ballot.title
-          button.btn.tokens.mx-2 Send tokens
+          button.btn.btn-outline-secondary.tokens.mx-2 Send tokens
           i.delete.far.fa-trash-alt   

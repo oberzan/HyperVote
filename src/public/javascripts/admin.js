@@ -22,7 +22,7 @@ $(function () {
     format: 'DD.MM.YYYY HH:mm',
     extraFormats: [ 'DD.MM.YY' ],
     minDate: d.setDate(d.getDate()-1),
-    sideBySide: true,
+    //sideBySide: true,
     stepping: 5
   });
   

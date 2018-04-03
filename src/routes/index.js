@@ -10,13 +10,15 @@ var ballot = require('../services/ballot');
 //   res.redirect("/feed");
 // });
 
+/* ADMIN */
+router.get('/admin', admin.index)
+router.post('/admin', ballot.createBallot)
+//router.post('/admin/ballots/:id/tokens', ballot.createTokens)
+
 /* GET home page. */
 router.get('/', index.homepage);
 router.get('/:id', index.ballot);
 
-/* ADMIN */
-router.get('/admin/ballots', admin.index)
-router.post('/admin/ballots', ballot.createBallot)
-//router.post('/admin/ballots/:id/tokens', ballot.createTokens)
+
 
 module.exports = router;
