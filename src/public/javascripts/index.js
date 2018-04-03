@@ -73,6 +73,7 @@ $(() => {
   $('#ballots form, #ballot form').submit(e => {
     let form = $(e.currentTarget);
     let token = form.find('.token');
+    console.log(token);
     e.preventDefault();
 
     var url = form.closest('form').attr('action'),
