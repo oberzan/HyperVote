@@ -75,9 +75,10 @@ $(() => {
     let token = form.find('.token');
     e.preventDefault();
 
-    console.log(form);
     var url = form.closest('form').attr('action'),
         data = form.closest('form').serialize();
+    console.log("Data:")
+    console.log(data);
 
     if(form.find('.token').val().length < 36) {
       // form.find('.invalid-feedback').text("Token too short");
