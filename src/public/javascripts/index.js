@@ -16,9 +16,10 @@ $(() => {
 
         let processedData = [];
         for (let key in data) {
+          let rkey = key;
           if(key == "undefined")
-            key = "Neoddano"
-          processedData.push([key, data[key]]);
+            rkey = "Neoddano"
+          processedData.push([rkey, data[key]]);
         }
         
         drawChart = () => {
