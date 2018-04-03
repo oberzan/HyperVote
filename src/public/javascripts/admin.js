@@ -24,7 +24,7 @@ $(function () {
       },
       success: data => {
         console.log(data);
-        errBar.text(data);
+        successBar.text(data);
         successBar.show();
       }
     })

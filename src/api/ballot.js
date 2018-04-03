@@ -79,7 +79,8 @@ createTokens = (req, res) => {
               returnJsonResponse(res, 1, err);
             });
         });
-        returnJsonResponse(res, 200, "Success");
+        let successMessage = res.__("Tokens for ") + ballot + res.__(" successfully sent") + ".";
+        returnJsonResponse(res, 200, successMessage);
 
       })
       .catch(err => {

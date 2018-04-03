@@ -21,5 +21,8 @@
 	"Hi": "Pozdravljeni",
 	"Your token for" : "Vaš žeton za",
 	"is": "je",
-	"You can cast your vote at": "Glasujete lahko na povezavi"
+	"You can cast your vote at": "Glasujete lahko na povezavi",
+
+	"Tokens for": "Žetoni za",
+	"successfully sent": "uspešno odposlani"
 }
