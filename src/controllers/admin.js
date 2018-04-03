@@ -6,7 +6,8 @@ function index(req, res, next) {
       console.log("Admin.index: got response");
       console.log(ballots);
       res.render('admin', {
-        ballots: ballots
+        ballots: ballots,
+        i18n: res
       });
     }).catch( err => {
       console.log(err);

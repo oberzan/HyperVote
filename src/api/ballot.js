@@ -43,18 +43,18 @@ createTokens = (req, res) => {
         let votingUrl = new URL(req.headers.referer).origin + '/' + ballot;
         tokens.forEach((token, i) => {
           let mailOptions = {
-            from: '"Admin 👻" <a>',
+            from: '"HyperVote admin" <a>',
             to: mails[i],
             subject: '[HyperVote] Voting token for ' + ballot,
-            text: 'Hi.\n' +
-                   `Your token for  ${ballot}  is: ${token}\n` + 
-                   `You can cast your vote at: ${votingUrl}`,
+            text: `${res.__("Hi")}\n` +
+                  `${res.__("Your token for")} ${ballot}  ${"is"}: ${token}\n` + 
+                  `${res.__("You can cast your vote at")}: ${votingUrl}`,
             html: '<html>' +
                     '<head></head>' +
                     '<body>' +
-                      '<h4>Hi</h4>'+
-                      `<p>Your token for ${ballot} is: <b>${token}</b></p>`+
-                      `<p>You can cast your vote at: ${votingUrl}</p>`+
+                      `<h4>${res.__("Hi")}</h4>`+
+                      `<p>${res.__("Your token for")} ${ballot} ${"is"}: <b>${token}</b></p>`+
+                      `<p>${res.__("You can cast your vote at")}: ${votingUrl}</p>`+
                     '</body>'+
                   '</html>'
           };

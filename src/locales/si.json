@@ -1,11 +1,25 @@
 {
-	"Insert token": "Vpišite žeton",
-	"Vote": "Oddaj glas",
 	"Choose an option": "Izberite",
+	"Insert token": "Vpišite žeton",
+	"Vote": "Oddaj glas",	
 	"You successfully voted": "Uspešno ste oddali glas na",
 	"Your vote was": "Glasovali ste za",
 	"Invalid token": "Neveljaven žeton",
 	"Successfull vote": "Glas uspešno oddan..",
 	"Vote successfull": "Glas uspešno oddan",
-	"Vote unsuccessfull": "Glas je neveljaven. Prišlo je do napake."
+	"Vote unsuccessfull": "Glas je neveljaven. Prišlo je do napake.",
+
+	"Create ballot": "Ustvari glasovanje",
+	"Title": "Naslov",
+	"Description": "Opis",
+	"End of voting": "Konec glasovanja",
+	"Options": "Možnosti",
+	"Add": "Dodaj",
+	"Create": "Ustvari",
+	"Send tokens": "Pošlji žetone",
+
+	"Hi": "Pozdravljeni",
+	"Your token for" : "Vaš žeton za",
+	"is": "je",
+	"You can cast your vote at": "Glasujete lahko na povezavi"
 }
