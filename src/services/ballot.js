@@ -12,7 +12,7 @@ getBallot = (id) => {
   return new Promise(function(resolve, reject) {
     request.get({
       headers: {'Accept': 'application/json'},
-      url: 'http://172.16.67.238:3000/api/org.vote.Ballot' + '/' + id
+      url: encodeURI('http://172.16.67.238:3000/api/org.vote.Ballot' + '/' + id)
     }).on('error', (err) =>{
       console.log("ERROR: ");
       console.error(err);
