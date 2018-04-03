@@ -6,14 +6,7 @@ $(() => {
     $(e.currentTarget).parent().parent().parent().find('button').prop('disabled', false);
   });
 
-  // Draw charts for finished ballots
-  $('.card').each((i, element) => {
-    console.log($(element));
-    if ($(element).find('.chart').length < 1)
-      return;
-    let ballot = $(element).find('.card-header btn').text().trim();
-    console.log(ballot);
-    
+  makeChart = (ballot) => {
     $.ajax({
       url: '/api/ballot/' + ballot + '/results', //ballot.title,
       type:'get',
@@ -60,7 +53,21 @@ $(() => {
       //   form.find('.token').prop('disabled', false);
       // }
     });
+  }
+
+  // Draw charts for finished ballots
+  $('.card').each((i, element) => {
+    console.log($(element));
+    if ($(element).find('.chart').length < 1)
+      return;
+    let ballot = $(element).find('.card-header btn').text().trim();
+    console.log(ballot);
+    makeChart(ballot);    
   });
+  // Draw chart for /:id
+  makeChart($('#ballot h1').text().trim());
+
+
 
   // Remove token too short/long message when a valid token is entered
   $(document).on('change', '.token.is-invalid',e => {
@@ -73,7 +80,7 @@ $(() => {
   $('#ballots form, #ballot form').submit(e => {
     let form = $(e.currentTarget);
     let token = form.find('.token');
-    
+
     e.preventDefault();
     e.stopImmediatePropagation();
 
