@@ -16,6 +16,8 @@ $(() => {
 
         let processedData = [];
         for (let key in data) {
+          if(key == "undefined")
+            key = "Neoddano"
           processedData.push([key, data[key]]);
         }
         
