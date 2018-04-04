@@ -15,9 +15,9 @@ $(() => {
         console.log(data);
 
         let nVotes = 0;
-        data.forEach((k, x) => {
-          nVotes += x;
-        });
+        for(let k in data) {
+          nVotes += data[k];
+        };
 
         let processedData = [];
         for (let key in data) {
