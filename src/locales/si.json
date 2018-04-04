@@ -24,5 +24,6 @@
 	"successfully sent": "uspešno odposlani",
 	"Authenticate": "Prijava",
 	"Invalid secret": "Invalid secret",
-	"Secret": "Geslo"
+	"Secret": "Geslo",
+	"Option": "Možnost"
 }

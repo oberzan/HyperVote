@@ -29,7 +29,7 @@ $(() => {
           $(element).find('table tbody').append(`<tr>
                                                   <td>${rkey}</td>
                                                   <td>${data[key]}</td>
-                                                  <td>${data[key] / nVotes}</td>
+                                                  <td>${100 * data[key] / nVotes}</td>
                                                  </tr>`);
         }
         
@@ -79,6 +79,7 @@ $(() => {
     makeChart(ballot, element);    
   });
   // Draw chart for /:id
+  console.log(1234);
   let bId = $('#ballot h1').text().trim();
   if(bId)
     makeChart(bId, document.querySelector('#ballot'));
