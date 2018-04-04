@@ -43,6 +43,7 @@ $(() => {
           // let data = google.visualization.arrayToDataTable(processedData);
 
           let options = {
+            legend: 'none',
             title: 'Results of a ballot',
             pieSliceText: 'none',
             chartArea:{height:250}
