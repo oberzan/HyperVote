@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var i18n = require('i18n');
 
+//var bearerToken = require('express-bearer-token');
+var jwt = require('jsonwebtoken');
+
 var composerClient = require('./src/composer-client');
 var index = require('./src/routes/index');
 var api = require('./src/routes/api');
@@ -22,6 +25,35 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use('/admin', (req, res, next) => {
+    console.log("Cookie: " + req.cookies.token);
+    
+    clearTokenAndRedirect = () => {
+      res.status(401)
+         .clearCookie("token")
+         .redirect("/authenticate");
+    }
+
+    jwt.verify(req.cookies.token, process.env.JWT_SECRET, (err, decodedToken) => {
+      if (err) {
+        clearTokenAndRedirect();
+      };
+
+      if (decodedToken.exp <= Date.now() / 1000) {
+        clearTokenAndRedirect();
+      }
+
+      console.log("User: ");
+      console.log(decodedToken.user);
+
+      if(decodedToken.user !== "admin") {
+        clearTokenAndRedirect();
+      }
+      next();
+    });    
+  }
+);
 
 /** STATIC CONTENT **/
 app.use(

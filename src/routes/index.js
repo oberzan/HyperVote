@@ -13,7 +13,9 @@ var ballot = require('../services/ballot');
 /* ADMIN */
 router.get('/admin', admin.index)
 router.post('/admin', ballot.createBallot)
-//router.post('/admin/ballots/:id/tokens', ballot.createTokens)
+
+router.get('/authenticate', index.authenticate);
+router.post('/authenticate', index.postSecret)
 
 /* GET home page. */
 router.get('/', index.homepage);

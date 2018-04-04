@@ -65,7 +65,7 @@ createTokens = (req, res) => {
                     '<head></head>' +
                     '<body>' +
                       `<h4>${res.__("Hi")}</h4>`+
-                      `<p>${res.__("Your token for")} ${ballot} ${"is"}: <b>${token}</b></p>`+
+                      `<p>${res.__("Your token for")} ${ballot} ${res.__("is")}: <b>${token}</b></p>`+
                       `<p>${res.__("You can cast your vote at")}: ${votingUrl}</p>`+
                     '</body>'+
                   '</html>'

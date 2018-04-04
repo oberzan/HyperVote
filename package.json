@@ -11,6 +11,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "express-jwt": "^5.3.1",
     "i18n": "^0.8.3",
     "moment": "^2.21.0",
     "morgan": "~1.9.0",

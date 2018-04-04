@@ -75,12 +75,12 @@ $(() => {
 
 
   // Remove token too short/long message when a valid token is entered
-  $(document).on('change', '.token.is-invalid',e => {
+  $(document).on('change', '.token.is-invalid', e => {
     let tokenInput = $(e.currentTarget);
     if(tokenInput.val().length == 36) {
       tokenInput.removeClass('is-invalid');
     }
-  })
+  });
 
   $('#ballots form, #ballot form').submit(e => {
     let form = $(e.currentTarget);

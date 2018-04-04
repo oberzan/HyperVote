@@ -1,14 +1,13 @@
 {
 	"Choose an option": "Izberite",
 	"Insert token": "Vpišite žeton",
-	"Vote": "Oddaj glas",	
+	"Vote": "Oddaj glas",
 	"You successfully voted": "Uspešno ste oddali glas na",
 	"Your vote was": "Glasovali ste za",
 	"Invalid token": "Neveljaven žeton",
 	"Successfull vote": "Glas uspešno oddan..",
 	"Vote successfull": "Glas uspešno oddan",
 	"Vote unsuccessfull": "Glas je neveljaven. Prišlo je do napake.",
-
 	"Create ballot": "Ustvari glasovanje",
 	"Title": "Naslov",
 	"Description": "Opis",
@@ -17,12 +16,13 @@
 	"Add": "Dodaj",
 	"Create": "Ustvari",
 	"Send tokens": "Pošlji žetone",
-
 	"Hi": "Pozdravljeni",
-	"Your token for" : "Vaš žeton za",
+	"Your token for": "Vaš žeton za",
 	"is": "je",
 	"You can cast your vote at": "Glasujete lahko na povezavi",
-
 	"Tokens for": "Žetoni za",
-	"successfully sent": "uspešno odposlani"
+	"successfully sent": "uspešno odposlani",
+	"Authenticate": "Prijava",
+	"Invalid secret": "Invalid secret",
+	"Secret": "Geslo"
 }

@@ -1,4 +1,4 @@
-$(function () {
+$(() => {
   
   /** SEND TOKENS **/
   $('.btn.tokens').click((x) => {
@@ -148,6 +148,7 @@ $(function () {
     console.log($(this));
     console.log(location);
     let li = $(this).parent();
+    li.find('button').prop('disabled', true);
 
     li.addClass('list-group-item-secondary');
     li.children().first().after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
@@ -170,6 +171,7 @@ $(function () {
     }).fail( err => {
       console.log(err);
       console.log(err.statusCode());
+      li.find('button').prop('disabled', false);
     });
 
     //$(this).parent().remove();
