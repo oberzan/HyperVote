@@ -36,4 +36,13 @@ block content
                     div.invalid-feedback #{i18n.__("Vote unsuccessfull")}
                   button.btn.btn-primary(type="submit" disabled=true) #{i18n.__("Vote")}
               else
-                div.chart
+                div.row
+                  div.col-7.chart
+                  div.col-md-5
+                    table.table.table-sm.table-hover
+                      thead
+                        tr
+                          th(scope="col") #{i18n.__("Option")}
+                          th(scope="col") #
+                          th(scope="col") %
+                      tbody
