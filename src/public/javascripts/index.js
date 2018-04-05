@@ -6,17 +6,25 @@ $(() => {
     $(e.currentTarget).parent().parent().parent().find('button').prop('disabled', false);
   });
 
-  makeChart = (ballot, element) => {
-    $.ajax({
-      url: '/api/ballot/' + ballot + '/results', //ballot.title,
-      type:'get',
-      success: data => {
-        console.log("success");
-        console.log(data);
+  makeChart = (element) => {
+    let options = {};
+    $('.table tbody tr').each((i, x) => {
+      let tds = $(x).find('td');
+      let option = tds[0].innerText;
+      let n = tds[1].innerText;
+      options[option] = n;
+    });
+
+    // $.ajax({
+    //   url: '/api/ballot/' + ballot + '/results', //ballot.title,
+    //   type:'get',
+    //   success: data => {
+    //     console.log("success");
+    //     console.log(data);
 
         let processedData = [];
-        for (let key in data) {
-          processedData.push([key, data[key]]);
+        for (let key in options) {
+          processedData.push([key, options[key]]);
         }
         
         drawChart = () => {
@@ -28,7 +36,7 @@ $(() => {
 
           // let data = google.visualization.arrayToDataTable(processedData);
 
-          let options = {
+          let chartOptions = {
             legend: 'none',
             title: 'Results of a ballot',
             pieSliceText: 'none',
@@ -36,24 +44,24 @@ $(() => {
           };
 
           let chart = new google.visualization.PieChart(element.querySelector('.chart'));
-          chart.draw(data, options);
+          chart.draw(data, chartOptions);
         }
 
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
-      },
-      error: err => {
-        console.log("error");
-        console.log(err);
-      } //,
+      // },
+      // error: err => {
+      //   console.log("error");
+      //   console.log(err);
+      // } //,
       // complete: x => {
       //   console.log("complete");
       //   console.log(x);
       //   form.find('button').prop('disabled', false);
       //   form.find('.token').prop('disabled', false);
       // }
-    });
+    // });
   }
 
   // Draw charts for finished ballots
@@ -61,15 +69,13 @@ $(() => {
     console.log($(element));
     if ($(element).find('.chart').length < 1)
       return;
-    let ballot = $(element).find('.card-header btn').text().trim();
-    console.log(ballot);
-    makeChart(ballot, element);    
+    makeChart(element);    
   });
   // Draw chart for /:id
   console.log(1234);
   let bId = $('#ballot h1').text().trim();
   if(bId)
-    makeChart(bId, document.querySelector('#ballot'));
+    makeChart(document.querySelector('#ballot'));
 
 
 
