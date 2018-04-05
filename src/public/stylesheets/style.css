@@ -14,5 +14,10 @@ li svg:hover {
   color: #444;
 }
 
+.table > tfoot > tr > td,
+.table > tfoot > tr > td {
+  border-top-width: 2px;
+}
+
 /* Prevents flickering of the google chart tooltip */
 svg > g > g:last-child { pointer-events: none }
