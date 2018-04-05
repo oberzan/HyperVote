@@ -6,12 +6,25 @@ const voteService = require('../services/vote');
 homepage = (req, res, next) => {
   ballotService.getBallots()
     .then(ballots => {
+      let ballotsOptions = {};
+      ballots.forEach(ballot => {
+        let options = await ballotService.getResults(ballot.title);
+        let nVotes = 0;
+        for(let k in options)
+          nVotes += options[k];
+        // })
+        ballotsOptions[ballot.title] = {
+          options: options,
+          nVotes: nVotes
+        }
+      });
       res.render('index', {
         title: "HyperVote",
         ballots: ballots,
+        ballotsOptions: ballotsOptions,
         i18n: res
       });
-    })  
+    }); 
 }
 
 ballot = (req, res, next) => {
