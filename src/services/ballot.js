@@ -127,7 +127,7 @@ getResults = (ballot) => {
 
         var sorted = [];
         for (let option in selCounts) sorted.push({name: option, n: selCounts[option]});
-        sortable.sort((a, b) => {
+        sorted.sort((a, b) => {
           return b.n - a.n;
         });
         console.log(sorted);
