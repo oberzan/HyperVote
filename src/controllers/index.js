@@ -9,10 +9,11 @@ homepage = (req, res, next) => {
       let ballotsOptions = {};
       for(let ballot of ballots) {
         let options = await ballotService.getResults(ballot.title);
+        
         let nVotes = 0;
-        for(let k in options)
-          nVotes += options[k];
-        // })
+        for(let option in options)
+          nVotes += option.n;
+
         ballotsOptions[ballot.title] = {
           options: options,
           nVotes: nVotes
@@ -33,8 +34,9 @@ ballot = (req, res, next) => {
       ballotService.getResults(req.params.id)
         .then(options => {
           let nVotes = 0;
-          for(let k in options)
-            nVotes += options[k];
+          for(let option in options)
+            nVotes += option.n;
+
           res.render('ballot', {
             title: "HyperVote",
             ballot: ballot,

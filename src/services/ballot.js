@@ -124,8 +124,14 @@ getResults = (ballot) => {
             selCounts[x] = 1
         });
         console.log(selCounts);
-        // let serializer = composerClient.getDefinition().getSerializer();      
-        resolve(selCounts);
+
+        var sorted = [];
+        for (let option in selCounts) sorted.push({name: option, n: selCounts[option]});
+        sortable.sort((a, b) => {
+          return b.n - a.n;
+        });
+        console.log(sorted);
+        resolve(sorted);
       })
       .catch(err => {
         console.log(err);
