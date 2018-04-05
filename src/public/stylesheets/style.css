@@ -15,7 +15,7 @@ li svg:hover {
 }
 
 .table > tfoot > tr > td,
-.table > tfoot > tr > td {
+.table > tfoot > tr > th {
   border-top-width: 2px;
 }
 
