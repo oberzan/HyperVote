@@ -11,7 +11,7 @@ homepage = (req, res, next) => {
         let options = await ballotService.getResults(ballot.title);
         
         let nVotes = 0;
-        for(let option in options)
+        for(let option of options)
           nVotes += option.n;
 
         ballotsOptions[ballot.title] = {
@@ -34,7 +34,7 @@ ballot = (req, res, next) => {
       ballotService.getResults(req.params.id)
         .then(options => {
           let nVotes = 0;
-          for(let option in options)
+          for(let option of options)
             nVotes += option.n;
 
           res.render('ballot', {
