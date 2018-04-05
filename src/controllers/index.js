@@ -17,14 +17,16 @@ homepage = (req, res, next) => {
 ballot = (req, res, next) => {
   ballotService.getBallot(req.params.id)
     .then(ballot => {
-      ballotService.getResults(ballot)
+      ballotService.getResults(req.params.id)
         .then(options => {
-          console.log("OPTIONS:");
-          console.log(options);
+          let nVotes = 0;
+          for(let k in options)
+            nVotes += options[k];
           res.render('ballot', {
             title: "HyperVote",
             ballot: ballot,
             options: options,
+            nVotes: nVotes,
             i18n: res
           });
         })

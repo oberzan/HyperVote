@@ -25,5 +25,6 @@
 	"Authenticate": "Prijava",
 	"Invalid secret": "Invalid secret",
 	"Secret": "Geslo",
-	"Option": "Možnost"
+	"Option": "Možnost",
+	"undefined vote": "Neoddano"
 }

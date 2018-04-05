@@ -36,9 +36,8 @@ block content
                 th(scope="col") #
                 th(scope="col") %
             tbody
-              each option, i in options
+              each n, option in options
                 tr
-                  td #{rkey}
-                  td #{data[key]}
-                  td 
-                    100 * data[key] / nVotes
+                  td #{option == "undefined" ? i18n.__("undefined vote") : option}
+                  td #{n}
+                  td #{100*n/nVotes}

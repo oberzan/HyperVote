@@ -14,23 +14,9 @@ $(() => {
         console.log("success");
         console.log(data);
 
-        let nVotes = 0;
-        for(let k in data) {
-          nVotes += data[k];
-        };
-
         let processedData = [];
         for (let key in data) {
-          let rkey = key;
-          if(key == "undefined")
-            rkey = "Neoddano"
-          processedData.push([rkey, data[key]]);
-
-          $(element).find('table tbody').append(`<tr>
-                                                  <td>${rkey}</td>
-                                                  <td>${data[key]}</td>
-                                                  <td>${100 * data[key] / nVotes}</td>
-                                                 </tr>`);
+          processedData.push([key, data[key]]);
         }
         
         drawChart = () => {
