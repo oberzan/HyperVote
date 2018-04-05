@@ -3,7 +3,6 @@ extends layout
 block head
   script(defer type='text/javascript', src='/javascripts/index.js')
   script(defer type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
-  script(defer type='text/javascript', src='/javascripts/index.js')
 
 block content
   div#ballot.container(style="max-width: 800px")
@@ -37,3 +36,9 @@ block content
                 th(scope="col") #
                 th(scope="col") %
             tbody
+              each option, i in options
+                tr
+                  td #{rkey}
+                  td #{data[key]}
+                  td 
+                    100 * data[key] / nVotes

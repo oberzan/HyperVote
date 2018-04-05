@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const ballotService = require('../services/ballot');
 const voteService = require('../services/vote');
 
-function homepage(req, res, next) {
+homepage = (req, res, next) => {
   ballotService.getBallots()
     .then(ballots => {
       res.render('index', {
@@ -14,26 +14,31 @@ function homepage(req, res, next) {
     })  
 }
 
-function ballot(req, res, next) {
+ballot = (req, res, next) => {
   ballotService.getBallot(req.params.id)
     .then(ballot => {
-      console.log(ballot);
-      res.render('ballot', {
-        title: "HyperVote",
-        ballot: ballot,
-        i18n: res
-      });
-    })  
+      ballotService.getResults(ballot)
+        .then(options => {
+          console.log("OPTIONS:");
+          console.log(options);
+          res.render('ballot', {
+            title: "HyperVote",
+            ballot: ballot,
+            options: options,
+            i18n: res
+          });
+        })
+    })
 }
 
-function authenticate(req, res, next) {
+authenticate = (req, res, next) => {
   
   res.render('authenicate', {
     i18n: res
   });  
 }
 
-function postSecret(req, res, next) {
+postSecret = (req, res, next) => {
   console.log("postSecret");
 
   let secret = process.env.HYPERVOTE_SECRET;
