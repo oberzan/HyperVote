@@ -10,22 +10,36 @@ returnJsonResponse = (response, status, content) => {
 
 getBallot = (id) => {  
   return new Promise(function(resolve, reject) {
-    request.get({
-      headers: {'Accept': 'application/json'},
-      url: encodeURI('http://172.16.67.238:3000/api/org.vote.Ballot' + '/' + id)
-    }).on('error', (err) =>{
-      console.log("ERROR: ");
-      console.error(err);
-      if (err.errno == 'ECONNREFUSED') {
-        console.log("Connection with rest-server refused.");
-      }
-      reject(err);
-    }).on('data', (data) => {
-      //console.log("DATA: ")
-      //console.log(JSON.parse(data.toString()))
-      console.log(data.toString());
-      resolve(JSON.parse(data.toString()));
-    });
+    let registry = composerClient.getConnection().getAssetRegistry('org.vote.Ballot');
+    registry.getAll()
+      .then(data => {
+        console.log(data.toString());
+        resolve(JSON.parse(data.toString()));
+      }).catch(err => {
+        console.log("ERROR: ");
+        console.error(err);
+        if (err.errno == 'ECONNREFUSED') {
+          console.log("Connection with rest-server refused.");
+        }
+        reject(err);
+      });
+
+    // request.get({
+    //   headers: {'Accept': 'application/json'},
+    //   url: encodeURI('http://172.16.67.238:3000/api/org.vote.Ballot' + '/' + id)
+    // }).on('error', (err) =>{
+    //   console.log("ERROR: ");
+    //   console.error(err);
+    //   if (err.errno == 'ECONNREFUSED') {
+    //     console.log("Connection with rest-server refused.");
+    //   }
+    //   reject(err);
+    // }).on('data', (data) => {
+    //   //console.log("DATA: ")
+    //   //console.log(JSON.parse(data.toString()))
+    //   console.log(data.toString());
+    //   resolve(JSON.parse(data.toString()));
+    // });
   });  
 }
 
