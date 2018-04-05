@@ -9,18 +9,14 @@ returnJsonResponse = (response, status, content) => {
 };
 
 getBallot = (id) => {  
-  return new Promise(function(resolve, reject) {
-    let registry = composerClient.getConnection().getAssetRegistry('org.vote.Ballot');
-    registry.getAll()
+  return new Promise(async (resolve, reject) => {
+    let registry = await composerClient.getConnection().getAssetRegistry('org.vote.Ballot');
+    registry.get(id)
       .then(data => {
-        console.log(data.toString());
-        resolve(JSON.parse(data.toString()));
+        resolve(data);
       }).catch(err => {
         console.log("ERROR: ");
         console.error(err);
-        if (err.errno == 'ECONNREFUSED') {
-          console.log("Connection with rest-server refused.");
-        }
         reject(err);
       });
 
