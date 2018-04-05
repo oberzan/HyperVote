@@ -5,9 +5,9 @@ const voteService = require('../services/vote');
 
 homepage = (req, res, next) => {
   ballotService.getBallots()
-    .then(ballots => {
+    .then(async ballots => {
       let ballotsOptions = {};
-      ballots.forEach(ballot => {
+      for(let ballot of ballots) {
         let options = await ballotService.getResults(ballot.title);
         let nVotes = 0;
         for(let k in options)
@@ -17,7 +17,7 @@ homepage = (req, res, next) => {
           options: options,
           nVotes: nVotes
         }
-      });
+      };
       res.render('index', {
         title: "HyperVote",
         ballots: ballots,

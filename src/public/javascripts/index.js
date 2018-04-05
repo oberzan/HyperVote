@@ -6,9 +6,9 @@ $(() => {
     $(e.currentTarget).parent().parent().parent().find('button').prop('disabled', false);
   });
 
-  makeChart = (element) => {
+  makeChart = (element, ) => {
     let options = [];
-    $('.table tbody tr').each((i, x) => {
+    $(element).find('.table tbody tr').each((i, x) => {
       let tds = $(x).find('td');
       let option = tds[0].innerText;
       let n = tds[1].innerText;
