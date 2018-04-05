@@ -38,8 +38,8 @@ block content
                 div.row
                   div.col-7.chart(style="padding:0; min-height:200px")
                   div.col-md-5
-                    table.table.table-sm.table-hover
-                      thead
+                    table.table.table-sm.table-hover.table-bordered
+                      thead.thead-light
                         tr
                           th(scope="col") #{i18n.__("Option")}
                           th(scope="col") #
@@ -50,3 +50,7 @@ block content
                             td #{option == "undefined" ? i18n.__("undefined vote") : option}
                             td #{n}
                             td #{100*n/ballotsOptions[ballot.title].nVotes}
+                      tfoot
+                        tr
+                          td
+                          th #{ballotsOptions[ballot.title].nVotes}
