@@ -53,7 +53,7 @@ createBallot = (req, res, next) => {
     "title": req.body.title,
     "description": req.body.description,
     "options": options,
-    "start": new Date().toISOString(),
+    //"start": new Date().toISOString(),
     "end": moment(req.body.endTime, 'DD.MM.YYYY HH:mm').toISOString(), //TODO: Fix for timezones. Cnvert on the client side
     "votes": [],
     "voters": []
