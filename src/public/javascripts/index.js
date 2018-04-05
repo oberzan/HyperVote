@@ -7,12 +7,12 @@ $(() => {
   });
 
   makeChart = (element) => {
-    let options = {};
+    let options = [];
     $('.table tbody tr').each((i, x) => {
       let tds = $(x).find('td');
       let option = tds[0].innerText;
       let n = tds[1].innerText;
-      options[option] = n;
+      options.push([option, parseInt(n)]);
     });
 
     // $.ajax({
@@ -31,8 +31,7 @@ $(() => {
           let data = new google.visualization.DataTable();
           data.addColumn('string', 'Option');
           data.addColumn('number', 'Number of votes');
-          data.addRows(processedData);
-
+          data.addRows(options);
 
           // let data = google.visualization.arrayToDataTable(processedData);
 
