@@ -39,7 +39,8 @@ $(() => {
             legend: 'none',
             title: 'Results of a ballot',
             pieSliceText: 'none',
-            chartArea:{height:185}
+            chartArea:{height:185},
+            pieStartAngle: 180
           };
 
           let chart = new google.visualization.PieChart(element.querySelector('.chart'));

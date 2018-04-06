@@ -45,5 +45,6 @@ block content
       each ballot in ballots
         li.list-group-item.d-flex.align-items-center
           span.mr-auto.title= ballot.title
-          button.btn.btn-outline-secondary.tokens.mx-2 #{i18n.__("Send tokens")}
+          if !ballot.start
+            button.btn.btn-outline-secondary.tokens.mx-2 #{i18n.__("Send tokens")}
           i.delete.far.fa-trash-alt   

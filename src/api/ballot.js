@@ -33,8 +33,6 @@ createTokens = (req, res) => {
       return err;
     }
 
-    console.log(req.headers.referer);
-    console.log(new URL(req.headers.referer).origin)
     let mails = fileData.split(/,|\n/);
 
     let tokens = [];
