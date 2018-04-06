@@ -19,7 +19,7 @@ li svg:hover {
   border-top-width: 2px;
 }
 
-.chart .circle {
+.table .circle {
   display:inline-block;
   min-height:15px;
   min-width:15px;
