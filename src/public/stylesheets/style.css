@@ -19,5 +19,13 @@ li svg:hover {
   border-top-width: 2px;
 }
 
+.chart .circle {
+  display:inline-block;
+  min-height:15px;
+  min-width:15px;
+  border-radius:50%;
+  vertical-align: text-top;
+}
+
 /* Prevents flickering of the google chart tooltip */
 svg > g > g:last-child { pointer-events: none }
