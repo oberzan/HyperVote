@@ -174,6 +174,7 @@ publishVote = (req, res, next) => {
 }
 
 module.exports = {
+  createBallot: createBallot,
   delete: deleteBallot,
   createTokens: createTokens,
   publishVote: publishVote,

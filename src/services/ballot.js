@@ -37,7 +37,7 @@ getBallots = () => {
 }
 
 createBallot = (data) => {
-  return new Promise(function(resolve, reject) {
+  return new Promise(async (resolve, reject) => {
     let registry = await composerClient.getConnection().getAssetRegistry('org.vote.Ballot');
     registry.add(data)
       .then(res => {
