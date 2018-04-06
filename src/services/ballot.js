@@ -53,7 +53,7 @@ createBallot = (data) => {
     // ballot.options = data.options;
     //"start": new Date().toISOString(),
     ballot.end = data.end;
-    ballot.votes = data.end;
+    ballot.votes = [];
     ballot.voters = [];
 
     registry.add(ballot)
