@@ -1,5 +1,4 @@
 const request = require('request');
-const moment = require('moment');
 
 const composerClient = require('../composer-client')
 
