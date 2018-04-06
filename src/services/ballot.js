@@ -43,7 +43,14 @@ createBallot = (data) => {
     
     let ballot = factory.newResource("org.vote", "Ballot", data.title);
     ballot.description = data.description;
-    ballot.options = data.options;
+    ballot.options = [];
+    data.options.forEach(opt => {
+      let option = factory.newConcept("org.vote", "Option");
+      option.Name = opt;
+      option.description = "TODO"
+      ballot.options.push(option);
+    });
+    // ballot.options = data.options;
     //"start": new Date().toISOString(),
     ballot.end = data.end;
     ballot.votes = data.end;

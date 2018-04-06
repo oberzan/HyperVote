@@ -17,21 +17,21 @@ returnJsonResponse = (res, status, content) => {
 createBallot = (req, res) => {
   console.log(req.body);
   console.log(req.body.endTime);
-  var options = [];
-  req.body.option.forEach(opt => {
-    options.push({
-      "$class": "org.vote.Option",
-      "Name": opt,
-      "description": "opt.description" //TODO
-    });
-  });
+  // var options = [];
+  // req.body.option.forEach(opt => {
+  //   options.push({
+  //     "$class": "org.vote.Option",
+  //     "Name": opt,
+  //     "description": "opt.description" //TODO
+  //   });
+  // });
 
   data = {
     "title": req.body.title,
     "description": req.body.description,
-    "options": options,
+    "options": req.body.option,
     //"start": new Date().toISOString(),
-    "end": moment(req.body.endTime, 'DD.MM.YYYY HH:mm').toISOString(), //TODO: Fix for timezones. Cnvert on the client side
+    "end": moment(req.body.endTime, 'DD.MM.YYYY HH:mm').toDate(), //TODO: Fix for timezones. Cnvert on the client side
     "votes": [],
     "voters": []
   };
