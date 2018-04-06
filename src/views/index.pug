@@ -68,9 +68,9 @@ block content
                           th.col-2(scope="col") #
                           th.col-2(scope="col") %
                       tbody
-                        each option,i in ballotsOptions[ballot.title].options
+                        each option,j in ballotsOptions[ballot.title].options
                           tr.d-flex
-                            td.col-1(style="display:inline-block; min-height:15px; min-width:15px; border-radius:50%; background:" + googleColors[i])
+                            td.col-1(style="display:inline-block; min-height:15px; min-width:15px; border-radius:50%; background:" + googleColors[j])
                             td.col-7.option #{option.name == "undefined" ? i18n.__("undefined vote") : option.name}
                             td.col-2.n #{option.n}
                             td.col-2 #{100 * option.n / ballotsOptions[ballot.title].nVotes}
