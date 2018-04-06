@@ -49,7 +49,7 @@ block content
                         each option in ballotsOptions[ballot.title].options
                           tr.d-flex
                             td.col-1
-                            td #{option.name == "undefined" ? i18n.__("undefined vote") : option.name}
+                            td.name #{option.name == "undefined" ? i18n.__("undefined vote") : option.name}
                             td #{option.n}
                             td #{100 * option.n / ballotsOptions[ballot.title].nVotes}
                       tfoot

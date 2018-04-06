@@ -9,7 +9,7 @@ $(() => {
   makeChart = (element, ) => {
     let options = [];
     $(element).find('.table tbody tr').each((i, x) => {
-      let tds = $(x).find('td');
+      let tds = $(x).find('td.name');
       let option = tds[0].innerText;
       let n = tds[1].innerText;
       options.push([option, parseInt(n)]);
