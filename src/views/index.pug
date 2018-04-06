@@ -40,18 +40,21 @@ block content
                   div.col-md-5
                     table.table.table-sm.table-hover
                       thead.thead-light
-                        tr
+                        tr.d-flex
+                          th.col-1
                           th(scope="col") #{i18n.__("Option")}
                           th(scope="col") #
                           th(scope="col") %
                       tbody
                         each option in ballotsOptions[ballot.title].options
-                          tr
+                          tr.d-flex
+                            td.col-1
                             td #{option.name == "undefined" ? i18n.__("undefined vote") : option.name}
                             td #{option.n}
                             td #{100 * option.n / ballotsOptions[ballot.title].nVotes}
                       tfoot
-                        tr
+                        tr.d-flex
+                          td.col-1
                           td
                           th #{ballotsOptions[ballot.title].nVotes}
                           td
