@@ -36,48 +36,18 @@ getBallots = () => {
   });
 }
 
-createBallot = (req, res, next) => {
-  console.log(req.body);
-  console.log(req.body.endTime);
-  var options = [];
-  req.body.option.forEach(opt => {
-    options.push({
-      "$class": "org.vote.Option",
-      "Name": opt,
-      "description": "opt.description" //TODO
-    });
-  });
-
-  data = {
-    "$class": "org.vote.Ballot",
-    "title": req.body.title,
-    "description": req.body.description,
-    "options": options,
-    //"start": new Date().toISOString(),
-    "end": moment(req.body.endTime, 'DD.MM.YYYY HH:mm').toISOString(), //TODO: Fix for timezones. Cnvert on the client side
-    "votes": [],
-    "voters": []
-  };
-  console.log(data);
-
-  request.post({
-      //headers: {'content-type':'application/json'},
-      url: 'http://172.16.67.238:3000/api/org.vote.Ballot',
-      json: data
-    },
-    function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        console.log("RESPONSE: ")
-        console.log(body);
-        //returnJsonResponse(res, 200, body);
-        res.redirect('back');
-        //returnJsonResponse(res, 200, body);
-      } else {
+createBallot = (data) => {
+  return new Promise(function(resolve, reject) {
+    let registry = await composerClient.getConnection().getAssetRegistry('org.vote.Ballot');
+    registry.add(data)
+      .then(res => {
+        resolve(res);
+      }).catch(err => {
         console.log("ERROR: ");
-        console.error(error)
-      }
-    }
-  );  
+        console.error(err);
+        reject(err);
+      });
+  });  
 }
 
 deleteBallot = (id) => {  

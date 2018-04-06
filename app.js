@@ -36,6 +36,10 @@ app.use('/admin', (req, res, next) => {
          .redirect("/authenticate");
     }
 
+    if(!process.env.JWT_SECRET) {
+      console.error("JWT_SECRET not set");
+    }
+
     jwt.verify(req.cookies.token, process.env.JWT_SECRET, (err, decodedToken) => {
       if (err) {
         clearTokenAndRedirect();

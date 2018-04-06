@@ -7,7 +7,7 @@ var ballot = require('../api/ballot')
 
 router.post('/hash/token', crypto.hashToken);
 
-
+router.post('/ballot', ballot.createBallot)
 router.delete('/ballot/:id', ballot.delete);
 
 router.post('/ballot/:id/tokens', ballot.createTokens);

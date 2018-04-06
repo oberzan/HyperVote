@@ -12,6 +12,37 @@ returnJsonResponse = (res, status, content) => {
   res.json(content);
 };
 
+createBallot = (req, res) => {
+  console.log(req.body);
+  console.log(req.body.endTime);
+  var options = [];
+  req.body.option.forEach(opt => {
+    options.push({
+      "$class": "org.vote.Option",
+      "Name": opt,
+      "description": "opt.description" //TODO
+    });
+  });
+
+  data = {
+    "$class": "org.vote.Ballot",
+    "title": req.body.title,
+    "description": req.body.description,
+    "options": options,
+    //"start": new Date().toISOString(),
+    "end": moment(req.body.endTime, 'DD.MM.YYYY HH:mm').toISOString(), //TODO: Fix for timezones. Cnvert on the client side
+    "votes": [],
+    "voters": []
+  };
+  console.log(data);
+  ballot.createBallot(data)
+    .then(x => {
+        console.log("RESPONSE: ")
+        console.log(x);
+        res.redirect('back');
+    });
+}
+
 createTokens = (req, res) => {
   let ballot = req.params.id;
 

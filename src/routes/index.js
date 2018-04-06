@@ -12,7 +12,7 @@ var ballot = require('../services/ballot');
 
 /* ADMIN */
 router.get('/admin', admin.index)
-router.post('/admin', ballot.createBallot)
+// router.post('/admin', ballot.createBallot)
 
 router.get('/authenticate', index.authenticate);
 router.post('/authenticate', index.postSecret)
