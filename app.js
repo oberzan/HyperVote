@@ -30,6 +30,7 @@ app.use('/admin', (req, res, next) => {
     console.log("Cookie: " + req.cookies.token);
     
     clearTokenAndRedirect = () => {
+      console.log("Clearing the cookie");
       res.status(401)
          .clearCookie("token")
          .redirect("/authenticate");
@@ -38,19 +39,21 @@ app.use('/admin', (req, res, next) => {
     jwt.verify(req.cookies.token, process.env.JWT_SECRET, (err, decodedToken) => {
       if (err) {
         clearTokenAndRedirect();
+        return;
       };
 
       if (decodedToken.exp <= Date.now() / 1000) {
         clearTokenAndRedirect();
+        return;
       }
 
       console.log("User: ");
       console.log(decodedToken.user);
 
-      if(decodedToken.user !== "admin") {
+      if(decodedToken.user !== "admin")
         clearTokenAndRedirect();
-      }
-      next();
+      else
+        next();
     });    
   }
 );
