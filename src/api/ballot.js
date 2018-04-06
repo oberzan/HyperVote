@@ -27,7 +27,6 @@ createBallot = (req, res) => {
   });
 
   data = {
-    "$class": "org.vote.Ballot",
     "title": req.body.title,
     "description": req.body.description,
     "options": options,

@@ -37,8 +37,19 @@ getBallots = () => {
 
 createBallot = (data) => {
   return new Promise(async (resolve, reject) => {
+    //let connection = 
     let registry = await composerClient.getConnection().getAssetRegistry('org.vote.Ballot');
-    registry.add(data)
+    let factory = await composerClient.getDefinition().getFactory();
+    
+    let ballot = factory.newResource("org.vote", "Ballot", data.title);
+    ballot.description = data.description;
+    ballot.options = data.options;
+    //"start": new Date().toISOString(),
+    ballot.end = data.end;
+    ballot.votes = data.end;
+    ballot.voters = [];
+
+    registry.add(ballot)
       .then(res => {
         resolve(res);
       }).catch(err => {
