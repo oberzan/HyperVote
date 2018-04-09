@@ -82,6 +82,7 @@ $(() => {
   $('#ballotForm').submit((e) => {
     e.preventDefault();
     let form = e.currentTarget;
+    $(form).find('input[type=submit]').prop('disabled', true);
 
     if($('#optionsUl').children().length < 2) {
       console.log("Not enough options");
@@ -97,6 +98,9 @@ $(() => {
       success:function(){
         location.reload();
         //form.reset();
+      },
+      error: () => {
+        $(form).find('input[type=submit]').prop('disabled', false);
       }
   });
 

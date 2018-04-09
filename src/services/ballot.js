@@ -50,7 +50,6 @@ createBallot = (data) => {
       option.description = "TODO"
       ballot.options.push(option);
     });
-    // ballot.options = data.options;
     //"start": new Date().toISOString(),
     ballot.end = data.end;
     ballot.votes = [];
