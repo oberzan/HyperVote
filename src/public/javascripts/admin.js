@@ -82,7 +82,7 @@ $(() => {
   $('#ballotForm').submit((e) => {
     e.preventDefault();
     let form = e.currentTarget;
-    
+
     if($('#optionsUl').children().length < 2) {
       console.log("Not enough options");
       console.log($('.options .invalid-feedback'));
@@ -95,68 +95,15 @@ $(() => {
       type:'post',
       data:$(form).serialize(),
       success:function(){
-        //console.log("worked");
+        location.reload();
+        //form.reset();
       }
   });
 
     return true;
   });
 
-
-  // jQuery.validator.addMethod("minoptions", function(value, element, params) {
-  //   console.log('minoptions')
-  //   console.log(params);
-    
-  //   let nOptions = $(element).parent().siblings('ul').first().children().length;
-  //   console.log(nOptions);
-  //   return nOptions >= params;
-  // }, 'A ballot needs at least 2 options');
-  
-  // $('#ballotForm').validate({
-  //   debug: true,
-  //   onkeyup: false,
-  //   onclick: false,
-  //   onfocusout: false,
-  //   errorClass: 'is-invalid',
-  //   errorElement: 'div',
-  //   errorPlacement: function(error, element) {
-  //     console.log("errorPlacement");
-  //     console.log(error);
-  //     console.log(element);
-  //   },
-  //   highlight: function(element, errorClass, validClass) {
-  //     console.log($(element));
-  //     console.log("#" + element.id + "-error");
-  //     console.log($("#" + element.id + "-error"));
-  //     console.log($(element.form).parent().find("div"));
-  //     $(element).addClass(errorClass).removeClass(validClass);
-  //     $("#" + element.id + "-error")
-  //       .addClass('invalid-feedback');
-  //   },
-  //   nhighlight: function(element, errorClass, validClass) {
-  //     $(element).removeClass(errorClass).addClass(validClass);
-  //     $(element.form).find("label[for=" + element.id + "]")
-  //       .removeClass('invalid-feedback');
-  //   },
-  //   invalidHandler: function(event, validator) {
-  //     // 'this' refers to the form
-  //     var errors = validator.numberOfInvalids();
-  //     if (errors) {
-  //       var message = errors == 1
-  //         ? 'You missed 1 field. It has been highlighted'
-  //         : 'You missed ' + errors + ' fields. They have been highlighted';
-  //       $("div.error span").html(message);
-  //       $("div.error").show();
-  //     } else {
-  //       $("div.error").hide();
-  //     }
-  //   },
-  //   rules: {
-  //     optionInput: {
-  //       minoptions: 2
-  //     }
-  //   }
-  // });
+  /* DELETE A BALLOT */
   $(document).on('click', '.options .delete', function() {
     console.log($(this));
     console.log(location);
