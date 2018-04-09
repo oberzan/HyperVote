@@ -70,18 +70,28 @@ createBallot = (data) => {
 deleteBallot = (id) => {  
   return new Promise(function(resolve, reject) {
     
-    request.del(
-      encodeURI('http://172.16.67.238:3000/api/org.vote.Ballot/' + id),
-      function (err, response, body) {
-        console.log(response.statusCode);
+    let registry = await composerClient.getConnection().getAssetRegistry('org.vote.Ballot');
+    registry.delete(id)
+      .then(() => {
+        console.log("BallotController deleted successufuly");
+        resolve(response.statusMessage);
+      })
+      .catch(err => {
+        reject(err)
+      })
+
+    // request.del(
+    //   encodeURI('http://172.16.67.238:3000/api/org.vote.Ballot/' + id),
+    //   function (err, response, body) {
+    //     console.log(response.statusCode);
         
-        if (!err && response.statusCode == 204) {
-          console.log("BallotController deleted successufuly");
-          resolve(response.statusMessage);
-        } else {
-          reject(err)
-        }
-      }
+    //     if (!err && response.statusCode == 204) {
+    //       console.log("BallotController deleted successufuly");
+    //       resolve(response.statusMessage);
+    //     } else {
+    //       reject(err)
+    //     }
+    //   }
 
     );
   });  
