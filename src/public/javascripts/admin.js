@@ -79,13 +79,26 @@ $(() => {
       '</li>');
   });
 
-  $('#ballotForm').submit(function() {
+  $('#ballotForm').submit((e) => {
+    e.preventDefault();
+    let form = e.currentTarget;
+    
     if($('#optionsUl').children().length < 2) {
       console.log("Not enough options");
       console.log($('.options .invalid-feedback'));
       $('.options .invalid-feedback').show().text("A ballot needs at least 2 options");
       return false;
     }
+
+    $.ajax({
+      url:'/api/ballot',
+      type:'post',
+      data:$(form).serialize(),
+      success:function(){
+        //console.log("worked");
+      }
+  });
+
     return true;
   });
 

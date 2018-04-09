@@ -40,7 +40,7 @@ createBallot = (req, res) => {
     .then(x => {
         console.log("RESPONSE: ")
         console.log(x);
-        res.redirect('back');
+        res.status(200).end();
     });
 }
 
