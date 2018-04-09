@@ -68,18 +68,16 @@ createBallot = (data) => {
 }
 
 deleteBallot = (id) => {  
-  return new Promise(function(resolve, reject) {
+  return new Promise(async (resolve, reject) => {
     
     let registry = await composerClient.getConnection().getAssetRegistry('org.vote.Ballot');
-    registry.delete(id)
-      .then(() => {
-        console.log("BallotController deleted successufuly");
-        resolve(response.statusMessage);
-      })
-      .catch(err => {
+    await registry.delete(id)
+      .catch(err =>
         reject(err)
-      })
+      );
 
+      console.log("BallotController deleted successufuly");
+      resolve(response.statusMessage);
     // request.del(
     //   encodeURI('http://172.16.67.238:3000/api/org.vote.Ballot/' + id),
     //   function (err, response, body) {
@@ -93,7 +91,7 @@ deleteBallot = (id) => {
     //     }
     //   }
 
-    );
+    
   });  
 }
 
