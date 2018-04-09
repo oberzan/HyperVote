@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var i18n = require('i18n');
 
-//var bearerToken = require('express-bearer-token');
 var jwt = require('jsonwebtoken');
 
 var composerClient = require('./src/composer-client');
