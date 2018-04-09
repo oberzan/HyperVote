@@ -86,12 +86,16 @@ postSecret = (req, res, next) => {
 
     console.log("Setting a cookie");
     console.log(req.body.secret);
+    let payload = {
+      user: "admin",
+      permissions: ['ADMIN']
+    }
+
     res.status(200)
        .cookie("token",
-               jwt.sign({
-                  user: "admin" },
-                  process.env.JWT_SECRET,
-                  { expiresIn: 10 * 60 }))
+               jwt.sign(payload),
+               process.env.JWT_SECRET,
+               { expiresIn: 10 * 60 })
        .json({ user:"admin" });
   } else {
     res.status(400)

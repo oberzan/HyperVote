@@ -1,5 +1,3 @@
-const request = require('request');
-
 const composerClient = require('../composer-client')
 
 returnJsonResponse = (response, status, content) => {
