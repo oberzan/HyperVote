@@ -15,10 +15,10 @@ div.row
               div.circle(style="background:" + googleColors[j])
             td.col-7.option #{option.name == "undefined" ? i18n.__("undefined vote") : option.name}
             td.col-2.n #{option.n}
-            td.col-2 #{100 * option.n / ballotsOptions[ballot.title].nVotes}
+            td.col-2 #{100 * option.n / nVotes}
       tfoot
         tr.d-flex
           td.col-1
           td.col-7
-          th.col-2 #{ballotsOptions[ballot.title].nVotes}
+          th.col-2 #{nVotes}
           td.col-2
