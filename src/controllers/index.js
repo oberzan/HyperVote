@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const config = require('./config.json');
+const config = require('../../config.json');
 
 const ballotService = require('../services/ballot');
 const voteService = require('../services/vote');
