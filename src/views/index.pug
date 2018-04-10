@@ -37,27 +37,28 @@ block content
               else
                 - let options = ballotsOptions[ballot.title].options
                 - let nVotes = ballotsOptions[ballot.title].nVotes
-                div.row
-                  div.col-7.chart(style="padding:0; min-height:200px")
-                  div.col-md-5
-                    table.table.table-sm.table-hover
-                      thead.thead-light
-                        tr.d-flex
-                          th.col-1
-                          th.col-7(scope="col") #{i18n.__("Option")}
-                          th.col-2(scope="col") #
-                          th.col-2(scope="col") %
-                      tbody
-                        each option,j in ballotsOptions[ballot.title].options
-                          tr.d-flex
-                            td.col-1
-                              div.circle(style="background:" + googleColors[j])
-                            td.col-7.option #{option.name == "undefined" ? i18n.__("undefined vote") : option.name}
-                            td.col-2.n #{option.n}
-                            td.col-2 #{100 * option.n / ballotsOptions[ballot.title].nVotes}
-                      tfoot
-                        tr.d-flex
-                          td.col-1
-                          td.col-7
-                          th.col-2 #{ballotsOptions[ballot.title].nVotes}
-                          td.col-2
+                include includes/legend.pug
+                //- div.row
+                //-   div.col-7.chart(style="padding:0; min-height:200px")
+                //-   div.col-md-5
+                //-     table.table.table-sm.table-hover
+                //-       thead.thead-light
+                //-         tr.d-flex
+                //-           th.col-1
+                //-           th.col-7(scope="col") #{i18n.__("Option")}
+                //-           th.col-2(scope="col") #
+                //-           th.col-2(scope="col") %
+                //-       tbody
+                //-         each option,j in ballotsOptions[ballot.title].options
+                //-           tr.d-flex
+                //-             td.col-1
+                //-               div.circle(style="background:" + googleColors[j])
+                //-             td.col-7.option #{option.name == "undefined" ? i18n.__("undefined vote") : option.name}
+                //-             td.col-2.n #{option.n}
+                //-             td.col-2 #{100 * option.n / ballotsOptions[ballot.title].nVotes}
+                //-       tfoot
+                //-         tr.d-flex
+                //-           td.col-1
+                //-           td.col-7
+                //-           th.col-2 #{ballotsOptions[ballot.title].nVotes}
+                //-           td.col-2
