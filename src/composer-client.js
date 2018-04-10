@@ -1,13 +1,13 @@
-import { BusinessNetworkConnection } from 'composer-client';
+const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 
-import logger from '../log.js';
+const logger = require('../log.js');
 
 var state = {
   bnDefinition: null,
   bnConnection: null
 }
 
-export const connect = (cardName, businessNetworkId, cb) => {
+exports.connect = (cardName, businessNetworkId, cb) => {
   logger.info('Composer-client connect');
   if(state.bnDefinition)
     return cb();
@@ -23,13 +23,13 @@ export const connect = (cardName, businessNetworkId, cb) => {
     });
 }
 
-export const getConnection = () => {
+exports.getConnection = () => {
   logger.info('returning connection')
   // console.log(state.bnConnection);
   return state.bnConnection;
 }
 
-export const getDefinition = () => {
+exports.getDefinition = () => {
   logger.info('returning definition')
   // console.log(state.bnDefinition);
   return state.bnDefinition;
