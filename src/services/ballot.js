@@ -92,7 +92,6 @@ getResults = (ballot) => {
     connection.query(query, { ballot: bId })
       .then(response => {
         let selections = response.map(x => x.selection);
-        console.log(selections);
         let selCounts = {};
         selections.forEach(x => {
           if(selCounts[x])
@@ -100,7 +99,6 @@ getResults = (ballot) => {
           else
             selCounts[x] = 1
         });
-        console.log(selCounts);
 
         var sorted = [];
         for (let option in selCounts) sorted.push({name: option, n: selCounts[option]});
