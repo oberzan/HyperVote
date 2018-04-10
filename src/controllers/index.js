@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 
+const config = require('./config.json');
+
 const ballotService = require('../services/ballot');
 const voteService = require('../services/vote');
 const googleColors = [
@@ -82,7 +84,11 @@ authenticate = (req, res, next) => {
 postSecret = (req, res, next) => {
   console.log("postSecret");
 
-  let secret = process.env.HYPERVOTE_SECRET;
+  let secret = config.secret.admin;
+  if(!secret) {
+    console.error("Admin secret not set")
+    res.status(500).end();
+  }
   if(req.body.secret === secret) {
 
     console.log("Setting a cookie");
@@ -95,7 +101,7 @@ postSecret = (req, res, next) => {
     res.status(200)
        .cookie("token",
                jwt.sign(payload),
-               process.env.JWT_SECRET,
+               config.secret.jwt,
                { expiresIn: 10 * 60 })
        .json({ user:"admin" });
   } else {

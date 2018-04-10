@@ -9,6 +9,8 @@ let i18n = require('i18n');
 let jwt = require('jsonwebtoken');
 let ejwt = require('express-jwt');
 
+let config = require('./config.json');
+
 let composerClient = require('./src/composer-client');
 let index = require('./src/routes/index');
 let api = require('./src/routes/api');
@@ -27,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(ejwt({
-  secret: process.env.JWT_SECRET,
+  secret: config.secret.jwt,
   credentialsRequired: false,
   getToken: req => req.cookies.token 
 }));
