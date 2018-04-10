@@ -4,7 +4,6 @@ function index(req, res, next) {
   ballot.getBallots()
     .then( ballots => {
       console.log("Admin.index: got response");
-      console.log(ballots);
       res.render('admin', {
         ballots: ballots,
         i18n: res

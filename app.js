@@ -28,44 +28,9 @@ app.use(cookieParser());
 
 app.use(ejwt({
   secret: process.env.JWT_SECRET,
+  credentialsRequired: false,
   getToken: req => req.cookies.token 
 }));
-
-// app.use('/admin', (req, res, next) => {
-//     console.log("Cookie: " + req.cookies.token);
-    
-//     clearTokenAndRedirect = () => {
-//       console.log("Clearing the cookie");
-//       res.status(401)
-//          .clearCookie("token")
-//          .redirect("/authenticate");
-//     }
-
-//     if(!process.env.JWT_SECRET) {
-//       console.error("JWT_SECRET not set");
-//     }
-
-//     jwt.verify(req.cookies.token, process.env.JWT_SECRET, (err, decodedToken) => {
-//       if (err) {
-//         clearTokenAndRedirect();
-//         return;
-//       };
-
-//       if (decodedToken.exp <= Date.now() / 1000) {
-//         clearTokenAndRedirect();
-//         return;
-//       }
-
-//       console.log("User: ");
-//       console.log(decodedToken.user);
-
-//       if(decodedToken.user !== "admin")
-//         clearTokenAndRedirect();
-//       else
-//         next();
-//     });    
-//   }
-// );
 
 /** STATIC CONTENT **/
 app.use(
@@ -104,6 +69,14 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+  if(err.message.indexOf('expired') > -1)
+    res.status(401)
+       .clearCookie("token")
+       .redirect('/authenticate');
+  if(err.status == 403)
+    res.status(403)
+       .redirect('/authenticate');
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
