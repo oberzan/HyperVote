@@ -1,15 +1,16 @@
 const ballot = require('../services/ballot');
+const logger = require('../../logger')
 
-function index(req, res, next) {
+index = (req, res, next) => {
   ballot.getBallots()
     .then( ballots => {
-      console.log("Admin.index: got response");
+      logger.info("Admin.index: got response");
       res.render('admin', {
         ballots: ballots,
         i18n: res
       });
     }).catch( err => {
-      console.log(err);
+      logger.error(err);
     });  
 }
 
