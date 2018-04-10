@@ -19,7 +19,8 @@
     "nodemailer": "^4.6.3",
     "pug": "2.0.0-beta11",
     "serve-favicon": "~2.4.5",
-    "tempusdominus-bootstrap-4": "^5.0.0-alpha17"
+    "tempusdominus-bootstrap-4": "^5.0.0-alpha17",
+    "winston": "^2.4.1"
   },
   "devDependencies": {
     "nodemon": "^1.17.2"
