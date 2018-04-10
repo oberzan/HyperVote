@@ -1,17 +1,18 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
+let guard = require('express-jwt-permissions')()
 
-var index = require('../controllers/index');
-var admin = require('../controllers/admin');
+let index = require('../controllers/index');
+let admin = require('../controllers/admin');
 
-var ballot = require('../services/ballot');
+let ballot = require('../services/ballot');
 
 // router.get('/', function(req, res, next) {
 //   res.redirect("/feed");
 // });
 
 /* ADMIN */
-router.get('/admin', admin.index)
+router.get('/admin', guard.check('ADMIN'), admin.index)
 // router.post('/admin', ballot.createBallot)
 
 router.get('/authenticate', index.authenticate);

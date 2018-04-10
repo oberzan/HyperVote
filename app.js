@@ -1,18 +1,19 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var i18n = require('i18n');
+let express = require('express');
+let path = require('path');
+let favicon = require('serve-favicon');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
+let i18n = require('i18n');
 
-var jwt = require('jsonwebtoken');
+let jwt = require('jsonwebtoken');
+let ejwt = require('express-jwt');
 
-var composerClient = require('./src/composer-client');
-var index = require('./src/routes/index');
-var api = require('./src/routes/api');
+let composerClient = require('./src/composer-client');
+let index = require('./src/routes/index');
+let api = require('./src/routes/api');
 
-var app = express();
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'src', 'views'));
@@ -25,41 +26,46 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/admin', (req, res, next) => {
-    console.log("Cookie: " + req.cookies.token);
+app.use(ejwt({
+  secret: process.env.JWT_SECRET,
+  getToken: req => req.cookies.token 
+}));
+
+// app.use('/admin', (req, res, next) => {
+//     console.log("Cookie: " + req.cookies.token);
     
-    clearTokenAndRedirect = () => {
-      console.log("Clearing the cookie");
-      res.status(401)
-         .clearCookie("token")
-         .redirect("/authenticate");
-    }
+//     clearTokenAndRedirect = () => {
+//       console.log("Clearing the cookie");
+//       res.status(401)
+//          .clearCookie("token")
+//          .redirect("/authenticate");
+//     }
 
-    if(!process.env.JWT_SECRET) {
-      console.error("JWT_SECRET not set");
-    }
+//     if(!process.env.JWT_SECRET) {
+//       console.error("JWT_SECRET not set");
+//     }
 
-    jwt.verify(req.cookies.token, process.env.JWT_SECRET, (err, decodedToken) => {
-      if (err) {
-        clearTokenAndRedirect();
-        return;
-      };
+//     jwt.verify(req.cookies.token, process.env.JWT_SECRET, (err, decodedToken) => {
+//       if (err) {
+//         clearTokenAndRedirect();
+//         return;
+//       };
 
-      if (decodedToken.exp <= Date.now() / 1000) {
-        clearTokenAndRedirect();
-        return;
-      }
+//       if (decodedToken.exp <= Date.now() / 1000) {
+//         clearTokenAndRedirect();
+//         return;
+//       }
 
-      console.log("User: ");
-      console.log(decodedToken.user);
+//       console.log("User: ");
+//       console.log(decodedToken.user);
 
-      if(decodedToken.user !== "admin")
-        clearTokenAndRedirect();
-      else
-        next();
-    });    
-  }
-);
+//       if(decodedToken.user !== "admin")
+//         clearTokenAndRedirect();
+//       else
+//         next();
+//     });    
+//   }
+// );
 
 /** STATIC CONTENT **/
 app.use(
@@ -91,7 +97,7 @@ app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
