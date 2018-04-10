@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-const config = require('./config.json');
+const config = require('../../config.json');
 
 const ballot = require('../services/ballot')
 const vote = require('../services/vote')
