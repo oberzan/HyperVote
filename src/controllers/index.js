@@ -32,6 +32,9 @@ homepage = (req, res, next) => {
     .then(async ballots => {
       let ballotsOptions = {};
       for(let ballot of ballots) {
+        if(ballot.end > Date.now())          
+          continue;
+
         let options = await ballotService.getResults(ballot.title);
         
         let nVotes = 0;
