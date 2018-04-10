@@ -2,5 +2,11 @@
   "secret": {
     "jwt": "",
     "admin": ""
+  },
+
+  "nodemailer": {
+    "user": "",
+    "password": "",
+    "list_path": ""
   }
 }

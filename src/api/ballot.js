@@ -1,5 +1,7 @@
 const moment = require('moment');
 
+const config = require('./config.json');
+
 const ballot = require('../services/ballot')
 const vote = require('../services/vote')
 
@@ -8,22 +10,9 @@ const { URL } = require('url');
 const nodemailer = require('nodemailer');
 const uuidv4 = require('uuid/v4');
 
-returnJsonResponse = (res, status, content) => {
-  res.status(status);
-  res.json(content);
-};
-
 createBallot = (req, res) => {
   console.log(req.body);
   console.log(req.body.endTime);
-  // var options = [];
-  // req.body.option.forEach(opt => {
-  //   options.push({
-  //     "$class": "org.vote.Option",
-  //     "Name": opt,
-  //     "description": "opt.description" //TODO
-  //   });
-  // });
 
   data = {
     "title": req.body.title,
@@ -46,19 +35,19 @@ createBallot = (req, res) => {
 createTokens = (req, res) => {
   let ballot = req.params.id;
 
-  if(process.env.NODEMAILER_LIST_PATH == undefined) {
-    returnJsonResponse(res, 500, "NODEMAILER_LIST_PATH is undefined");
+  if(!config.nodemailer.list_path) {
+    res.status(500).json("nodemailer list_path is undefined");
     return;
   }
-  if(process.env.NODEMAILER_USER == undefined) {
-    returnJsonResponse(res, 500, "NODEMAILER_USER is undefined");
+  if(!config.nodemailer.user) {
+    res.status(500).json("nodemailer user is undefined");
     return;
   }
-  if(process.env.NODEMAILER_PASS == undefined) {
-    returnJsonResponse(res, 500, "NODEMAILER_PASS is undefined");
+  if(!config.nodemailer.password) {
+    res.status(500).json("nodemailer password is undefined");
     return;
   }
-  fs.readFile(process.env.NODEMAILER_LIST_PATH, 'utf8', (err, fileData) => {
+  fs.readFile(config.nodemailer.list_path, 'utf8', (err, fileData) => {
     if (err) {
       console.log(err);
       return err;
@@ -105,16 +94,16 @@ createTokens = (req, res) => {
               console.log('Message sent: %s', info.messageId);
             })
             .catch(err => {
-              returnJsonResponse(res, 1, err);
+              res.status(400).json(err);
             });
         });
         let successMessage = `${res.__("Tokens for")} ${ballot} ${res.__("successfully sent")}.`;
-        returnJsonResponse(res, 200, successMessage);
+        res.status(200).json(successMessage);
 
       })
       .catch(err => {
         console.log(err);
-        returnJsonResponse(res, 1, err);
+        res.status(400).json(err);
       });
   });    
 }
@@ -123,10 +112,10 @@ deleteBallot = (req, res) => {
   console.log("DELETE ballot: " + req.params.id);
   ballot.delete(req.params.id)
     .then( data => {
-      returnJsonResponse(res, 204, data);
+      res.status(204).json(data);
     })
     .catch( err => {
-      returnJsonResponse(res, 400, err)
+      res.status(400).json(err);
     });  
 }
 
@@ -135,11 +124,11 @@ getResults = (req, res) => {
   ballot.getResults(req.params.id)
     .then( data => {
       console.log('getResultsResponse');
-      returnJsonResponse(res, 200, data);
+      res.status(200).json(data);
     })
     .catch( err => {
       console.log('getResultsError');
-      returnJsonResponse(res, 400, err)
+      res.status(400).json(err);
     });
 }
 
