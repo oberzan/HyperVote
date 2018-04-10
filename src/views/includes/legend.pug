@@ -9,7 +9,7 @@ div.row
           th.col-2(scope="col") #
           th.col-2(scope="col") %
       tbody
-        each option,j in ballotsOptions[ballot.title].options
+        each option,j in options
           tr.d-flex
             td.col-1
               div.circle(style="background:" + googleColors[j])

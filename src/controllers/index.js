@@ -65,6 +65,7 @@ ballot = (req, res, next) => {
             ballot: ballot,
             options: options,
             nVotes: nVotes,
+            googleColors,
             i18n: res
           });
         })

@@ -35,6 +35,7 @@ block content
                     div.invalid-feedback #{i18n.__("Vote unsuccessfull")}
                   button.btn.btn-primary(type="submit" disabled=true) #{i18n.__("Vote")}
               else
+                - let options = ballotsOptions[ballot.title].options
                 div.row
                   div.col-7.chart(style="padding:0; min-height:200px")
                   div.col-md-5
