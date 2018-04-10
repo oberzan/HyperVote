@@ -1,12 +1,14 @@
-const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
+import { BusinessNetworkConnection } from 'composer-client';
+
+import logger from '../log.js';
 
 var state = {
   bnDefinition: null,
   bnConnection: null
 }
 
-exports.connect = (cardName, businessNetworkId, cb) => {
-  console.log('Composer-client connect');
+export const connect = (cardName, businessNetworkId, cb) => {
+  logger.info('Composer-client connect');
   if(state.bnDefinition)
     return cb();
 
@@ -16,34 +18,19 @@ exports.connect = (cardName, businessNetworkId, cb) => {
       state.bnDefinition = result;
       return cb();
     }).catch((err) => {
-      console.log("Composer-client connection has failed")
-      console.log(err);
+      logger.error("Composer-client connection has failed")
+      logger.error(err);
     });
 }
 
-exports.getConnection = () => {
-  console.log('returning connection')
+export const getConnection = () => {
+  logger.info('returning connection')
   // console.log(state.bnConnection);
   return state.bnConnection;
 }
 
-exports.getDefinition = () => {
-  console.log('returning definition')
+export const getDefinition = () => {
+  logger.info('returning definition')
   // console.log(state.bnDefinition);
   return state.bnDefinition;
 }
-
-// let bizNetworkConnection = new BusinessNetworkConnection();
-// let cardName = 'BNadmin-org1@voting-network';
-// let businessNetworkId = 'voting-network';
-
-
-// let connection = bizNetworkConnection.connect(cardName)
-//   .then((result) => {
-//     return result;
-//   });
-
-// module.exports = {
-//   connection = connection
-// }
-// expor

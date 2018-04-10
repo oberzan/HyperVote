@@ -4,6 +4,7 @@ const config = require('../../config.json');
 
 const ballotService = require('../services/ballot');
 const voteService = require('../services/vote');
+
 const googleColors = [
   '#3366CC',
   '#DC3912',
@@ -85,17 +86,17 @@ authenticate = (req, res, next) => {
 }
 
 postSecret = (req, res, next) => {
-  console.log("postSecret");
+  logger.info("postSecret");
 
   let secret = config.secret.admin;
   if(!secret) {
-    console.error("Admin secret not set")
+    logger.error("Admin secret not set")
     res.status(500).end();
   }
   if(req.body.secret === secret) {
 
-    console.log("Setting a cookie");
-    console.log(req.body.secret);
+    logger.info("Setting a cookie");
+    logger.info(req.body.secret);
     let payload = {
       user: "admin",
       permissions: ['ADMIN']
