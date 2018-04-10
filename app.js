@@ -1,7 +1,7 @@
 let express = require('express');
 let path = require('path');
 let favicon = require('serve-favicon');
-let logger = require('morgan');
+let morgan = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 let i18n = require('i18n');
@@ -10,6 +10,7 @@ let jwt = require('jsonwebtoken');
 let ejwt = require('express-jwt');
 
 let config = require('./config.json');
+let logger = require('./log.js');
 
 let composerClient = require('./src/composer-client');
 let index = require('./src/routes/index');
@@ -23,7 +24,7 @@ app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -41,7 +42,7 @@ app.use(
   )
 );
 
-composerClient.connect('BNadmin-org1@voting-network', 'voting-network', () => {console.log('Connection established')});
+composerClient.connect('BNadmin-org1@voting-network', 'voting-network', () => logger.info('Connection established'));
 
 app.locals.moment = require('moment');
 
