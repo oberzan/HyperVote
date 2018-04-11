@@ -1,42 +1,41 @@
 const uuidv4 = require('uuid/v4');
 const crypto = require('crypto');
-const composerClient = require('../composer-client')
+
+const composerClient = require('../composer-client');
+const logger = require('../../log.js');
 
 publishTokens = (ballot, tokens) => {
-  console.log('PublishTokens');
+  logger.info('PublishTokens');
 
   let serializer = composerClient.getDefinition().getSerializer();
   
   let hashes = [];
   tokens.forEach(thash => {
-    console.log("Hashing");
     let sha = crypto.createHash('sha256');
     hashes.push(sha.update(thash).digest('hex'));
   });
   
-  console.log(hashes);
+  logger.debug(hashes);
   let resource = serializer.fromJSON({
     '$class': 'org.vote.PublishTokens',
     'ballot': ballot,
     'hashedTokens': hashes
   });
-  console.log("resource");
-  console.log(resource);
+  logger.debug(resource);
   return new Promise((resolve, reject) => {
     composerClient.getConnection().submitTransaction(resource)
-      .then(res => {
-        console.log("Transaction submitted")
-        console.log(res);
+      .then(() => {
+        logger.info("PublishTokens transaction submitted")
         resolve(res);
       }).catch(err => {
-        console.log(err);
+        logger.error(err);
         reject(err);
       });
   });
 }
 
 publishVote = (ballot, token, option) => {
-  console.log('PublishVote');
+  logger.info('PublishVote');
 
   let serializer = composerClient.getDefinition().getSerializer();
 
@@ -49,10 +48,10 @@ publishVote = (ballot, token, option) => {
   return new Promise((resolve, reject) => {
     composerClient.getConnection().submitTransaction(resource)
       .then(res => {
-        console.log("Vote published successfully")
+        logger.info("Vote published successfully")
         resolve(res);
       }).catch(err => {
-        console.log(err);
+        logger.error(err);
         reject(err);
       });
   });

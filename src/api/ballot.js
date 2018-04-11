@@ -92,9 +92,11 @@ createTokens = (req, res) => {
               logger.info('Message sent: %s', info.messageId);
             })
             .catch(err => {
+              logger.error(err);
               res.status(400).json(err);
             });
         });
+        logger.info('Tokens successfully created.');
         let successMessage = `${res.__("Tokens for")} ${ballot} ${res.__("successfully sent")}.`;
         res.status(200).json(successMessage);
 
