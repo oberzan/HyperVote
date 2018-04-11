@@ -2,12 +2,13 @@ $(() => {
   
   /** SEND TOKENS **/
   $('.btn.tokens').click((x) => {
+    $(x.target).prop('disabled', true);
     let ballot = $(x.target).siblings('.title').first().text();
     let url = [window.location.origin,
       'api',
       'ballot',
        ballot,
-       'tokens'
+      'tokens'
     ].join('/');
     
     let errBar = $('#ballotErrorBar');
@@ -21,8 +22,10 @@ $(() => {
           errBar.text(err.responseJSON);
           errBar.show();
         }
+        $(x.target).prop('disabled', false);
       },
       success: data => {
+        $(x.target).hide();
         console.log(data);
         successBar.text(data);
         successBar.show();
