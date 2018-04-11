@@ -1,7 +1,7 @@
 const moment = require('moment');
 
 const config = require('../../config.json');
-const logger = require('../../log.js');
+const logger = require('../../log.js')(module);
 
 const ballot = require('../services/ballot')
 const vote = require('../services/vote')

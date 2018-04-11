@@ -1,20 +1,20 @@
-let express = require('express');
-let path = require('path');
-let favicon = require('serve-favicon');
-let morgan = require('morgan');
-let cookieParser = require('cookie-parser');
-let bodyParser = require('body-parser');
-let i18n = require('i18n');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const i18n = require('i18n');
 
-let jwt = require('jsonwebtoken');
-let ejwt = require('express-jwt');
+const jwt = require('jsonwebtoken');
+const ejwt = require('express-jwt');
 
-let config = require('./config.json');
-let logger = require('./log.js');
+const config = require('./config.json');
+const logger = require('./log.js')(module);
 
 let composerClient = require('./src/composer-client');
-let index = require('./src/routes/index');
-let api = require('./src/routes/api');
+const index = require('./src/routes/index');
+const api = require('./src/routes/api');
 
 let app = express();
 

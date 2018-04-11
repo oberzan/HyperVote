@@ -1,5 +1,5 @@
 const ballot = require('../services/ballot');
-const logger = require('../../log.js')
+const logger = require('../../log.js')(module);
 
 index = (req, res, next) => {
   ballot.getBallots()

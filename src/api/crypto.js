@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const logger = require('../../log.js')
+const logger = require('../../log.js')(module);
 
 module.exports.hashToken = function(req, res) {
   logger.debug(req.body)

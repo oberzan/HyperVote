@@ -1,4 +1,5 @@
 const composerClient = require('../composer-client')
+const logger = require('../../log.js')(module);
 
 returnJsonResponse = (response, status, content) => {
   response.status(status);
@@ -13,7 +14,7 @@ getBallot = (id) => {
         resolve(data);
       }).catch(err => {
         console.log("ERROR: ");
-        console.error(err);
+        logger.error(err);
         reject(err);
       });
   });  

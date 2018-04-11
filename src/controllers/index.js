@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const config = require('../../config.json');
-const logger = require('../../log.js');
+const logger = require('../../log.js')(module);
 
 const ballotService = require('../services/ballot');
 const voteService = require('../services/vote');
