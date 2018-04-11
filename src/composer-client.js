@@ -25,12 +25,12 @@ exports.connect = (cardName, businessNetworkId, cb) => {
 
 exports.getConnection = () => {
   logger.info('returning connection')
-  // console.log(state.bnConnection);
+  logger.debug(state.bnConnection);
   return state.bnConnection;
 }
 
 exports.getDefinition = () => {
   logger.info('returning definition')
-  // console.log(state.bnDefinition);
+  logger.debug(state.bnDefinition);
   return state.bnDefinition;
 }
