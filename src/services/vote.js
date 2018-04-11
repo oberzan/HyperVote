@@ -2,7 +2,7 @@ const uuidv4 = require('uuid/v4');
 const crypto = require('crypto');
 
 const composerClient = require('../composer-client');
-const logger = require('../../log.js');
+const logger = require('../../log.js')(module);
 
 publishTokens = (ballot, tokens) => {
   logger.info('PublishTokens');
