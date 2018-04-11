@@ -69,7 +69,8 @@ createTokens = (req, res) => {
         });
     
         let votingUrl = new URL(req.headers.referer).origin + '/' + ballot;
-        tokens.forEach((token, i) => {
+        for (let [i, token] of tokens.entries()) {
+        //tokens.forEach((token, i) => {
           let mailOptions = {
             from: '"HyperVote admin" <a>',
             to: mails[i],
@@ -95,7 +96,7 @@ createTokens = (req, res) => {
               logger.error(err);
               res.status(400).json(err);
             });
-        });
+        };
         logger.info('Tokens successfully created.');
         let successMessage = `${res.__("Tokens for")} ${ballot} ${res.__("successfully sent")}.`;
         res.status(200).json(successMessage);
