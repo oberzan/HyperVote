@@ -63,8 +63,8 @@ createTokens = (req, res) => {
         let transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user: process.env.NODEMAILER_USER, // generated ethereal user
-            pass: process.env.NODEMAILER_PASS // generated ethereal password
+            user: config.nodemailer.user, // generated ethereal user
+            pass: config.nodemailer.password // generated ethereal password
           }
         });
     
