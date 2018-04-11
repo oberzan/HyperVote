@@ -51,14 +51,12 @@ $(() => {
         submitDateString = e.date.toISOString();
         console.log(submitDateString);
       }
-      //$("#datetimepicker input").val(submitDateString);
     });
 
   /** ADD OPTION **/ 
   $('#addOptionBtn').click(function() {
     let options = 
       $('#optionsUl li').map(function() {
-        //console.log(this.innerText);
         return this.innerText;
       }).get();
 
@@ -99,8 +97,9 @@ $(() => {
       type:'post',
       data:$(form).serialize(),
       success:function(){
+        form.reset();
+        $(form).find('ul li').remove();
         location.reload();
-        //form.reset();
       },
       error: () => {
         $(form).find('input[type=submit]').prop('disabled', false);
