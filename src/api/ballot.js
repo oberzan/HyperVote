@@ -1,6 +1,7 @@
 const moment = require('moment');
 
 const config = require('../../config.json');
+const logger = require('../../log.js');
 
 const ballot = require('../services/ballot')
 const vote = require('../services/vote')
@@ -11,8 +12,7 @@ const nodemailer = require('nodemailer');
 const uuidv4 = require('uuid/v4');
 
 createBallot = (req, res) => {
-  console.log(req.body);
-  console.log(req.body.endTime);
+  logger.info(req.body);
 
   data = {
     "title": req.body.title,
@@ -23,12 +23,10 @@ createBallot = (req, res) => {
     "votes": [],
     "voters": []
   };
-  console.log(data);
+  logger.info(data);
   ballot.createBallot(data)
     .then(x => {
-        console.log("RESPONSE: ")
-        console.log(x);
-        res.status(200).end();
+      res.sendStatus(200);
     });
 }
 
@@ -49,7 +47,7 @@ createTokens = (req, res) => {
   }
   fs.readFile(config.nodemailer.list_path, 'utf8', (err, fileData) => {
     if (err) {
-      console.log(err);
+      logger.error(err);
       return err;
     }
 
@@ -91,7 +89,7 @@ createTokens = (req, res) => {
     
           transporter.sendMail(mailOptions)
             .then(info => {
-              console.log('Message sent: %s', info.messageId);
+              logger.info('Message sent: %s', info.messageId);
             })
             .catch(err => {
               res.status(400).json(err);
@@ -102,14 +100,14 @@ createTokens = (req, res) => {
 
       })
       .catch(err => {
-        console.log(err);
+        logger.error(err);
         res.status(400).json(err);
       });
   });    
 }
 
 deleteBallot = (req, res) => {
-  console.log("DELETE ballot: " + req.params.id);
+  logger.info("DELETE ballot: " + req.params.id);
   ballot.delete(req.params.id)
     .then( data => {
       res.status(204).json(data);
@@ -120,14 +118,15 @@ deleteBallot = (req, res) => {
 }
 
 getResults = (req, res) => {
-  console.log('getResults');
+  logger.debug('getResults');
   ballot.getResults(req.params.id)
     .then( data => {
-      console.log('getResultsResponse');
+      logger.debug('getResultsResponse');
       res.status(200).json(data);
     })
     .catch( err => {
-      console.log('getResultsError');
+      logger.debug('getResultsError');
+      logger.error(err);
       res.status(400).json(err);
     });
 }
@@ -140,25 +139,11 @@ publishVote = (req, res, next) => {
       res.status(200).send({
         message: `${res.__("You successfully voted")} ${ballot}. ${res.__("Your vote was")} ${option}.`
       });
-      // res.render('voted', {
-      //   ballot: ballot,
-      //   option: option,
-      //   i18n: res
-      // });
     })
     .catch((err) => {
       res.status(400).send({
         message: `${res.__("Invalid token")}`
       });
-
-      // if(err.toString().indexOf("does not exist") > -1){
-      //   console.log("Does not exist");
-      // }
-      // res.render('error', {
-      //   error: {
-      //     stack: err.stack
-      //   }
-      // });
     });
 }
 

@@ -13,7 +13,20 @@ const logger = createLogger({
 
 if (process.env.NODE_ENV !== 'production') {
   logger.add(new transports.Console({
-    format: format.simple()
+    
+    format: format.combine(
+      format.colorize(),
+      format.timestamp(),
+      //format.align(),
+      format.printf((info) => {
+        const {
+          timestamp, level, message, ...args
+        } = info;
+        const ts = timestamp.slice(0, 19).replace('T', ' ');
+        return `${ts} [${level}]: ${message} ${Object.keys(args).length ? JSON.stringify(args, null, 2) : ''}`;
+      })
+    )
+      
   }));
 }
 

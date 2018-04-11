@@ -92,7 +92,7 @@ postSecret = (req, res, next) => {
   let secret = config.secret.admin;
   if(!secret) {
     logger.error("Admin secret not set")
-    res.status(500).end();
+    res.sendStatus(500);
   }
   if(req.body.secret === secret) {
 
