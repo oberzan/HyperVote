@@ -1,6 +1,6 @@
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 
-const logger = require('../log.js');
+const logger = require('../log.js')(module);
 
 var state = {
   bnDefinition: null,
@@ -8,7 +8,7 @@ var state = {
 }
 
 exports.connect = (cardName, businessNetworkId, cb) => {
-  logger.info('Composer-client connect');
+  logger.info('Composer-client connect with card: ' + cardName);
   if(state.bnDefinition)
     return cb();
 
