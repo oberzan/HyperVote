@@ -77,6 +77,10 @@ ballot = (req, res, next) => {
           });
         })
     })
+    .catch(err => {
+      logger.error(err);
+      res.sendStatus(400);
+    });
 }
 
 authenticate = (req, res, next) => {

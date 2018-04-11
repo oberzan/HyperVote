@@ -7,7 +7,8 @@ getBallot = (id) => {
     registry.get(id)
       .then(data => {
         resolve(data);
-      }).catch(err => {
+      })
+      .catch(err => {
         logger.error(err);
         reject(err);
       });
@@ -20,7 +21,8 @@ getBallots = () => {
     registry.getAll()
       .then(data => {
         resolve(data);
-      }).catch(err => {
+      })
+      .catch(err => {
         logger.error(err);
         reject(err);
       });
