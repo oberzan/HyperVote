@@ -1,4 +1,5 @@
 const { createLogger, format, transports } = require('winston');
+const util = require('util');
 
 const getLogger = (callingModule) => {
   let logger = createLogger({
@@ -12,20 +13,23 @@ const getLogger = (callingModule) => {
     ]
   });
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production') {    
+    let fileArr = callingModule.filename.split('/');
+    let file = callingModule.parent.parent !== null ? fileArr[fileArr.length -2] + '/' : '';
+    file = file + fileArr.pop();
     logger.add(new transports.Console({
-      
+      level: 'debug',
       format: format.combine(
         format.colorize(),
         format.timestamp(),
-        format.label({label: 'log.js'}),
+        format.label({label: file}),
         //format.align(),
         format.printf((info) => {
           const {
             timestamp, level, message, label, ...args
           } = info;
           const ts = timestamp.slice(0, 19).replace('T', ' ');
-          return `${ts} [${level}]: [${label}] ${message} ${Object.keys(args).length ? JSON.stringify(args, null, 2) : ''}`;
+          return `${ts} [${level}]: [${label}] ${util.format(message)} ${Object.keys(args).length ? JSON.stringify(args, null, 2) : ''}`;
         })
       )
         

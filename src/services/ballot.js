@@ -1,11 +1,6 @@
 const composerClient = require('../composer-client')
 const logger = require('../../log.js')(module);
 
-returnJsonResponse = (response, status, content) => {
-  response.status(status);
-  response.json(content);
-};
-
 getBallot = (id) => {  
   return new Promise(async (resolve, reject) => {
     let registry = await composerClient.getConnection().getAssetRegistry('org.vote.Ballot');
@@ -13,7 +8,6 @@ getBallot = (id) => {
       .then(data => {
         resolve(data);
       }).catch(err => {
-        console.log("ERROR: ");
         logger.error(err);
         reject(err);
       });
@@ -27,8 +21,7 @@ getBallots = () => {
       .then(data => {
         resolve(data);
       }).catch(err => {
-        console.log("ERROR: ");
-        console.error(err);
+        logger.error(err);
         reject(err);
       });
   });
@@ -58,8 +51,7 @@ createBallot = (data) => {
       .then(res => {
         resolve(res);
       }).catch(err => {
-        console.log("ERROR: ");
-        console.error(err);
+        logger.error(err);
         reject(err);
       });
   });  
@@ -73,13 +65,13 @@ deleteBallot = (id) => {
       .catch(err =>
         reject(err)
       );
-    console.log(id + " deleted successufuly");
+    logger.info(id + " deleted successufuly");
     resolve();  
   });  
 }
 
 getResults = (ballot) => {
-  console.log('Get votes');
+  logger.debug('Get votes');
 
   let connection = composerClient.getConnection();
 
@@ -89,7 +81,7 @@ getResults = (ballot) => {
         WHERE (ballot == _$ballot)
     `);
     let bId = encodeURI('resource:org.vote.Ballot#'+ballot);
-    console.log(bId);
+    logger.debug(bId);
     connection.query(query, { ballot: bId })
       .then(response => {
         let selections = response.map(x => x.selection);
@@ -106,11 +98,11 @@ getResults = (ballot) => {
         sorted.sort((a, b) => {
           return b.n - a.n;
         });
-        console.log(sorted);
+        logger.debug(sorted);
         resolve(sorted);
       })
       .catch(err => {
-        console.log(err);
+        logger.error(err);
         reject(err);
       });
   });
