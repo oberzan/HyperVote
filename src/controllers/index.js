@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const config = require('../../config.json');
+const logger = require('../../log.js');
 
 const ballotService = require('../services/ballot');
 const voteService = require('../services/vote');
@@ -104,9 +105,9 @@ postSecret = (req, res, next) => {
 
     res.status(200)
        .cookie("token",
-               jwt.sign(payload),
-               config.secret.jwt,
-               { expiresIn: 10 * 60 })
+               jwt.sign(payload,
+                 config.secret.jwt,
+                 { expiresIn: 10 * 60 }))
        .json({ user:"admin" });
   } else {
     res.status(400)

@@ -73,12 +73,12 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   if(err.message.indexOf('expired') > -1)
-    res.status(401)
-       .clearCookie("token")
-       .redirect('/authenticate');
+    return res.status(401)
+              .clearCookie("token")
+              .redirect('/authenticate');
   if(err.status == 403)
-    res.status(403)
-       .redirect('/authenticate');
+    return res.status(403)
+              .redirect('/authenticate');
 
   // set locals, only providing error in development
   res.locals.message = err.message;
