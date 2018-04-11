@@ -26,7 +26,7 @@ publishTokens = (ballot, tokens) => {
     composerClient.getConnection().submitTransaction(resource)
       .then(() => {
         logger.info("PublishTokens transaction submitted")
-        resolve(res);
+        resolve();
       }).catch(err => {
         logger.error(err);
         reject(err);
