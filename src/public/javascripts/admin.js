@@ -137,8 +137,6 @@ $(() => {
       console.log(err.statusCode());
       li.find('button').prop('disabled', false);
     });
-
-    //$(this).parent().remove();
   });
   $(document).on('click', '#optionsUl svg', function() {
     $(this).parent().remove();

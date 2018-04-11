@@ -73,10 +73,12 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   if(err.message.indexOf('expired') > -1)
+    logger.debug('Token expired, redirecting to /authenticate');
     return res.status(401)
               .clearCookie("token")
               .redirect('/authenticate');
   if(err.status == 403)
+    logger.debug('Access forbidden, redirecting to /authenticate');
     return res.status(403)
               .redirect('/authenticate');
 
