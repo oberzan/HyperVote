@@ -59,7 +59,7 @@ createTokens = (req, res) => {
     }
 
     vote.publishTokens(req.params.id, tokens)
-      .then(() => {
+      .then(async () => {
         let transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
@@ -88,7 +88,7 @@ createTokens = (req, res) => {
                   '</html>'
           };
     
-          transporter.sendMail(mailOptions)
+          await transporter.sendMail(mailOptions)
             .then(info => {
               logger.info('Message sent: %s', info.messageId);
             })

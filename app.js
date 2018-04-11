@@ -74,6 +74,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   if(err.message.indexOf('expired') > -1)
     logger.debug('Token expired, redirecting to /authenticate');
+    logger.debug(req.cookies);
     return res.status(401)
               .clearCookie("token")
               .redirect('/authenticate');
