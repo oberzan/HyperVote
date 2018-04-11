@@ -6,8 +6,8 @@ $(() => {
   })
 
   $('#auth').submit(e => {
-    logger.verbose("Submitting ");
-    logger.debug(e);
+    console.log("Submitting ");
+    console.log(e);
     let form = $(e.currentTarget);
 
     e.preventDefault();
@@ -20,8 +20,8 @@ $(() => {
       type: 'post',
       data: data,
       success: data => {
-        logger.info("Successfully authenticated");
-        logger.debug(data.token);
+        console.log("Successfully authenticated");
+        console.log(data.token);
         if(data.user === "admin") {
           window.location.replace("admin");
         }
@@ -31,8 +31,8 @@ $(() => {
         // token.removeClass('is-invalid');
       },
       error: err => {
-        logger.debug("error");
-        logger.error(err);
+        console.error("error");
+        console.error(err);
         $("#secret").addClass("is-invalid");
         //$("#secret").siblings(".invalid-feedback").show();
 
@@ -40,8 +40,8 @@ $(() => {
         // token.removeClass('is-valid');
       },
       complete: x => {
-        logger.debug("complete");
-        logger.debug(x);
+        console.log("complete");
+        console.log(x);
         // form.find('button').prop('disabled', false);
         // token.prop('disabled', false);
       }
