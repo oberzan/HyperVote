@@ -1,5 +1,16 @@
+import { SSL_OP_COOKIE_EXCHANGE } from "constants";
+
 $(() => {
-  
+  /** SHOW WARNING ON TOKEN EXPIRATION **/
+  let cookieExpTime = sessionStorage.getItem('cookieExpTime');
+  setTimeout(() => {
+    $('#cookieWarning').show();
+  }, moment(cookieExpTime) - moment());
+  // if (cookieExpTime < moment()) {
+  //   if (cooki)
+  // }
+
+
   /** SEND TOKENS **/
   $('.btn.tokens').click((x) => {
     $(x.target).prop('disabled', true);

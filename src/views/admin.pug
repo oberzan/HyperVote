@@ -11,7 +11,7 @@ block head
 
 block content
   div.container(style="max-width: 700px")
-    div.alert.alert-warning(role="alert") 
+    div#cookieWarning.alert.alert-warning(role="alert" style="display: none") 
       | #{i18n.__("Warning")+': ' + i18n.__("Session has expired")+ '. ' + i18n.__("Authenticate at")}
       a(href='/authenticate')  /authenticate
     h1 #{i18n.__("Create ballot")}
