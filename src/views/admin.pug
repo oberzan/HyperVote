@@ -10,10 +10,10 @@ block head
   script(defer type='text/javascript', src='/javascripts/admin.js')
 
 block content
-  div.alert.alert-warning(role="alert") 
-    | #{i18n.__("Warning")+':' + i18n.__("Session has expired")+ '.' + i18n.__("Authenticate at")}
-    a(href='/authenticate') /authenticate
   div.container(style="max-width: 700px")
+    div.alert.alert-warning(role="alert") 
+      | #{i18n.__("Warning")+': ' + i18n.__("Session has expired")+ '. ' + i18n.__("Authenticate at")}
+      a(href='/authenticate')  /authenticate
     h1 #{i18n.__("Create ballot")}
     
     form#ballotForm(autocomplete="off")
