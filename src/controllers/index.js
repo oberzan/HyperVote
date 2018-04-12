@@ -78,7 +78,7 @@ ballot = (req, res, next) => {
         })
     })
     .catch(err => {
-      logger.error(err);
+      logger.error(err.details);
       res.sendStatus(400);
     });
 }

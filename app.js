@@ -17,6 +17,7 @@ const index = require('./src/routes/index');
 const api = require('./src/routes/api');
 
 let app = express();
+app.locals.moment = require('moment');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'src', 'views'));
@@ -35,6 +36,15 @@ app.use(ejwt({
   getToken: req => req.cookies.token 
 }));
 
+app.use(function(err, req, res, next) {
+  if(err.status == 401 && err.message.indexOf('expired') > -1) {
+    logger.debug('Token expired, clearing token');
+    logger.debug(req.cookies);
+    res.status(401).clearCookie("token");
+    next();
+  }
+});
+
 /** STATIC CONTENT **/
 app.use(
   express.static(
@@ -43,8 +53,6 @@ app.use(
 );
 
 composerClient.connect('BNadmin-org1@voting-network', 'voting-network', () => logger.info('Connection established'));
-
-app.locals.moment = require('moment');
 
 // Locales
 i18n.configure({
@@ -72,12 +80,12 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  if(err.message.indexOf('expired') > -1)
-    logger.debug('Token expired, redirecting to /authenticate');
-    logger.debug(req.cookies);
-    return res.status(401)
-              .clearCookie("token")
-              .redirect('/authenticate');
+  // if(err.status == err.message.indexOf('expired') > -1)
+  //   logger.debug('Token expired, redirecting to /authenticate');
+  //   logger.debug(req.cookies);
+  //   return res.status(401)
+  //             .clearCookie("token")
+  //             .redirect('/authenticate');
   if(err.status == 403)
     logger.debug('Access forbidden, redirecting to /authenticate');
     return res.status(403)
