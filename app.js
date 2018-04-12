@@ -86,10 +86,15 @@ app.use(function(err, req, res, next) {
   //   return res.status(401)
   //             .clearCookie("token")
   //             .redirect('/authenticate');
-  if(err.status == 403)
-    logger.debug('Access forbidden, redirecting to /authenticate');
+  if(err.status == 403) {
+    logger.debug('Access forbidden');
+    
+    if (req.url.indexOf('api/') < 2) {
+      return res.sendStatus(403);
+    }
     return res.status(403)
               .redirect('/authenticate');
+  }
 
   // set locals, only providing error in development
   res.locals.message = err.message;
