@@ -137,6 +137,8 @@ $(() => {
     }).fail( err => {
       console.log(err);
       console.log(err.statusCode());
+      li.removeClass('list-group-item-secondary');
+      li.find('.fa-spinner').remove();
       li.find('button').prop('disabled', false);
     });
   });

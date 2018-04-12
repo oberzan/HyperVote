@@ -89,7 +89,7 @@ app.use(function(err, req, res, next) {
   if(err.status == 403) {
     logger.debug('Access forbidden');
     
-    if (req.url.indexOf('api/') < 2) {
+    if (req.url.indexOf('/api/') === 0) {
       return res.sendStatus(403);
     }
     return res.status(403)
