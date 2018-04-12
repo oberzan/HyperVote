@@ -101,7 +101,9 @@ $(() => {
         $(form).find('ul li').remove();
         location.reload();
       },
-      error: () => {
+      error: err => {
+        if (err.status === 403)
+          window.location.replace('/authenticate');
         $(form).find('input[type=submit]').prop('disabled', false);
       }
   });
