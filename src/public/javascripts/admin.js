@@ -1,5 +1,3 @@
-import { SSL_OP_COOKIE_EXCHANGE } from "constants";
-
 $(() => {
   /** SHOW WARNING ON TOKEN EXPIRATION **/
   let cookieExpTime = sessionStorage.getItem('cookieExpTime');
