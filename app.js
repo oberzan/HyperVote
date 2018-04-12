@@ -41,8 +41,8 @@ app.use(function(err, req, res, next) {
     logger.debug('Token expired, clearing token');
     logger.debug(req.cookies);
     res.status(401).clearCookie("token");
-    next();
   }
+  next();
 });
 
 /** STATIC CONTENT **/
