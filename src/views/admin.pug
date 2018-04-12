@@ -6,7 +6,6 @@ block head
   script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.js')
   if i18n.locale == 'si'
     script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/locale/sl.js')
-  //- script(src='/components/jquery-validation/dist/jquery.validate.js')
   script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha18/js/tempusdominus-bootstrap-4.min.js', crossorigin="anonymous")
   script(defer type='text/javascript', src='/javascripts/admin.js')
 
@@ -14,7 +13,7 @@ block content
   div.container(style="max-width: 700px")
     h1 #{i18n.__("Create ballot")}
     
-    form#ballotForm
+    form#ballotForm(autocomplete="off")
       div.form-group
         label(for="title") #{i18n.__("Title")}
         input#title.form-control(type="text", name="title" required)
