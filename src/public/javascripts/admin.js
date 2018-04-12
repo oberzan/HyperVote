@@ -35,7 +35,7 @@ $(() => {
         $(x.target).prop('disabled', false);
       },
       done: () => {
-        $(x.target).find('.fa-spinner').remove();
+        $(x.target).siblings('.fa-spinner').remove();
       }
       
     })
