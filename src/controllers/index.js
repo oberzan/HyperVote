@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const moment = require('moment');
 
 const config = require('../../config.json');
 const logger = require('../../log.js')(module);
@@ -107,12 +108,14 @@ postSecret = (req, res, next) => {
       permissions: ['ADMIN']
     }
 
+    let cookieLife = 10 * 60;
     res.status(200)
        .cookie("token",
                jwt.sign(payload,
                  config.secret.jwt,
-                 { expiresIn: 10 * 60 }))
-       .json({ user:"admin" });
+                 { expiresIn: cookieLife }))
+       .json({ cookieExpTime: moment().add(cookieLife, 's').toDate(),
+               user:"admin" });
   } else {
     res.status(400)
        .clearCookie("token")

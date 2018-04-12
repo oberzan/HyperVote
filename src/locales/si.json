@@ -26,5 +26,9 @@
 	"Invalid secret": "Invalid secret",
 	"Secret": "Geslo",
 	"Option": "Možnost",
-	"undefined vote": "Neoddano"
+	"undefined vote": "Neoddano",
+	"Warning": "Pozor",
+	"Session has expired": "Seja je potekla",
+	"Authenticate at": "Ponovna avtentikacija na"
+
 }

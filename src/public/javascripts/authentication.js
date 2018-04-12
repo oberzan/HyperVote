@@ -22,6 +22,7 @@ $(() => {
       success: data => {
         console.log("Successfully authenticated");
         console.log(data.token);
+        sessionStorage.setItem('cookieExpTime', date.cookieExpTime);
         if(data.user === "admin") {
           window.location.replace("admin");
         }
