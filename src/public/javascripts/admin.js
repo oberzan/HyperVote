@@ -3,6 +3,8 @@ $(() => {
   /** SEND TOKENS **/
   $('.btn.tokens').click((x) => {
     $(x.target).prop('disabled', true);
+    $(x.target).parent().children().first().after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+
     let ballot = $(x.target).siblings('.title').first().text();
     let url = [window.location.origin,
       'api',
@@ -16,6 +18,12 @@ $(() => {
     $.ajax({
       type: "POST",
       url: url,
+      success: data => {
+        $(x.target).hide();
+        console.log(data);
+        successBar.text(data);
+        successBar.show();
+      },
       error: err => {
         console.log(err);
         if(err.status === 403)
@@ -26,12 +34,10 @@ $(() => {
         }
         $(x.target).prop('disabled', false);
       },
-      success: data => {
-        $(x.target).hide();
-        console.log(data);
-        successBar.text(data);
-        successBar.show();
+      done: () => {
+        $(x.target).find('.fa-spinner').remove();
       }
+      
     })
   });
 
@@ -39,7 +45,7 @@ $(() => {
   $('#enddatetimepicker').datetimepicker({
     format: 'DD.MM.YYYY HH:mm',
     extraFormats: [ 'DD.MM.YY' ],
-    minDate: moment().add(5, 'm'),
+    minDate: moment(),
     //sideBySide: true,
     stepping: 5
   });
