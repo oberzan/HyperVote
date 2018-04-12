@@ -33,12 +33,11 @@ $(() => {
           errBar.show();
         }
         $(x.target).prop('disabled', false);
-      },
-      done: () => {
-        $(x.target).siblings('.fa-spinner').remove();
       }
-      
-    })
+    }).done(() => {
+      console.log('Done sending');
+      $(x.target).siblings('.fa-spinner').remove();
+    });
   });
 
   /** DATE PICKER **/ 
