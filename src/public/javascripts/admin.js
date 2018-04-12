@@ -133,13 +133,17 @@ $(() => {
       url: url     
     }).done( data => {
       console.log("Successfully deleted " + option);
-      location.reload();
+      li.remove();
+      //location.reload();
     }).fail( err => {
-      console.log(err);
-      console.log(err.statusCode());
-      li.removeClass('list-group-item-secondary');
-      li.find('.fa-spinner').remove();
-      li.find('button').prop('disabled', false);
+      console.error(err);
+      if (err.status === 403) {
+        window.location.replace('/authenticate');
+      } else {
+        li.removeClass('list-group-item-secondary');
+        li.find('.fa-spinner').remove();
+        li.find('button').prop('disabled', false);
+      }
     });
   });
   $(document).on('click', '#optionsUl svg', function() {
