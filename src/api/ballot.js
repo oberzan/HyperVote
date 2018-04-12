@@ -13,6 +13,8 @@ const uuidv4 = require('uuid/v4');
 
 createBallot = (req, res) => {
   logger.info(req.body);
+  if (req.body.endTime < moment())
+    return res.status(400).json("Given end date is in the past");
 
   data = {
     "title": req.body.title,
@@ -27,6 +29,9 @@ createBallot = (req, res) => {
   ballot.createBallot(data)
     .then(x => {
       res.sendStatus(200);
+    })
+    .catch(err => {
+      res.sendStatus(400);
     });
 }
 

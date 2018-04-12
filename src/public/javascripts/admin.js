@@ -36,11 +36,10 @@ $(() => {
   });
 
   /** DATE PICKER **/ 
-  let d = new Date();
   $('#enddatetimepicker').datetimepicker({
     format: 'DD.MM.YYYY HH:mm',
     extraFormats: [ 'DD.MM.YY' ],
-    minDate: d.setDate(d.getDate()-1),
+    minDate: moment().add(5, 'm'),
     //sideBySide: true,
     stepping: 5
   });
@@ -64,14 +63,10 @@ $(() => {
 
     let option = $('#optionInput').val();
     
-    if(option.length < 1) {
-      alert('Option name too short.');
-      return;
-    }
-    if(options.includes(option)) {
-      alert('Option already exists');
-      return;
-    }
+    if(option.length < 1)
+      return alert('Option name too short.');
+    if(options.includes(option))
+      return alert('Option already exists');
 
     $('#optionInput').val('');
     $('#optionsUl').append(
