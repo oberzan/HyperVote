@@ -93,6 +93,7 @@ li svg:hover {
 
 .form-control {
   border-radius: 0;
+  box-shadow: none;
 }
 
 .form-group label {
