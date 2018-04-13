@@ -51,6 +51,10 @@ header {
   margin: auto;
 }
 
+hr {
+  margin-top: 0.8rem;
+}
+
 a {
   color: #00B7FF;
 }
@@ -81,6 +85,7 @@ li svg:hover {
 }
 
 .form-group label {
+  font-weight: bold;
   margin-bottom: 0.3rem;
 }
 
