@@ -60,6 +60,13 @@ li svg {
 li svg:hover {
   color: #444;
 }
+.btn {
+  font-family: "GeogrotesqueMedium", Arial, Helvetica, sans-serif;
+}
+.card btn {
+  padding:2px;
+  font-size: 1.1rem;
+}
 
 .fa-spinner {
   margin: 0 5px;
