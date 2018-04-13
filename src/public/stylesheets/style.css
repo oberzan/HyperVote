@@ -35,6 +35,16 @@ body {
   line-height: 1.4;
 }
 
+h1:first-child,h2:first-child,h3:first-child{
+  margin-top:0
+}
+h1{
+  margin:40px 0 0.5em;
+  font-family:GeogrotesqueMedium,Arial,Helvetica,sans-serif;
+  font-size:3em;
+  text-transform:uppercase
+}
+
 header {
   max-width: 1045px;
   margin: auto;
