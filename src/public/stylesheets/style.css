@@ -46,7 +46,7 @@ h1{
 }
 
 header {
-  max-width: 1045px;
+  max-width: 995px;
   margin: auto;
 }
 
@@ -60,9 +60,11 @@ li svg {
 li svg:hover {
   color: #444;
 }
+
 .btn {
   font-family: "GeogrotesqueMedium", Arial, Helvetica, sans-serif;
 }
+
 .card btn {
   padding:2px;
   font-size: 1.1rem;
