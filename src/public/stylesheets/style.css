@@ -41,7 +41,7 @@ body > .container > h1{
 
 h1{
   margin:40px 0 0.5em;
-  font-family:GeogrotesqueMedium,Arial,Helvetica,sans-serif;
+  font-family: "GeogrotesqueMedium",Arial,Helvetica,sans-serif;
   font-size:3em;
   text-transform:uppercase
 }
@@ -53,6 +53,10 @@ header {
 
 a {
   color: #00B7FF;
+}
+
+input[type="password"] {
+  font: large Arial, Helvetica, sans-serif;
 }
 
 li svg {
