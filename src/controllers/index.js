@@ -80,6 +80,9 @@ ballot = (req, res, next) => {
     })
     .catch(err => {
       logger.error(err.details);
+      
+      if(err.details.includes('does not exist'))
+        return res.status(404).send("Requested ballot does not exist.");
       res.sendStatus(400);
     });
 }
