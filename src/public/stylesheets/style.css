@@ -68,6 +68,7 @@ input.form-control:hover,
 input.form-control:focus {
   border-color: #1391C4;
   outline: solid 1px #1391C4;
+  box-shadow: none;
 }
 
 li svg {
@@ -93,7 +94,6 @@ li svg:hover {
 
 .form-control {
   border-radius: 0;
-  box-shadow: none;
 }
 
 .form-group label {
