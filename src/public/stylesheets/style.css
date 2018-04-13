@@ -67,7 +67,7 @@ input[type="password"] {
 input.form-control:hover,
 input.form-control:focus {
   border-color: #1391C4;
-  border-width: 2px;
+  outline: solid 1px #1391C4;
 }
 
 li svg {
@@ -93,8 +93,6 @@ li svg:hover {
 
 .form-control {
   border-radius: 0;
-  border: solid 2px transparent;
-  box-shadow: 0 0 1px #ced4da;
 }
 
 .form-group label {
