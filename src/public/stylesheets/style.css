@@ -81,6 +81,10 @@ li svg:hover {
 .btn {
   border-radius: 0;
   font-family: "GeogrotesqueMedium", Arial, Helvetica, sans-serif;
+  border: none;
+}
+.btn-primary {
+  background: #1391C4;
 }
 
 .card btn {
@@ -94,6 +98,7 @@ li svg:hover {
 
 .form-control {
   border-radius: 0;
+  transition: all .1s linear 0s;
 }
 
 .form-group label {

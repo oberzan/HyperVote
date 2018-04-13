@@ -40,7 +40,7 @@ block content
           div.input-group-append
             button#addOptionBtn.btn.btn-outline-secondary(type="button") #{i18n.__("Add")}
           
-      input.btn.btn-primary(type="submit", value=i18n.__("Create"))
+      input.btn.btn-primary(type="submit", value=i18n.__("Create").toUpperCase())
 
     hr
     div#ballotErrorBar.alert.alert-danger(role="alert", style="display: none")
