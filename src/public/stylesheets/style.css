@@ -81,10 +81,10 @@ li svg:hover {
 .btn {
   border-radius: 0;
   font-family: "GeogrotesqueMedium", Arial, Helvetica, sans-serif;
-  border: none;
 }
 .btn-primary {
   background: #1391C4;
+  border: none;
 }
 
 .card btn {
