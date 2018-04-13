@@ -1,10 +1,42 @@
+@font-face{
+  font-family:'GeogrotesqueBold';
+  src:url(../fonts/geogrotesque/geogrotesque-bold.woff2) format("woff2"),url(../fonts/geogrotesque/geogrotesque-bold.woff) format("woff");
+  font-weight:normal;
+  font-style:normal
+}
+@font-face{
+  font-family:'GeogrotesqueMedium';
+  src:url(../fonts/geogrotesque/geogrotesque-medium.woff2) format("woff2"),url(../fonts/geogrotesque/geogrotesque-medium.woff) format("woff");
+  font-weight:normal;
+  font-style:normal
+}
+@font-face{
+  font-family:'GeogrotesqueLight';
+  src:url(../fonts/geogrotesque/geogrotesque-light.woff2) format("woff2"),url(../fonts/geogrotesque/geogrotesque-light.woff) format("woff");
+  font-weight:normal;
+  font-style:normal
+}
+@font-face{
+  font-family:'GeogrotesqueRegular';
+  src:url(../fonts/geogrotesque/geogrotesque-regular.woff2) format("woff2"),url(../fonts/geogrotesque/geogrotesque-regular.woff) format("woff");
+  font-weight:normal;
+  font-style:normal
+}
+@font-face{
+  font-family:'GeogrotesqueSemibold';
+  src:url(../fonts/geogrotesque/geogrotesque-semibold.woff2) format("woff2"),url(../fonts/geogrotesque/geogrotesque-semibold.woff) format("woff");
+  font-weight:normal;
+  font-style:normal
+}
+
 body {
   padding: 0;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px "GeogrotesqueRegular", Arial, Helvetica, sans-serif;
+  line-height: 1.4;
 }
 
 header {
-  max-width: 990px;
+  max-width: 1045px;
   margin: auto;
 }
 
