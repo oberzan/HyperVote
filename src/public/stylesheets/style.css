@@ -31,7 +31,7 @@
 
 body {
   padding: 0;
-  font: 16px "GeogrotesqueRegular", Arial, Helvetica, sans-serif;
+  font: 17px "GeogrotesqueRegular", Arial, Helvetica, sans-serif;
   line-height: 1.4;
 }
 
@@ -57,6 +57,7 @@ a {
 
 input[type="password"] {
   font: large Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
 }
 
 li svg {
@@ -77,6 +78,10 @@ li svg:hover {
 
 .fa-spinner {
   margin: 0 5px;
+}
+
+.form-group label {
+  margin-bottom: 0.3rem;
 }
 
 .table > tfoot > tr > td,
