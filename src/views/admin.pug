@@ -18,7 +18,7 @@ block content
           h4.modal-title #{i18n.__("Authenticate")}
           button.close( type="button" data-dismiss="modal")
         div.modal-body
-          div.alert.alert-warning(role="alert" style="display: none") 
+          div.alert.alert-warning(role="alert") 
             | #{i18n.__("Warning")+': ' + i18n.__("Session has expired")+ '. ' + i18n.__("Reauthenticate") + ' '}
           form#auth(method="post" action="/authenticate")
             div.form-group
