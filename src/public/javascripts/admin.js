@@ -8,10 +8,9 @@ $(() => {
   //   if (cooki)
   // }
 
-  $('body').on('click', '.modal[type="submit"', e => {
-    console.log(e);
-    $(this.form).submit();
-    $('#myModal').modal('hide');
+  $('body').on('click', '.modal input[type="submit"]', e => {
+    $('#auth').submit();
+    $('#authModal').modal('hide');
   });
 
   /** SEND TOKENS **/

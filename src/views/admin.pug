@@ -14,26 +14,26 @@ block content
   div#authModal.modal.fade 
     div.modal-dialog
       div.modal-content
-
         div.modal-header
           h4.modal-title Modal Heading
           button.close( type="button" data-dismiss="modal")
-
         div.modal-body
           form#auth(method="post")
             div.form-group
               label(for="secret") #{i18n.__("Secret")}
               input#secret.form-control(type="password", name="secret")
               div.invalid-feedback #{i18n.__("Invalid secret")}
-
         div.modal-footer
           button.btn.btn-danger( type="button" data-dismiss="modal") Close
           input.btn.btn-primary(type="submit", value=i18n.__("Authenticate"))
+  
   button.btn.btn-primary(type="button" data-toggle="modal" data-target="#authModal") Open modal
   div.container.p-0(style="max-width: 720px")
     div#cookieWarning.alert.alert-warning(role="alert" style="display: none") 
       | #{i18n.__("Warning")+': ' + i18n.__("Session has expired")+ '. ' + i18n.__("Authenticate at") + ' '}
       a(href='/authenticate') /authenticate
+      button.btn.btn-primary(type="button" data-toggle="modal" data-target="#authModal") Open modal
+      a(data-toggle="modal" data-target="#authModal") Open modal
     h1 #{i18n.__("Create ballot")}
     
     form#ballotForm(autocomplete="off")
