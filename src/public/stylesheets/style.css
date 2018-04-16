@@ -87,6 +87,10 @@ li svg:hover {
   border: none;
 }
 
+.card {
+  border-radius: 0;
+}
+
 .card btn {
   padding:2px;
   font-size: 1.1rem;
@@ -104,6 +108,10 @@ li svg:hover {
 .form-group label {
   font-weight: bold;
   margin-bottom: 0.3rem;
+}
+
+.input-group-text {
+  border-radius: 0;
 }
 
 .table > tfoot > tr > td,
