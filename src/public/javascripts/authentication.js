@@ -16,7 +16,7 @@ $(() => {
     let data = form.serialize();
 
     $.ajax({
-      url: e.currentTarget.baseURI, //ballot.title,
+      url: e.currentTarget.action,
       type: 'post',
       data: data,
       success: data => {

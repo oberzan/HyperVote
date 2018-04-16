@@ -18,7 +18,7 @@ block content
           h4.modal-title Modal Heading
           button.close( type="button" data-dismiss="modal")
         div.modal-body
-          form#auth(method="post")
+          form#auth(method="post" action="/authenticate")
             div.form-group
               label(for="secret") #{i18n.__("Secret")}
               input#secret.form-control(type="password", name="secret")

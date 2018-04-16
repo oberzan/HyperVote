@@ -14,7 +14,7 @@ $(() => {
   });
 
   /** SEND TOKENS **/
-  $('.btn.tokens').click((x) => {
+  $('.btn.tokens').click( x => {
     $(x.target).prop('disabled', true);
     $(x.target).parent().children().first().after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
