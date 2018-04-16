@@ -114,6 +114,10 @@ li svg:hover {
   border-radius: 0;
 }
 
+.list-group-item {
+  border-radius: 0 !important;
+}
+
 .modal-content {
   border-radius: 0;
 }

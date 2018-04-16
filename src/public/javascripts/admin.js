@@ -2,15 +2,20 @@ $(() => {
   /** SHOW WARNING ON TOKEN EXPIRATION **/
   let cookieExpTime = sessionStorage.getItem('cookieExpTime');
   setTimeout(() => {
-    $('#cookieWarning').show();
+    $('#authModal').modal({backdrop:"static", keyboard:false});
+    //$('#cookieWarning').show();
   }, moment(cookieExpTime) - moment());
   // if (cookieExpTime < moment()) {
   //   if (cooki)
   // }
 
   $('body').on('click', '.modal input[type="submit"]', e => {
-    $('#auth').submit();
-    $('#authModal').modal('hide');
+    $('#auth').submit()
+      .then(() => {
+        $('#authModal').modal('hide');
+      })
+      //.catch();
+    
   });
 
   /** SEND TOKENS **/
