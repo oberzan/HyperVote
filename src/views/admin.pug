@@ -16,10 +16,10 @@ block content
 
         div.modal-header
           h4.modal-title Modal Heading
-          include authenticate.pug
           button.close( type="button" data-dismiss="modal")
 
-        div.modal-body Modal body..
+        div.modal-body
+          include includes/authenticate.pug
 
         div.modal-footer
           button.btn.btn-danger( type="button" data-dismiss="modal") Close
