@@ -89,7 +89,7 @@ ballot = (req, res, next) => {
 
 authenticate = (req, res, next) => {
   
-  res.render('authenicate', {
+  res.render('authenticate', {
     i18n: res
   });  
 }
