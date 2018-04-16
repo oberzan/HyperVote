@@ -8,6 +8,11 @@ $(() => {
   //   if (cooki)
   // }
 
+  $('body').on('click', '.modal[type="submit"', e => {
+    console.log(e);
+    $(this.form).submit();
+    $('#myModal').modal('hide');
+  });
 
   /** SEND TOKENS **/
   $('.btn.tokens').click((x) => {
