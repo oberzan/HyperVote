@@ -1,21 +1,20 @@
 $(() => {
   /** SHOW WARNING ON TOKEN EXPIRATION **/
-  let cookieExpTime = sessionStorage.getItem('cookieExpTime');
-  setTimeout(() => {
-    $('#authModal').modal({backdrop:"static", keyboard:false});
-    //$('#cookieWarning').show();
-  }, moment(cookieExpTime) - moment());
-  // if (cookieExpTime < moment()) {
-  //   if (cooki)
-  // }
+  setReauthenticationTimeout = () => {
+    let cookieExpTime = sessionStorage.getItem('cookieExpTime');
+    setTimeout(() => {
+      $('#authModal').modal({backdrop:"static", keyboard:false});
+    }, moment(cookieExpTime) - moment());
+  }
+  setReauthenticationTimeout();
 
   $('body').on('click', '.modal input[type="submit"]', e => {
     $('#auth').submit()
       .then(() => {
         $('#authModal').modal('hide');
+        setReauthenticationTimeout();
       })
-      //.catch();
-    
+      // TODO .catch(); 
   });
 
   /** SEND TOKENS **/

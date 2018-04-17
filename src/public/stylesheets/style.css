@@ -71,6 +71,10 @@ input.form-control:focus {
   box-shadow: none;
 }
 
+.form-control.is-invalid {
+  border-color: #DF3231;
+}
+
 li svg {
   color: #BBB;
 }
@@ -103,6 +107,11 @@ li svg:hover {
 .form-control {
   border-radius: 0;
   transition: all .1s linear 0s;
+}
+
+.form-control.is-invalid {
+  border-color: #DF3231 !important;
+  outline-color: #DF3231 !important;
 }
 
 .form-group label {
