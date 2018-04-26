@@ -51,6 +51,7 @@ createBallot = (data) => {
 
     registry.add(ballot)
       .then(res => {
+        logger.info(res);
         resolve(res);
       }).catch(err => {
         logger.error(err);

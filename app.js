@@ -6,8 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const i18n = require('i18n');
 
-const jwt = require('jsonwebtoken');
-const ejwt = require('express-jwt');
+const jwt = require('express-jwt');
 
 const config = require('./config.json');
 const logger = require('./log.js')(module);
@@ -30,7 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(ejwt({
+app.use(jwt({
   secret: config.secret.jwt,
   credentialsRequired: false,
   getToken: req => req.cookies.token 

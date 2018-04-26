@@ -57,6 +57,7 @@ createTokens = (req, res) => {
     }
 
     let mails = fileData.split(/,|\n/);
+    mails = mails.filter(x => x !== '');
 
     let tokens = [];
     for(let i = 0; i < mails.length; i++) {
@@ -92,7 +93,7 @@ createTokens = (req, res) => {
                     '</body>'+
                   '</html>'
           };
-    
+
           await transporter.sendMail(mailOptions)
             .then(info => {
               logger.info('Message sent: %s', info.messageId);

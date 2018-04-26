@@ -71,10 +71,6 @@ input.form-control:focus {
   box-shadow: none;
 }
 
-.form-control.is-invalid {
-  border-color: #DF3231;
-}
-
 li svg {
   color: #BBB;
 }
@@ -112,6 +108,9 @@ li svg:hover {
 .form-control.is-invalid {
   border-color: #DF3231 !important;
   outline-color: #DF3231 !important;
+}
+.form-control.is-invalid:focus {
+  box-shadow: none;
 }
 
 .form-group label {
