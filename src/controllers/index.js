@@ -66,7 +66,7 @@ ballot = (req, res, next) => {
         .then(options => {
           let nVotes = 0;
           let token = req.params.token.length;
-          token = token.length == 36 ? token : "";
+          token = token && token.length == 36 ? token : "";
           for(let option of options)
             nVotes += option.n;
 
