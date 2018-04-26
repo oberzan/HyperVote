@@ -21,6 +21,7 @@ router.post('/authenticate', index.postSecret)
 /* GET home page. */
 router.get('/', index.homepage);
 router.get('/:id', index.ballot);
+router.get('/:id/:token', index.ballot);
 
 
 

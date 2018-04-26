@@ -65,11 +65,14 @@ ballot = (req, res, next) => {
       ballotService.getResults(req.params.id)
         .then(options => {
           let nVotes = 0;
+          let token = req.params.token.length;
+          token = token.length == 36 ? token : "";
           for(let option of options)
             nVotes += option.n;
 
           res.render('ballot', {
             title: "HyperVote",
+            token: token,
             ballot: ballot,
             options: options,
             nVotes: nVotes,

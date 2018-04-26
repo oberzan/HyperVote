@@ -21,7 +21,7 @@ block content
                 =option.Name
         div.form-group
           label(for="token") #{i18n.__("Insert token")}
-          input.form-control.token(id="token" name="token")
+          input.form-control.token(id="token" name="token" value=token)
           div.valid-feedback #{i18n.__("Vote successfull")}
           div.invalid-feedback #{i18n.__("Vote unsuccessfull")}
         button.btn.btn-primary(type="submit" disabled=true) #{i18n.__("Vote")}
