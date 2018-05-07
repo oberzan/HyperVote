@@ -76,7 +76,7 @@ publishVote = (ballot, token, option) => {
 }
 
 module.exports = {
-  getVote = getVote,
+  getVote: getVote,
   publishTokens: publishTokens,
   publishVote: publishVote
 }
