@@ -37,5 +37,5 @@ block content
                 - let options = ballotsOptions[ballot.title].options
                 - let nVotes = ballotsOptions[ballot.title].nVotes
                 include includes/legend.pug
-      if ballots.length
-        #{i18n.__("There are no ballots")}
+      if !ballots.length
+        p #{i18n.__("There are no ballots")}
