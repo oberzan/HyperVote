@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
+const crypto = require('crypto');
 
 const config = require('../../config.json');
 const logger = require('../../log.js')(module);
