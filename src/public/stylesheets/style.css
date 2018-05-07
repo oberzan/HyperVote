@@ -56,7 +56,15 @@ hr {
 }
 
 a {
+  outline: none;
   color: #00B7FF;
+}
+a img {
+  outline: none;
+}
+
+img {
+  border: 0;
 }
 
 input[type="password"] {
