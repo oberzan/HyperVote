@@ -143,5 +143,9 @@ li svg:hover {
   vertical-align: text-top;
 }
 
+#ballots {
+  padding-top: 1.3rem;
+}
+
 /* Prevents flickering of the google chart tooltip */
 svg > g > g:last-child { pointer-events: none }

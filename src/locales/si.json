@@ -32,5 +32,6 @@
 	"Session has expired": "Seja je potekla",
 	"Reauthenticate": "Potrebna je ponovna avtentikacija",
 	"Voting token": "Glasovalni žeton",
-	"for": "za"
+	"for": "za",
+	"There are no ballots": "Ne obstaja še nobeno glasovanje"
 }

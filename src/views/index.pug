@@ -7,7 +7,6 @@ block head
 block content
   div.container.p-0(style="max-width: 720px")
     h1= title
-    br
     div#ballots
       each ballot, i in ballots
         div.card(class=i)
@@ -38,3 +37,5 @@ block content
                 - let options = ballotsOptions[ballot.title].options
                 - let nVotes = ballotsOptions[ballot.title].nVotes
                 include includes/legend.pug
+      if ballots.length
+        #{i18n.__("There are no ballots")}
