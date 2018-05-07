@@ -80,7 +80,7 @@ createTokens = (req, res) => {
           let mailOptions = {
             from: '"HyperVote admin" <a>',
             to: mails[i],
-            subject: '[HyperVote] Voting token for ' + ballot,
+            subject: `[HyperVote] ${res.__("Voting token")} ${res.__("for")} ` + ballot,
             text: `${res.__("Hi")}\n` +
                   `${res.__("Your token for")} ${ballot}  ${"is"}: ${token}\n` + 
                   `${res.__("You can cast your vote at")}: ${votingUrl}`,

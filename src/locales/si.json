@@ -1,6 +1,7 @@
 {
 	"Choose an option": "Izberite",
 	"Insert token": "Vpišite žeton",
+	"Token": "Žeton",
 	"Vote": "Oddaj glas",
 	"You successfully voted": "Uspešno ste oddali glas na",
 	"Your vote was": "Glasovali ste za",
@@ -21,7 +22,7 @@
 	"is": "je",
 	"You can cast your vote at": "Glasujete lahko na povezavi",
 	"Tokens for": "Žetoni za",
-	"successfully sent": "uspešno odposlani",
+	"successfully sent": "so bili uspešno odposlani",
 	"Authenticate": "Prijava",
 	"Invalid secret": "Invalid secret",
 	"Secret": "Geslo",
@@ -29,6 +30,7 @@
 	"undefined vote": "Neoddano",
 	"Warning": "Pozor",
 	"Session has expired": "Seja je potekla",
-	"Reauthenticate": "Potrebna je ponovna avtentikacija"
-
+	"Reauthenticate": "Potrebna je ponovna avtentikacija",
+	"Voting token": "Glasovalni žeton",
+	"for": "za"
 }

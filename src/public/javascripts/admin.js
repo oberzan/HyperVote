@@ -14,7 +14,6 @@ $(() => {
         $('#authModal').modal('hide');
         setReauthenticationTimeout();
       })
-      // TODO .catch(); 
   });
 
   /** SEND TOKENS **/
