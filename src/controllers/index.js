@@ -67,6 +67,11 @@ ballot = (req, res, next) => {
           let nVotes = 0;
           let token = req.query.token;
           token = token && token.length == 36 ? token : "";
+          if(token) {
+            let hash = crypto.createHash('sha256').update(token, 'utf8').digest().toString('hex');
+            let selected = await voteService.getVote(hash);
+            logger.info(selected);
+          }
           for(let option of options)
             nVotes += option.n;
 

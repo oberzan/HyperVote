@@ -4,6 +4,24 @@ const crypto = require('crypto');
 const composerClient = require('../composer-client');
 const logger = require('../../log.js')(module);
 
+getVote = async hash => {
+  // return new Promise(async (resolve, reject) => {
+    let registry = await composerClient.getConnection().getAssetRegistry('org.vote.Vote');
+    return registry.get(hash)
+      .catch(err => {
+        logger.error(err);
+        return undefined;
+      });
+      // .then(data => {
+      //   resolve(data);
+      // })
+      // .catch(err => {
+      //   logger.error(err);
+      //   reject(err);
+      // });
+  // });
+}
+
 publishTokens = (ballot, tokens) => {
   logger.info('PublishTokens');
 
