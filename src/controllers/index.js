@@ -64,7 +64,7 @@ ballot = (req, res, next) => {
   ballotService.getBallot(req.params.id)
     .then(ballot => {
       ballotService.getResults(req.params.id)
-        .then(options => {
+        .then(async options => {
           let nVotes = 0;
           let token = req.query.token;
           token = token && token.length == 36 ? token : "";
