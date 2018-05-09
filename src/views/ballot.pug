@@ -11,13 +11,12 @@ block content
     p 
       =ballot.description
     if moment(ballot.end) >= moment()
-      if selected
-        div.selected
-          p #{i18n.__("You have voted for")} 
-            b #{selected}
-          button.revote.btn.btn-primary #{i18n.__("Change")}
+      div.selected(style=`display:${selected ? 'none':'unset'}`)
+        p #{i18n.__("You have voted for")}: 
+          b #{selected}
+        button.revote.btn.btn-primary #{i18n.__("Change")}
       
-      form.vote(action=`api/vote/${ballot.title}`, method="post", style=`display:${selected ? 'none':'unset'}`)
+      form.vote(action=`api/vote/${ballot.title}` method="post" style=`display:${selected ? 'none':'unset'}`)
         div.form-group
           label #{i18n.__("Choose an option")}:
           each option in ballot.options

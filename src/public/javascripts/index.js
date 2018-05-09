@@ -131,8 +131,8 @@ $(() => {
         $('div.selected').show();
         $('form.vote').hide();
         $('div.selected b').text(form.find("input[type=radio]:checked").val());
-        token.addClass('is-valid');
-        token.removeClass('is-invalid');
+        // token.addClass('is-valid');
+        // token.removeClass('is-invalid');
       },
       error: err => {
         console.log("error");
