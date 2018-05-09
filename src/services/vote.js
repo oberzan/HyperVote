@@ -10,7 +10,7 @@ getVote = async hash => {
     return registry.get(hash)
       .catch(err => {
         logger.error(err);
-        return undefined;
+        return false;
       });
       // .then(data => {
       //   resolve(data);

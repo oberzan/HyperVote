@@ -23,6 +23,6 @@
     "winston": "^3.0.0-rc4"
   },
   "devDependencies": {
-    "nodemon": "^1.17.2"
+    "nodemon": "^1.17.4"
   }
 }

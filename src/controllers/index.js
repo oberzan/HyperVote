@@ -71,7 +71,7 @@ ballot = (req, res, next) => {
           if(token) {
             let hash = crypto.createHash('sha256').update(token, 'utf8').digest().toString('hex');
             let selected = await voteService.getVote(hash);
-            logger.info(selected);
+            logger.info(selected.selection);
           }
           for(let option of options)
             nVotes += option.n;
@@ -81,6 +81,7 @@ ballot = (req, res, next) => {
             token: token,
             ballot: ballot,
             options: options,
+            selected: selected,
             nVotes: nVotes,
             googleColors,
             i18n: res
