@@ -30,6 +30,7 @@
 }
 
 body {
+  opacity: 0;
   padding: 0;
   font: 17px "GeogrotesqueRegular", Arial, Helvetica, sans-serif;
   line-height: 1.4;
