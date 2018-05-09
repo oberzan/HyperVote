@@ -152,8 +152,9 @@ $(() => {
   });
 
   $('button.revote').click(e => {    
-    e.currentTarget.parent().hide();
-    e.currentTarget.parent().siblings('form').show();
+    let divSelected = $(e.currentTarget).parent();
+    divSelected.hide();
+    divSelected.siblings('form').show();
   });
 
 });
