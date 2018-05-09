@@ -13,7 +13,8 @@ block content
     if moment(ballot.end) >= moment()
       if selected
         div.selected
-          p #{i18n.__("You have voted for")} #{selected}
+          p #{i18n.__("You have voted for")} 
+            b #{selected}
           button.revote.btn.btn-primary #{i18n.__("Change")}
       
       form.vote(action=`api/vote/${ballot.title}`, method="post", style=`display:${selected ? 'none':'unset'}`)
