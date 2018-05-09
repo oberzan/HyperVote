@@ -11,7 +11,7 @@ block content
     p 
       =ballot.description
     if moment(ballot.end) >= moment()
-      div.selected(style=`display:${selected ? 'none':'unset'}`)
+      div.selected(style=`display:${selected ? 'unset':'none'}`)
         p #{i18n.__("You have voted for")}: 
           b #{selected}
         button.revote.btn.btn-primary #{i18n.__("Change")}
