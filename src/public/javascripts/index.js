@@ -148,6 +148,7 @@ $(() => {
   });
 
   $('button.revote').click(() => {
+    $('div.selected').hide();
     $('form.vote').show();
   });
 

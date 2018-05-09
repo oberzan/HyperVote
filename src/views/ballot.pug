@@ -12,8 +12,9 @@ block content
       =ballot.description
     if moment(ballot.end) >= moment()
       if selected
-        p You have voted for #{selected}
-        button.revote Change
+        div.selected
+          p You have voted for #{selected}
+          button.revote.btn.btn-primary #{Change}
       
       form.vote(action=`api/vote/${ballot.title}`, method="post", style=`display:${selected ? 'none':'unset'}`)
         div.form-group
