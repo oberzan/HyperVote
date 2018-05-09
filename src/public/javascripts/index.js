@@ -151,9 +151,9 @@ $(() => {
     });
   });
 
-  $('button.revote').click(() => {
-    $('div.selected').hide();
-    $('form.vote').show();
+  $('button.revote').click(e => {    
+    e.currentTarget.parent().hide();
+    e.currentTarget.parent().siblings('form').show();
   });
 
 });
