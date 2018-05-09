@@ -128,9 +128,10 @@ $(() => {
         console.log("success");
         console.log(data);
 
-        $('div.selected').show();
-        $('form.vote').hide();
-        $('div.selected b').text(form.find("input[type=radio]:checked").val());
+        form.siblings('div.selected').show();
+        form.siblings('div.selected').find('b').text(form.find("input[type=radio]:checked").val());
+        form.hide();
+        
         // token.addClass('is-valid');
         // token.removeClass('is-invalid');
       },

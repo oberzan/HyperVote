@@ -19,6 +19,11 @@ block content
               p 
                 =ballot.description
               if moment(ballot.end) >= moment()
+                div.selected(style=`display:${selected ? 'unset':'none'}`)
+                  p #{i18n.__("You have voted for")}: 
+                    b #{selected}
+                  button.revote.btn.btn-primary #{i18n.__("Change")}
+
                 form(action=`api/vote/${ballot.title}`, method="post")
                   div.form-group
                     label(for=i) #{i18n.__("Choose an option")}:

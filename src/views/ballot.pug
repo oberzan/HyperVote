@@ -8,7 +8,7 @@ block content
   div#ballot.container.p-0(style="max-width: 720px")
     h1
       =ballot.title
-    p 
+    p(style="margin-bottom: 1.5rem")
       =ballot.description
     if moment(ballot.end) >= moment()
       div.selected(style=`display:${selected ? 'unset':'none'}`)
@@ -16,7 +16,7 @@ block content
           b #{selected}
         button.revote.btn.btn-primary #{i18n.__("Change")}
       
-      form.vote(action=`api/vote/${ballot.title}` method="post" style=`display:${selected ? 'none':'unset'}`)
+      form(action=`api/vote/${ballot.title}` method="post" style=`display:${selected ? 'none':'unset'}`)
         div.form-group
           label #{i18n.__("Choose an option")}:
           each option in ballot.options
