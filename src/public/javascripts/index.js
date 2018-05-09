@@ -147,5 +147,9 @@ $(() => {
     });
   });
 
+  $('button.revote').click(() => {
+    $('form.vote').show();
+  });
+
 });
 
