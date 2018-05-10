@@ -179,8 +179,11 @@ $(() => {
     let button = $(e.currentTarget).siblings('button.tokens');
 
     $('#mailList .modal-header .title').text(title);
-    if (button.length() > 0 && button.is(':enabled')) 
+    if (button.length > 0 && button.is(':enabled')) 
       $('#mailList .tokens').show();
+    else
+      $('#mailList .tokens').hide();
+      
     $('#mailList').modal({backdrop:"true", keyboard:true});
   });
 
