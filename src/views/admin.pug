@@ -32,18 +32,18 @@ block content
 
   //- MAIL LIST MODAL
   div.modal#mailList
-    div.modal-dialog
+    div.modal-dialog(style="max-width: 610px")
       div.modal-content
 
         div.modal-header
           h4.modal-titleModal
             span.title
             span - #{i18n.__("email list")}
-          button.close(type="button" data-dismiss="modal") *
+          input(type="file" data-iconName="fa fa-upload")
+          //- i.far.fa-file
 
         div.modal-body
-          ul
-            
+          ul            
 
         div.modal-footer
           button.btn.btn-danger(type="button" data-dismiss="modal") Close
