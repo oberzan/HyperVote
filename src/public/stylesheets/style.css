@@ -80,6 +80,14 @@ input.form-control:focus {
   box-shadow: none;
 }
 
+li svg {
+  color: #BBB;
+  font-size: 1.2em;
+}
+li svg:hover {
+  color: #444;
+}
+
 .btn {
   border-radius: 0;
   font-family: "GeogrotesqueMedium", Arial, Helvetica, sans-serif;
@@ -133,12 +141,7 @@ input.form-control:focus {
 }
 
 .options li svg {
-  color: #BBB;
   margin-left: 10px;
-  font-size: 1.2em;
-}
-.options li svg:hover {
-  color: #444;
 }
 
 .table > tfoot > tr > td,
@@ -156,6 +159,11 @@ input.form-control:focus {
 
 #ballots {
   padding-top: 1.3rem;
+}
+
+#mailList .modal-body {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 #mailList .list-group-item {
