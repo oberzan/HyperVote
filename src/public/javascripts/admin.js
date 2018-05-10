@@ -9,11 +9,11 @@ $(() => {
   setReauthenticationTimeout();
 
   $('body').on('click', '.modal input[type="submit"]', e => {
-    $('#auth').submit()
-      .then(() => {
-        $('#authModal').modal('hide');
-        setReauthenticationTimeout();
-      })
+    $('#auth').submit();
+  });
+  $('#auth').bind('ajax:success', () => {
+    $('#authModal').modal('hide');
+    setReauthenticationTimeout();
   });
 
   /** SEND TOKENS **/
