@@ -36,11 +36,14 @@ block content
       div.modal-content
 
         div.modal-header
-          h4.modal-titleModal Heading
+          h4.modal-titleModal
+            span.title
+            span - #{i18n.__("email list")}
           button.close(type="button" data-dismiss="modal") *
 
         div.modal-body
-          Modal body..
+          ul
+            
 
         div.modal-footer
           button.btn.btn-danger(type="button" data-dismiss="modal") Close

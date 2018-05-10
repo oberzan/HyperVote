@@ -23,7 +23,7 @@ $(() => {
         console.log("Successfully authenticated");
         console.log(data.token);
         sessionStorage.setItem('cookieExpTime', data.cookieExpTime);
-        if(data.user === "admin") {
+        if(data.user === "admin" && window.location.pathname.indexOf('/admin') != 0) {
           window.location.replace("admin");
         }
         //sessionStorage.setItem("hypervote_jwt", data.token);
@@ -34,7 +34,8 @@ $(() => {
       error: err => {
         console.error("error");
         console.error(err);
-        $("#secret").addClass("is-invalid");
+        if(err.status != 0)
+          $("#secret").addClass("is-invalid");
         //$("#secret").siblings(".invalid-feedback").show();
 
         // token.addClass('is-invalid');

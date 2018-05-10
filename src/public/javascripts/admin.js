@@ -170,8 +170,12 @@ $(() => {
   $(document).on('click', '#optionsUl svg', function() {
     $(this).parent().remove();
   });
-
-  $('.options svg.mail').click(() => {
-    $('#mailList').modal({backdrop:"static", keyboard:true});
+  
+  /* OPEN MAIL LIST MODAL */
+  $('.options svg.mail').click(e => {
+    let title = $(e.currentTarget).siblings('.title').text();
+    let mailList = $('#mailList');
+    $('#mailList .modal-header .title').text(title);
+    $('#mailList').modal({backdrop:"true", keyboard:true});
   });
 });
