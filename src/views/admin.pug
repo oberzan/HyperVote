@@ -10,6 +10,7 @@ block head
   script(defer type='text/javascript', src='/javascripts/admin.js')
   script(defer type='text/javascript', src='/javascripts/authentication.js')
 
+//- AUTHENTICATION MODAL
 block content
   div#authModal.modal.fade 
     div.modal-dialog
@@ -28,6 +29,24 @@ block content
         div.modal-footer
           //- button.btn.btn-danger( type="button" data-dismiss="modal") Close
           input.btn.btn-primary(type="submit", value=i18n.__("Authenticate"))
+
+//- MAIL LIST MODAL
+div.modal#mailList
+  div.modal-dialog
+    div.modal-content
+
+      div.modal-header
+        h4.modal-titleModal Heading
+        button.close(type="button" data-dismiss="modal")&times;
+
+      div.modal-body
+        Modal body..
+
+      div.modal-footer
+        button.btn.btn-danger(type="button" data-dismiss="modal") Close
+
+
+
 
   div.container.p-0(style="max-width: 720px")
     //- div#cookieWarning.alert.alert-warning(role="alert" style="display: none") 
@@ -72,5 +91,5 @@ block content
           span.mr-auto.title= ballot.title
           if !ballot.start && moment(ballot.end) > moment()
             button.btn.btn-outline-secondary.tokens.mx-2(style="margin: -2px 0; padding: 3px 9px;") #{i18n.__("Send tokens")}
-          i.far.fa-address-book
+          i.mail.far.fa-address-book
           i.delete.far.fa-trash-alt   

@@ -98,6 +98,7 @@ $(() => {
       '</li>');
   });
 
+  /* CREATE BALLOT FORM SUBMIT */ 
   $('#ballotForm').submit((e) => {
     e.preventDefault();
     let form = e.currentTarget;
@@ -170,4 +171,7 @@ $(() => {
     $(this).parent().remove();
   });
 
+  $('.options svg.mail').click(() => {
+    $('#mailList').modal({backdrop:"static", keyboard:true});
+  });
 });
