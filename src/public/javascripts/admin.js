@@ -200,7 +200,9 @@ $(() => {
           .map(x => x.trim())
           .filter(x => x !== '');
         mails.forEach(x => {
-          $('#mailList ul').append('<li class="list-group-item">'+ x +'</li>');
+          $('#mailList ul').append('<li class="list-group-item d-flex align-items-center"> \
+                                      <span class="mr-auto">'+ x +'</span><i class="fas fa-minus"></i> \
+                                    </li>');
         });          
       }
     }

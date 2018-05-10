@@ -159,12 +159,15 @@ input.form-control:focus {
 }
 
 #mailList .list-group-item {
-  border-top: 0;
+  border-bottom: 0;
   border-right: 0;
-  border-left: 0; 
+  border-left: 0;
 }
-#mailList .list-group-item:last-child {
-  border-bottom: 0; 
+#mailList .list-group-item:first-child {
+  border-top: 0; 
+}
+#mailList .list-group-item:hover {
+  z-index: unset
 }
 
 /* Prevents flickering of the google chart tooltip */
