@@ -183,7 +183,7 @@ $(() => {
       $('#mailList .tokens').show();
     else
       $('#mailList .tokens').hide();
-      
+
     $('#mailList').modal({backdrop:"true", keyboard:true});
   });
 
@@ -207,11 +207,18 @@ $(() => {
           .filter(x => x !== '');
         mails.forEach(x => {
           $('#mailList ul').append('<li class="list-group-item d-flex align-items-center"> \
-                                      <span class="mr-auto">'+ x +'</span><i class="fas fa-minus"></i> \
+                                      <span class="mr-auto">'+ x +'</span><i class="fas fa-minus remove"></i> \
                                     </li>');
-        });          
+        });
+        if (mails.length > 0) $('#mailList .tokens').prop('disabled', false);       
       }
     }
     reader.readAsBinaryString(f);
+  });
+
+  $(document).on('click', '#mailList .remove', e => {
+    if ($(e.currentTarget).parent().siblings().length < 1)
+      $('#mailList .tokens').prop('disabled', true)
+    $(e.currentTarget).parent().remove();    
   });
 });

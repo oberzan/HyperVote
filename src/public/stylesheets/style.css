@@ -162,6 +162,11 @@ li svg:hover {
   vertical-align: text-top;
 }
 
+.tokens {
+  padding-right: 9px;
+  padding-left: 9px;
+}
+
 #ballots {
   padding-top: 1.3rem;
 }
