@@ -140,6 +140,11 @@ li svg:hover {
   border-radius: 0;
 }
 
+.modal-footer .btn {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
 .options li svg {
   margin-left: 10px;
 }
