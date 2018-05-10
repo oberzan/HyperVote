@@ -115,8 +115,8 @@ $(() => {
       type:'post',
       data:$(form).serialize(),
       success:function(){
-        form.reset();
-        $(form).find('ul li').remove();
+        // form.reset();
+        // $(form).find('ul li').remove();
         location.reload();
       },
       error: err => {

@@ -82,6 +82,8 @@ input.form-control:focus {
 
 li svg {
   color: #BBB;
+  margin-left: 10px;
+  font-size: 1.2em;
 }
 li svg:hover {
   color: #444;
