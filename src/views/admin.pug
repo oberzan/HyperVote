@@ -46,6 +46,7 @@ block content
           ul.list-group       
 
         div.modal-footer
+          button.btn.btn-outline-secondary.tokens.mx-2(style="margin: -2px 0; padding: 3px 9px; display: none;" data-expires=ballot.end) #{i18n.__("Send tokens")}
           button.btn.btn-danger(type="button" data-dismiss="modal") Close
 
 
@@ -93,6 +94,6 @@ block content
         li.list-group-item.d-flex.align-items-center
           span.mr-auto.title= ballot.title
           if !ballot.start && moment(ballot.end) > moment()
-            button.btn.btn-outline-secondary.tokens.mx-2(style="margin: -2px 0; padding: 3px 9px;") #{i18n.__("Send tokens")}
+            button.btn.btn-outline-secondary.tokens.mx-2(style="margin: -2px 0; padding: 3px 9px;" data-expires=ballot.end) #{i18n.__("Send tokens")}
           i.mail.far.fa-address-book
           i.delete.far.fa-trash-alt   

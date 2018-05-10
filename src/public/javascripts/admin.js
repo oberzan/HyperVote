@@ -176,8 +176,11 @@ $(() => {
   /* OPEN MAIL LIST MODAL */
   $(document).on('click', '.options .mail', e => {
     let title = $(e.currentTarget).siblings('.title').text();
-    let mailList = $('#mailList');
+    let button = $(e.currentTarget).siblings('button.tokens');
+
     $('#mailList .modal-header .title').text(title);
+    if (button.length() > 0 && button.is(':enabled')) 
+      $('#mailList .tokens').show();
     $('#mailList').modal({backdrop:"true", keyboard:true});
   });
 
