@@ -187,6 +187,10 @@ $(() => {
     $('#mailList').modal({backdrop:"true", keyboard:true});
   });
 
+  $('#mailList').on('hidden.bs.modal', () => {
+    $('#mailList input[type="file"]').val("");
+  });
+
   // $(".fa-file").click(() => {
   //   $("input[type='file']").trigger('click');
   // });
