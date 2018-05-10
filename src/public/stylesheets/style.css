@@ -80,15 +80,6 @@ input.form-control:focus {
   box-shadow: none;
 }
 
-li svg {
-  color: #BBB;
-  margin-left: 10px;
-  font-size: 1.2em;
-}
-li svg:hover {
-  color: #444;
-}
-
 .btn {
   border-radius: 0;
   font-family: "GeogrotesqueMedium", Arial, Helvetica, sans-serif;
@@ -139,6 +130,15 @@ li svg:hover {
 
 .modal-content {
   border-radius: 0;
+}
+
+.options li svg {
+  color: #BBB;
+  margin-left: 10px;
+  font-size: 1.2em;
+}
+.options li svg:hover {
+  color: #444;
 }
 
 .table > tfoot > tr > td,
