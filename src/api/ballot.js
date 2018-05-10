@@ -56,8 +56,9 @@ createTokens = (req, res) => {
       return err;
     }
 
-    let mails = fileData.split(/,|\n/);
-    mails = mails.filter(x => x !== '');
+    let mails = fileData.split(/,|\n/)
+      .map(x => x.trim())
+      .filter(x => x !== '');
 
     let tokens = [];
     for(let i = 0; i < mails.length; i++) {

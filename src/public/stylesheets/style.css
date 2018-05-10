@@ -158,5 +158,14 @@ input.form-control:focus {
   padding-top: 1.3rem;
 }
 
+#mailList .list-group-item {
+  border-top: 0;
+  border-right: 0;
+  border-left: 0; 
+}
+#mailList .list-group-item:last-child {
+  border-bottom: 0; 
+}
+
 /* Prevents flickering of the google chart tooltip */
 svg > g > g:last-child { pointer-events: none }

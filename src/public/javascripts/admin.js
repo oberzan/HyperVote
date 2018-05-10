@@ -1,5 +1,5 @@
 $(() => {
-  /** SHOW WARNING ON TOKEN EXPIRATION **/
+  /** REAUTHENTICATION MODAL WINDOW **/
   setReauthenticationTimeout = () => {
     let cookieExpTime = sessionStorage.getItem('cookieExpTime');
     setTimeout(() => {
@@ -179,5 +179,31 @@ $(() => {
     let mailList = $('#mailList');
     $('#mailList .modal-header .title').text(title);
     $('#mailList').modal({backdrop:"true", keyboard:true});
+  });
+
+  // $(".fa-file").click(() => {
+  //   $("input[type='file']").trigger('click');
+  // });
+  $('input[type="file"]').on('change', e => {
+    let f = e.currentTarget.files[0];
+    if(!f) 
+      return;
+
+    let reader = new FileReader();
+    reader.onload = file => {
+      console.log(file);
+    }
+    reader.onloadend = evt => {
+      if (evt.target.readyState == FileReader.DONE) {
+        console.log(evt.target.result);
+        let mails = evt.target.result.split(/,|\n/)
+          .map(x => x.trim())
+          .filter(x => x !== '');
+        mails.forEach(x => {
+          $('#mailList ul').append('<li class="list-group-item">'+ x +'</li>');
+        });          
+      }
+    }
+    reader.readAsBinaryString(f);
   });
 });
