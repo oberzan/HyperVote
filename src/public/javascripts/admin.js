@@ -169,12 +169,12 @@ $(() => {
       }
     });
   });
-  $(document).on('click', '#optionsUl svg', function() {
-    $(this).parent().remove();
+  $(document).on('click', '#optionsUl svg', e => {
+    $(e.currentTarget).parent().remove();
   });
   
   /* OPEN MAIL LIST MODAL */
-  $('.options svg.mail').click(e => {
+  $(document).on('click', '.options .mail', e => {
     let title = $(e.currentTarget).siblings('.title').text();
     let mailList = $('#mailList');
     $('#mailList .modal-header .title').text(title);
