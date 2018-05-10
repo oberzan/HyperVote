@@ -11,9 +11,11 @@ $(() => {
   $('body').on('click', '.modal input[type="submit"]', e => {
     $('#auth').submit();
   });
-  $('#auth').bind('ajax:success', () => {
-    $('#authModal').modal('hide');
-    setReauthenticationTimeout();
+  $(document).ajaxSuccess((e, xhr, settings) => {
+    if(settings.url.indexOf('/authenticate') >= 0) {
+      $('#authModal').modal('hide');
+      setReauthenticationTimeout();
+    }
   });
 
   /** SEND TOKENS **/
