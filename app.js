@@ -19,6 +19,8 @@ const api = require('./src/routes/api');
 let app = express();
 app.locals.moment = require('moment');
 
+global.appRoot = path.resolve(__dirname);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'pug');
