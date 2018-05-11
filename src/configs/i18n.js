@@ -8,4 +8,4 @@ i18n.configure({
   directory: path.join(appRoot, 'src', 'locales')
 });
 
-exports.i18n = i18n;
+module.exports = i18n;
