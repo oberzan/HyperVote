@@ -234,7 +234,9 @@ $(() => {
               </li>');
   };  
   $(document).on('click', '#mailList .fa-plus', e => {
-    addEmail($(e.currentTarget).siblings('input').val());
+    let input = $(e.currentTarget).siblings('input');
+    addEmail(input.val());
+    input.val("");
     $('#mailList .tokens').prop('disabled', false);
   });
 

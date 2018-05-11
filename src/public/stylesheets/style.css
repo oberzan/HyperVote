@@ -138,6 +138,10 @@ li svg:hover,
   border-radius: 0 !important;
 }
 
+.modal-backdrop:first {
+  z-index: 1039;
+}
+
 .modal-content {
   border-radius: 0;
 }
@@ -169,6 +173,10 @@ li svg:hover,
   padding-left: 9px;
 }
 
+#auth {
+  z-index: 1051;
+}
+
 #ballots {
   padding-top: 1.3rem;
 }
@@ -176,6 +184,7 @@ li svg:hover,
 #mailList .modal-body {
   padding-top: 0;
   padding-bottom: 0;
+  z-index: 1040
 }
 
 #mailList .list-group-item {
