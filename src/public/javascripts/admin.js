@@ -120,9 +120,9 @@ $(() => {
       $('ul.ballots li').map((i, el) => {
         return el.innerText.trim();
       }).get();
-    let option = $('#title').val().trim();
-    if(options.includes(option))
-      return alert('Option already exists');
+    let ballot = $('#title').val().trim();
+    if(ballots.includes(ballot))
+      return alert('Ballot already exists');
 
     $(form).find('input[type=submit]').prop('disabled', true);
 
