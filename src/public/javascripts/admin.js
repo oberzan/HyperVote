@@ -58,15 +58,15 @@ $(() => {
     });
   };
 
-  $('ul.ballots .tokens').click( x => {
-    let title = $(x.target).siblings('.title').first().text();
-    sendTokens($(x.target), title)
+  $('ul.ballots .tokens').click(e => {
+    let title = $(e.currentTarget).siblings('.title').first().text();
+    sendTokens($(e.currentTarget), title);
   });
-  
+
   $(document).on('click', '#mailList .tokens', e => {
     let title = $('#mailList .title').text();
     let mails = $('#mailList li').map((i, el) => $(el).text().trim()).get();
-    sendTokens($(x.target), title, mails);
+    sendTokens($(e.target), title, mails);
   });
 
   /** DATE PICKER **/ 
