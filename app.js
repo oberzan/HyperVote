@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 
 const jwt = require('express-jwt');
 
-const i18n = require('.src/configs/i18n.js');
+const i18n = require('./src/configs/i18n.js');
 const config = require('./config.json');
 const logger = require('./log.js')(module);
 
