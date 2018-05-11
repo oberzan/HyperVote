@@ -66,7 +66,8 @@ $(() => {
   $(document).on('click', '#mailList .tokens', e => {
     let title = $('#mailList .title').text();
     let emails = $('#mailList li').map((i, el) => $(el).text().trim()).get();
-    sendTokens($(e.target), title, emails);
+    sendTokens($(e.target), title, emails)
+      .then($('#mailList').modal("hide"));
   });
 
   /** DATE PICKER **/ 
