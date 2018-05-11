@@ -117,8 +117,8 @@ $(() => {
     let form = e.currentTarget;
 
     let ballots = 
-      $('ul.ballots li').map(e => {
-        return $(e.currentTarget).innerText.trim();
+      $('ul.ballots li').map((i, el) => {
+        return el.innerText.trim();
       }).get();
     let option = $('#title').val().trim();
     if(options.includes(option))
