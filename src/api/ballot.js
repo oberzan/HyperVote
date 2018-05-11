@@ -37,6 +37,7 @@ createBallot = (req, res) => {
 
 createTokens = (req, res) => {
   let ballot = req.params.id;
+  logger.debug(req);
 
   if(!config.nodemailer.list_path) {
     res.status(500).json("nodemailer list_path is undefined");
