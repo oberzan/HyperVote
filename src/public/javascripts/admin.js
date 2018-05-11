@@ -92,10 +92,10 @@ $(() => {
   $('#addOptionBtn').click(() => {
     let options = 
       $('#optionsUl li').map(function() {
-        return this.innerText;
+        return this.innerText.trim();
       }).get();
 
-    let option = $('#optionInput').val();
+    let option = $('#optionInput').val().trim();
     
     if(option.length < 1)
       return alert('Option name too short.');
