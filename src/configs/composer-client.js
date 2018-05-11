@@ -1,6 +1,6 @@
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 
-const logger = require('../log.js')(module);
+const logger = require(appRoot + '/log.js')(module);
 
 var state = {
   bnDefinition: null,
