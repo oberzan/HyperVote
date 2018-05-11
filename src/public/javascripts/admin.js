@@ -223,7 +223,9 @@ $(() => {
                 <span class="mr-auto">'+ email +'</span><i class="fas fa-minus remove"></i> \
               </li>');
   };  
-  $('#mailList .fa-plus').click(e => addEmail($(e.currentTarget).siblings('input').val()));
+  $(document).on('click', '#mailList .fa-plus', e =>
+    addEmail($(e.currentTarget).siblings('input').val())
+  );
 
   // REMOVE EMAIL
   $(document).on('click', '#mailList .remove', e => {
