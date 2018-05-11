@@ -19,17 +19,7 @@ $(() => {
   });
 
   /** SEND TOKENS **/
-  $('ul.ballots .tokens').click( x => {
-    let title = $(x.target).siblings('.title').first().text();
-    sendTokens($(x.target), title)
-  });
-  $(document).on('click', '#mailList .tokens', e => {
-    let title = $('#mailList .title').text();
-    let mails = $('#mailList li').map((i, el) => $(el).text().trim()).get();
-    sendTokens($(x.target), title, mails)
-  });
-
-  let sendTokens = (btn, title, mails) => {
+  sendTokens = (btn, title, mails) => {
     btn.prop('disabled', true);
     btn.before('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
     let url = [
@@ -67,6 +57,17 @@ $(() => {
       btn.siblings('.fa-spinner').remove();
     });
   };
+
+  $('ul.ballots .tokens').click( x => {
+    let title = $(x.target).siblings('.title').first().text();
+    sendTokens($(x.target), title)
+  });
+  
+  $(document).on('click', '#mailList .tokens', e => {
+    let title = $('#mailList .title').text();
+    let mails = $('#mailList li').map((i, el) => $(el).text().trim()).get();
+    sendTokens($(x.target), title, mails);
+  });
 
   /** DATE PICKER **/ 
   $('#enddatetimepicker').datetimepicker({

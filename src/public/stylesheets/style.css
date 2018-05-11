@@ -177,7 +177,7 @@ li svg:hover {
 }
 
 #mailList .list-group-item {
-  border-bottom: 0;
+  /* border-bottom: 0; */
   border-right: 0;
   border-left: 0;
 }
