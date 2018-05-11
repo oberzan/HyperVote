@@ -218,14 +218,25 @@ $(() => {
 
   // ADD EMAIL
   addEmail = (email) => {
+    let emails = 
+      $('#mailList li').map(e => {
+        return $(e.currentTarget).innerText.trim();
+      }).get();
+
+    if(email.length < 1)
+      return;
+    if(emails.includes(email))
+      return alert('Email already exists');
+
     $('#mailList ul')
       .append('<li class="list-group-item d-flex align-items-center"> \
                 <span class="mr-auto">'+ email +'</span><i class="fas fa-minus remove"></i> \
               </li>');
   };  
-  $(document).on('click', '#mailList .fa-plus', e =>
-    addEmail($(e.currentTarget).siblings('input').val())
-  );
+  $(document).on('click', '#mailList .fa-plus', e => {
+    addEmail($(e.currentTarget).siblings('input').val());
+    $('#mailList .tokens').prop('disabled', false);
+  });
 
   // REMOVE EMAIL
   $(document).on('click', '#mailList .remove', e => {
