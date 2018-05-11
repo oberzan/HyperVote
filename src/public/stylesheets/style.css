@@ -86,7 +86,7 @@ li svg,
   font-size: 1.2em;
 }
 li svg:hover,
-#mailList svg {
+#mailList svg:hover {
   color: #444;
 }
 

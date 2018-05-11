@@ -215,6 +215,24 @@ $(() => {
   // $(".fa-file").click(() => {
   //   $("input[type='file']").trigger('click');
   // });
+
+  // ADD EMAIL
+  addEmail = (email) => {
+    $('#mailList ul')
+      .append('<li class="list-group-item d-flex align-items-center"> \
+                <span class="mr-auto">'+ x +'</span><i class="fas fa-minus remove"></i> \
+              </li>');
+  };  
+  $('#mailList .fa-plus').click(e => addEmail($(e.currentTarget).siblings('input').val()));
+
+  // REMOVE EMAIL
+  $(document).on('click', '#mailList .remove', e => {
+    if ($(e.currentTarget).parent().siblings().length < 1)
+      $('#mailList .tokens').prop('disabled', true)
+    $(e.currentTarget).parent().remove();    
+  });
+
+  // UPLOAD EMAILS FROM CSV FILE
   $('input[type="file"]').on('change', e => {
     let f = e.currentTarget.files[0];
     if(!f) 
@@ -230,10 +248,8 @@ $(() => {
         let mails = evt.target.result.split(",")
           .map(x => x.trim())
           .filter(x => x !== '');
-        mails.forEach(x => {
-          $('#mailList ul').append('<li class="list-group-item d-flex align-items-center"> \
-                                      <span class="mr-auto">'+ x +'</span><i class="fas fa-minus remove"></i> \
-                                    </li>');
+        mails.forEach(m => {
+          addEmail(m)
         });
         if (mails.length > 0) $('#mailList .tokens').prop('disabled', false);       
       }
@@ -241,9 +257,4 @@ $(() => {
     reader.readAsBinaryString(f);
   });
 
-  $(document).on('click', '#mailList .remove', e => {
-    if ($(e.currentTarget).parent().siblings().length < 1)
-      $('#mailList .tokens').prop('disabled', true)
-    $(e.currentTarget).parent().remove();    
-  });
 });
