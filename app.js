@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 
 const jwt = require('express-jwt');
 
+global.appRoot = path.resolve(__dirname);
+
 const i18n = require('./src/configs/i18n.js');
 const config = require('./config.json');
 const logger = require('./log.js')(module);
@@ -18,8 +20,6 @@ const api = require('./src/routes/api');
 
 let app = express();
 app.locals.moment = require('moment');
-
-global.appRoot = path.resolve(__dirname);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'src', 'views'));
