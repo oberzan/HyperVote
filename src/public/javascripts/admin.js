@@ -35,7 +35,7 @@ $(() => {
     $.ajax({
       type: "POST",
       url: url,
-      data: mails,
+      data: {mails: mails},
       success: data => {
         btn.hide();
         console.log(data);
