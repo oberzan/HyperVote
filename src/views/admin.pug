@@ -43,9 +43,10 @@ block content
           //- i.far.fa-file
 
         div.modal-body
-          ul.list-group   
-          input.form-control(type="text")
-          i.fas.fa-plus    
+          ul.list-group
+          div.d-flex.align-items-center(style="padding: 0.1rem 1.25rem 0.1rem 0.3rem;")
+            input.form-control(type="text")
+            i.fas.fa-plus    
 
         div.modal-footer
           button.btn.btn-outline-secondary.tokens.mx-2(style="display: none;" data-expires=ballot.end disabled) #{i18n.__("Send tokens")}
