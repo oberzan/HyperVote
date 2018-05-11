@@ -220,7 +220,7 @@ $(() => {
   addEmail = (email) => {
     $('#mailList ul')
       .append('<li class="list-group-item d-flex align-items-center"> \
-                <span class="mr-auto">'+ x +'</span><i class="fas fa-minus remove"></i> \
+                <span class="mr-auto">'+ email +'</span><i class="fas fa-minus remove"></i> \
               </li>');
   };  
   $('#mailList .fa-plus').click(e => addEmail($(e.currentTarget).siblings('input').val()));
