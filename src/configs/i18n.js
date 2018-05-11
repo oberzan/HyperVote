@@ -7,4 +7,4 @@ i18n.configure({
   directory: path.join(__dirname, 'src', 'locales')
 });
 
-export default i18n;
+module.exports.i18n = i18n;
