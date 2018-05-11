@@ -19,12 +19,21 @@ $(() => {
   });
 
   /** SEND TOKENS **/
-  $('.btn.tokens').click( x => {
-    $(x.target).prop('disabled', true);
-    $(x.target).parent().children().first().after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+  $('ul.ballots .tokens').click( x => {
+    let title = $(x.target).siblings('.title').first().text();
+    sendTokens($(x.target), title)
+  });
+  $(document).on('click', '#mailList .tokens', e => {
+    let title = $('#mailList .title').text();
+    let mails = $('#mailList li').map((i, el) => $(el).text().trim()).get();
+    sendTokens($(x.target), title, mails)
+  });
 
-    let ballot = $(x.target).siblings('.title').first().text();
-    let url = [window.location.origin,
+  let sendTokens = (btn, title, mails) => {
+    btn.prop('disabled', true);
+    btn.before('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+    let url = [
+      window.location.origin,
       'api',
       'ballot',
        ballot,
@@ -36,8 +45,9 @@ $(() => {
     $.ajax({
       type: "POST",
       url: url,
+      data: mails,
       success: data => {
-        $(x.target).hide();
+        btn.hide();
         console.log(data);
         successBar.text(data);
         successBar.show();
@@ -50,13 +60,13 @@ $(() => {
           errBar.text(err.responseJSON);
           errBar.show();
         }
-        $(x.target).prop('disabled', false);
+        btn.prop('disabled', false);
       }
     }).done(() => {
       console.log('Done sending');
-      $(x.target).siblings('.fa-spinner').remove();
+      btn.siblings('.fa-spinner').remove();
     });
-  });
+  };
 
   /** DATE PICKER **/ 
   $('#enddatetimepicker').datetimepicker({
@@ -78,7 +88,7 @@ $(() => {
     });
 
   /** ADD OPTION **/ 
-  $('#addOptionBtn').click(function() {
+  $('#addOptionBtn').click(() => {
     let options = 
       $('#optionsUl li').map(function() {
         return this.innerText;
@@ -108,8 +118,8 @@ $(() => {
 
     if($('#optionsUl').children().length < 2) {
       console.log("Not enough options");
-      console.log($('.options .invalid-feedback'));
-      $('.options .invalid-feedback').show().text("A ballot needs at least 2 options");
+      console.log($('ul.ballots .invalid-feedback'));
+      $('ul.ballots .invalid-feedback').show().text("A ballot needs at least 2 options");
       return false;
     }
 
@@ -133,7 +143,7 @@ $(() => {
   });
 
   /* DELETE A BALLOT */
-  $(document).on('click', '.options .delete', function() {
+  $(document).on('click', 'ul.ballots .delete', function() {
     console.log($(this));
     console.log(location);
     let li = $(this).parent();
@@ -174,7 +184,7 @@ $(() => {
   });
   
   /* OPEN MAIL LIST MODAL */
-  $(document).on('click', '.options .mail', e => {
+  $(document).on('click', 'ul.ballots .mail', e => {
     let title = $(e.currentTarget).siblings('.title').text();
     let button = $(e.currentTarget).siblings('button.tokens');
 
