@@ -4,14 +4,15 @@ const favicon = require('serve-favicon');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const i18n = require('i18n');
+// const i18n = require('i18n');
 
 const jwt = require('express-jwt');
 
+const i18n = require('.src/configs/i18n.js');
 const config = require('./config.json');
 const logger = require('./log.js')(module);
 
-let composerClient = require('./src/composer-client');
+let composerClient = require('./src/configs/composer-client');
 const index = require('./src/routes/index');
 const api = require('./src/routes/api');
 
@@ -53,15 +54,9 @@ app.use(
 
 composerClient.connect('BNadmin-org1@voting-network', 'voting-network', () => logger.info('Connection established'));
 
-// Locales
-i18n.configure({
-  locales:['si'],
-  directory: path.join(__dirname, 'src', 'locales'),
-  defaultLocale: 'si'
-});
 app.use(i18n.init);
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();

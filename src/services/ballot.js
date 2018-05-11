@@ -1,4 +1,4 @@
-const composerClient = require('../composer-client')
+const composerClient = require('../configs/composer-client')
 const logger = require('../../log.js')(module);
 
 getBallot = (id) => {  

@@ -19,7 +19,7 @@ $(() => {
   });
 
   /** SEND TOKENS **/
-  sendTokens = (btn, title, mails) => {
+  sendTokens = (btn, title, emails) => {
     btn.prop('disabled', true);
     btn.before('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
     let url = [
@@ -35,7 +35,7 @@ $(() => {
     $.ajax({
       type: "POST",
       url: url,
-      data: {mails: mails},
+      data: {emails: emails},
       success: data => {
         btn.hide();
         console.log(data);
@@ -65,8 +65,8 @@ $(() => {
 
   $(document).on('click', '#mailList .tokens', e => {
     let title = $('#mailList .title').text();
-    let mails = $('#mailList li').map((i, el) => $(el).text().trim()).get();
-    sendTokens($(e.target), title, mails);
+    let emails = $('#mailList li').map((i, el) => $(el).text().trim()).get();
+    sendTokens($(e.target), title, emails);
   });
 
   /** DATE PICKER **/ 
