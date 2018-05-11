@@ -36,10 +36,12 @@ $(() => {
         console.error(err);
         if(err.status != 0)
           $("#secret").addClass("is-invalid");
-        //$("#secret").siblings(".invalid-feedback").show();
+        else {
+          console.error("Response status: 0\n.");
+          window.location.replace("/authenticate");
+        } 
 
-        // token.addClass('is-invalid');
-        // token.removeClass('is-valid');
+        //$("#secret").siblings(".invalid-feedback").show();
       },
       complete: x => {
         console.log("complete");

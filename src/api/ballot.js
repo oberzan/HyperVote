@@ -73,6 +73,7 @@ publishTokens = (ballot, emails, originUrl) => {
                   '</html>'
           };
 
+          logger.debug("Sending email to" + emails[i]);
           await transporter.sendMail(mailOptions)
             .then(info => {
               logger.info('Message sent: %s', info.messageId);

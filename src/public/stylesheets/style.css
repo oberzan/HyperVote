@@ -80,11 +80,13 @@ input.form-control:focus {
   box-shadow: none;
 }
 
-li svg {
+li svg,
+#mailList svg {
   color: #BBB;
   font-size: 1.2em;
 }
-li svg:hover {
+li svg:hover,
+#mailList svg {
   color: #444;
 }
 
