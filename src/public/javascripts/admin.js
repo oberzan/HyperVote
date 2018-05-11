@@ -124,14 +124,14 @@ $(() => {
     if(ballots.includes(ballot))
       return alert('Ballot already exists');
 
-    $(form).find('input[type=submit]').prop('disabled', true);
-
     if($('#optionsUl').children().length < 2) {
       console.log("Not enough options");
       console.log($('ul.ballots .invalid-feedback'));
-      $('ul.ballots .invalid-feedback').show().text("A ballot needs at least 2 options");
+      $('.options .invalid-feedback').show().text("A ballot needs at least 2 options");
       return false;
     }
+
+    $(form).find('input[type=submit]').prop('disabled', true);
 
     $.ajax({
       url:'/api/ballot',
