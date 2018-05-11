@@ -115,6 +115,15 @@ $(() => {
   $('#ballotForm').submit((e) => {
     e.preventDefault();
     let form = e.currentTarget;
+
+    let ballots = 
+      $('ul.ballots li').map(e => {
+        return $(e.currentTarget).innerText.trim();
+      }).get();
+    let option = $('#title').val().trim();
+    if(options.includes(option))
+      return alert('Option already exists');
+
     $(form).find('input[type=submit]').prop('disabled', true);
 
     if($('#optionsUl').children().length < 2) {
