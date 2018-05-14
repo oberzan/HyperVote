@@ -177,12 +177,30 @@ li svg:hover,
   padding-left: 9px;
 }
 
+#addMail {
+  border-width: 0 0 1px 0;
+  outline: 0;
+}
+#addMail:hover {
+  border-bottom-width: 2px;
+  margin-bottom: -1px;  
+}
+
 #auth {
   z-index: 1051;
 }
 
 #ballots {
   padding-top: 1.3rem;
+}
+
+#importMails {
+  display: inline-flex;
+  align-items: center;
+}
+
+#importMails input {
+  display: none;
 }
 
 #mailList{

@@ -39,13 +39,15 @@ block content
           h4.modal-titleModal
             span.title
             span - #{i18n.__("email list")}
-          input(type="file" data-iconName="fa fa-upload" accept=".csv")
+          div#importMails
+            i.far.fa-file
+            input(type="file" data-iconName="fa fa-upload" accept=".csv")
           //- i.far.fa-file
 
         div.modal-body
           ul.list-group
           div.d-flex.align-items-center(style="padding: 0.1rem 1.25rem 0.1rem 0; outline: none")
-            input.form-control(type="text")
+            input#addMail.form-control(type="text")
             i.fas.fa-plus    
 
         div.modal-footer
