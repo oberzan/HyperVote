@@ -266,8 +266,9 @@ $(() => {
         mails.forEach(m => {
           addEmail(m)
         });
-        if (mails.length > 0) $('#mailList .tokens').prop('disabled', false);       
+        if (mails.length > 0) $('#mailList .tokens').prop('disabled', false);
       }
+      $(e.currentTarget).val("");
     }
     reader.readAsBinaryString(f);
   });
