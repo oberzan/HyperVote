@@ -178,7 +178,8 @@ li svg:hover,
 }
 
 #addMail {
-  border-width: 0 0 1px 0;
+  border-width: 0 0 0px 0;
+  border-color: #1391C4;
   outline: 0;
   padding: 0.75rem 1.25rem;
   width: 100%;
@@ -186,7 +187,8 @@ li svg:hover,
 #addMail:hover,
 #addMail:focus {
   border-bottom-width: 2px;
-  margin-bottom: -1px;  
+  border-color: #1391C4;
+  margin-bottom: -2px;  
 }
 
 #auth {
@@ -223,6 +225,12 @@ li svg:hover,
   padding-top: 0;
   padding-bottom: 0;
   z-index: 1040
+}
+
+#mailList .modal-footer {
+  /* border: none; */
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 
 #mailList .list-group-item {
