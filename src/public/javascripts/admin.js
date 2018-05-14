@@ -254,9 +254,6 @@ $(() => {
       return;
 
     let reader = new FileReader();
-    reader.onload = file => {
-      console.log(file);
-    }
     reader.onloadend = evt => {
       if (evt.target.readyState == FileReader.DONE) {
         let mails = evt.target.result.split(",")
