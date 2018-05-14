@@ -196,10 +196,14 @@ $(() => {
 
   /* OPEN MAIL LIST MODAL */
   $(document).on('click', 'ul.ballots .mail', e => {
-    let title = $(e.currentTarget).siblings('.title').text();
+    let title = $(e.currentTarget).siblings('.title').text().trim();
     let button = $(e.currentTarget).siblings('button.tokens');
 
-    $('#mailList .modal-header .title').text(title);
+    let titleSpan = $('#mailList .modal-header .title');
+    if(titleSpan.text().trim() !== title)
+      $('#mailList ul').html("");
+    titleSpan.text(title);
+    
     if (button.length > 0 && button.is(':enabled')) 
       $('#mailList .tokens').show();
     else
@@ -258,7 +262,7 @@ $(() => {
           .map(x => x.trim())
           .filter(x => x !== '');
 
-        $('#mailList ul').html("")
+        $('#mailList ul').html("");
         mails.forEach(m => {
           addEmail(m)
         });
