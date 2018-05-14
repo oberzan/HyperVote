@@ -259,10 +259,11 @@ $(() => {
     }
     reader.onloadend = evt => {
       if (evt.target.readyState == FileReader.DONE) {
-        console.log(evt.target.result);
         let mails = evt.target.result.split(",")
           .map(x => x.trim())
           .filter(x => x !== '');
+
+        $('#mailList ul').html("")
         mails.forEach(m => {
           addEmail(m)
         });
