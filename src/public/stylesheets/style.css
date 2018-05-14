@@ -181,7 +181,8 @@ li svg:hover,
   border-width: 0 0 1px 0;
   outline: 0;
 }
-#addMail:hover {
+#addMail:hover,
+#addMail:focus {
   border-bottom-width: 2px;
   margin-bottom: -1px;  
 }
@@ -195,16 +196,25 @@ li svg:hover,
 }
 
 #importMails {
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
+  margin-left: 15px;
 }
 
 #importMails input {
   display: none;
 }
 
-#mailList{
+#importMails svg {
+  font-size: 1.7em;
+}
+
+#mailList {
   z-index: 1040
+}
+
+#mailList .modal-header {
+  justify-content: start;
 }
 
 #mailList .modal-body {
