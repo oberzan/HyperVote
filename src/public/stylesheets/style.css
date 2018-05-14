@@ -185,6 +185,10 @@ li svg:hover,
   padding-top: 1.3rem;
 }
 
+#mailList{
+  z-index: 1040
+}
+
 #mailList .modal-body {
   padding-top: 0;
   padding-bottom: 0;
