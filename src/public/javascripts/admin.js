@@ -193,7 +193,7 @@ $(() => {
   $(document).on('click', '#optionsUl svg', e => {
     $(e.currentTarget).parent().remove();
   });
-  
+
   /* OPEN MAIL LIST MODAL */
   $(document).on('click', 'ul.ballots .mail', e => {
     let title = $(e.currentTarget).siblings('.title').text();
@@ -212,9 +212,7 @@ $(() => {
     $('#mailList input[type="file"]').val("");
   });
 
-  // $(".fa-file").click(() => {
-  //   $("input[type='file']").trigger('click');
-  // });
+  $('#importMails i').click(() => $('#importMails input').trigger('click'));
 
   // ADD EMAIL
   addEmail = (email) => {
