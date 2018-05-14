@@ -219,8 +219,8 @@ $(() => {
   // ADD EMAIL
   addEmail = (email) => {
     let emails = 
-      $('#mailList li').map(e => {
-        return $(e.currentTarget).innerText.trim();
+      $('#mailList li').map((i, li) => {
+        return li.innerText.trim();
       }).get();
 
     if(email.length < 1)
