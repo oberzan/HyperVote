@@ -212,7 +212,7 @@ $(() => {
     $('#mailList input[type="file"]').val("");
   });
 
-  $('#importMails i').click(() => $('#importMails input').trigger('click'));
+  $(document).on('click', '#importMails svg', () => $('#importMails input').trigger('click'));
 
   // ADD EMAIL
   addEmail = (email) => {
