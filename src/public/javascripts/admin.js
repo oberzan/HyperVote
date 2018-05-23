@@ -157,11 +157,14 @@ $(() => {
   });
 
   /* DELETE A BALLOT */
-  $(document).on('click', 'ul.ballots .delete', function() {
+  $(document).on('click', 'ul.ballots .delete', e => {
+    let title = $(e.currentTarget).siblings('.title').text();
+    $('#deleteModal .title').text(title);
     $('#deleteModal').modal({backdrop:"true", keyboard:true});
-
-    let li = $(this).parent();
-    li.find('button').prop('disabled', true);
+  });
+  $('#deleteModal .delete').click(e => {
+    let title = $('#deleteModal .title').text();
+    let li = $("ul.ballots > li > span:contains('"+ title +"')").parent();
 
     li.addClass('list-group-item-secondary');
     li.children().first().after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
@@ -193,6 +196,7 @@ $(() => {
       }
     });
   });
+
   $(document).on('click', '#optionsUl svg', e => {
     $(e.currentTarget).parent().remove();
   });

@@ -59,11 +59,14 @@ block content
     div.modal-dialog(role="document")
       div.modal-content
         div.modal-header
-          h5#deleteModalLabel.modal-title Confirmation
+          h5#deleteModalLabel.modal-title Delete 
+            span.title
           button.close(type="button" data-dismiss="modal" aria-label="Close")
             span(aria-hidden="true")
         div.modal-body
-          p This will delete the selected ballot. Do you want to continue?
+          p This will delete 
+            span.title
+            | . Do you want to continue?
         div.modal-footer
           button.btn.btn-secondary(type="button" data-dismiss="modal") Cancel
           button.btn.btn-primary(type="button") Continue
