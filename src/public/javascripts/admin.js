@@ -70,7 +70,7 @@ $(() => {
     sendTokens($(e.target), title, emails, () => {
         let li = $('ul.ballots > li').filter((i, el) => {
           return $(el).find('.title').text().trim() === title
-        }).siblings('.mail, .tokens').hide();
+        }).find('.mail, .tokens').hide();
 
         $('#mailList').modal("hide");
       });
