@@ -163,13 +163,13 @@ $(() => {
     $('#deleteModal').modal({backdrop:"true", keyboard:true});
   });
   $('#deleteModal .delete').click(e => {
-    let title = $('#deleteModal .title').text();
+    let title = $('#deleteModal .title').first().text();
     let li = $("ul.ballots > li > span:contains('"+ title +"')").parent();
 
     li.addClass('list-group-item-secondary');
     li.children().first().after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
-    let option = li.find('span').text();
+    let option = li.find('.title').text();
     let url = [window.location.origin,
               'api',
               'ballot',
