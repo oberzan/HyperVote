@@ -73,7 +73,7 @@ publishTokens = (ballot, emails, originUrl) => {
                   '</html>'
           };
 
-          logger.debug("Sending email to" + emails[i]);
+          logger.debug("Sending email to " + emails[i]);
           await transporter.sendMail(mailOptions)
             .then(info => {
               logger.info('Message sent: %s', info.messageId);
@@ -124,6 +124,10 @@ createTokens = (req, res) => {
           .map(x => x.trim())
           .filter(x => x !== '');      
     });    
+  }
+
+  if( typeof emails === 'string' ) {
+    emails = [ emails ];
   }
 
   let originUrl = new URL(req.headers.referer).origin;

@@ -219,6 +219,7 @@ li svg:hover,
 
 #mailList .modal-header {
   justify-content: start;
+  padding-bottom: 0.5rem;
 }
 
 #mailList .modal-body {
