@@ -183,6 +183,7 @@ $(() => {
       url: url     
     }).done( data => {
       console.log("Successfully deleted " + option);
+      $('#deleteModal').modal('hide');
       li.remove();
       //location.reload();
     }).fail( err => {
