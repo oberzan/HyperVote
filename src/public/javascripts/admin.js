@@ -58,10 +58,10 @@ $(() => {
     });
   };
 
-  $('ul.ballots .tokens').click(e => {
-    let title = $(e.currentTarget).siblings('.title').first().text();
-    sendTokens($(e.currentTarget), title);
-  });
+  // $('ul.ballots .tokens').click(e => {
+  //   let title = $(e.currentTarget).siblings('.title').first().text();
+  //   sendTokens($(e.currentTarget), title);
+  // });
 
   $(document).on('click', '#mailList .tokens', e => {
     let title = $('#mailList .title').text();
@@ -200,17 +200,17 @@ $(() => {
   /* OPEN MAIL LIST MODAL */
   $(document).on('click', 'ul.ballots .mail', e => {
     let title = $(e.currentTarget).siblings('.title').text().trim();
-    let button = $(e.currentTarget).siblings('button.tokens');
+    // let button = $(e.currentTarget).siblings('button.tokens');
 
     let titleSpan = $('#mailList .modal-header .title');
     if(titleSpan.text().trim() !== title)
       $('#mailList ul').html("");
     titleSpan.text(title);
     
-    if (button.length > 0 && button.is(':enabled')) 
-      $('#mailList .tokens').show();
-    else
-      $('#mailList .tokens').hide();
+    // if (button.length > 0 && button.is(':enabled')) 
+    $('#mailList .tokens').show();
+    // else
+      // $('#mailList .tokens').hide();
 
     $('#mailList').modal({backdrop:"true", keyboard:true});
   });
