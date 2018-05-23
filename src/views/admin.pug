@@ -108,9 +108,9 @@ block content
 
     hr
     div#ballotErrorBar.alert.alert-danger(role="alert", style="display: none")
-    div#ballotSuccessBar.alert.alert-success.align-items-center(role="alert", style="display: none; font-size: 0.9rem")
+    div#ballotSuccessBar.alert.alert-success.align-items-center(role="alert", style="display: none;")
       span
-      i.fas.fa-times(onclick="console.log($(this))")
+      i.fas.fa-times(onclick="console.log($(this).parent().hide())" style="font-size: 0.9rem")
     ul.ballots.list-group
       each ballot in ballots
         li.list-group-item.d-flex.align-items-center
