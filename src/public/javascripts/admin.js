@@ -67,7 +67,10 @@ $(() => {
     let title = $('#mailList .title').text();
     let emails = $('#mailList li').map((i, el) => $(el).text().trim()).get();
     sendTokens($(e.target), title, emails)
-      .then($('#mailList').modal("hide"));
+      .then(() => {
+        $(".ballots > li > .title:contains("+title+")").siblings('.mail, .tokens').hide();
+        $('#mailList').modal("hide");
+      });
   });
 
   /** DATE PICKER **/ 
