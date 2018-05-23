@@ -91,6 +91,13 @@ li svg:hover,
   color: #444;
 }
 
+.alert {
+  display: flex;
+}
+.alert svg {
+  margin-left: auto;
+}
+
 .btn {
   border-radius: 0;
   font-family: "GeogrotesqueMedium", Arial, Helvetica, sans-serif;

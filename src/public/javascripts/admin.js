@@ -31,14 +31,13 @@ $(() => {
     ].join('/');
     
     let errBar = $('#ballotErrorBar');
-    let successBar = $('#ballotSuccessBar');
+    let successBar = $('#ballotSuccessBar > span');
     $.ajax({
       type: "POST",
       url: url,
       data: {emails: emails},
       success: data => {
         btn.hide();
-        console.log(data);
         successBar.text(data);
         successBar.show();
         cb();
