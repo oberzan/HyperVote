@@ -68,7 +68,10 @@ $(() => {
     let title = $('#mailList .title').text();
     let emails = $('#mailList li').map((i, el) => $(el).text().trim()).get();
     sendTokens($(e.target), title, emails, () => {
-        $(".ballots > li > .title:contains("+title+")").siblings('.mail, .tokens').hide();
+        let li = $('ul.ballots > li').filter((i, el) => {
+          return $(el).find('.title').text().trim() === title
+        }).siblings('.mail, .tokens').hide();
+
         $('#mailList').modal("hide");
       });
   });
@@ -164,7 +167,9 @@ $(() => {
   });
   $('#deleteModal .delete').click(e => {
     let title = $('#deleteModal .title').first().text();
-    let li = $("ul.ballots > li > span:contains('"+ title +"')").parent();
+    let li = $('ul.ballots > li').filter((i, el) => {
+      return $(el).find('.title').text().trim() === title
+    });
 
     li.addClass('list-group-item-secondary');
     li.children().first().after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
