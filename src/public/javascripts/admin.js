@@ -31,7 +31,7 @@ $(() => {
     ].join('/');
     
     let errBar = $('#ballotErrorBar');
-    let successBar = $('#ballotSuccessBar > span');
+    let successBar = $('#ballotSuccessBar');
     $.ajax({
       type: "POST",
       url: url,
@@ -39,7 +39,7 @@ $(() => {
       success: data => {
         // btn.hide();
         btn.prop('disabled', false);
-        successBar.text(data);
+        successBar.find('span').text(data);
         successBar.show();
         cb();
       },
