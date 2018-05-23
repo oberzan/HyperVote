@@ -54,7 +54,19 @@ block content
           button.btn.btn-outline-secondary.tokens.mx-2(style="display: none;" data-expires=ballot.end disabled) #{i18n.__("Send tokens")}
           button.btn.btn-danger(type="button" data-dismiss="modal") Close
 
-
+  //- DELETE A BALLOT CONFIRMATION MODAL
+  div#deleteModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true")
+    div.modal-dialog(role="document")
+      div.modal-content
+        div.modal-header
+          h5#deleteModalLabel.modal-title Confirmation
+          button.close(type="button" data-dismiss="modal" aria-label="Close")
+            span(aria-hidden="true")
+        div.modal-body
+          p This will delete the selected ballot. Do you want to continue?
+        div.modal-footer
+          button.btn.btn-secondary(type="button" data-dismiss="modal") Cancel
+          button.btn.btn-primary(type="button") Continue
 
   div.container.p-0(style="max-width: 720px")
     //- div#cookieWarning.alert.alert-warning(role="alert" style="display: none") 

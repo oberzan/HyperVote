@@ -158,8 +158,8 @@ $(() => {
 
   /* DELETE A BALLOT */
   $(document).on('click', 'ul.ballots .delete', function() {
-    console.log($(this));
-    console.log(location);
+    $('#deleteModal').modal({backdrop:"true", keyboard:true});
+
     let li = $(this).parent();
     li.find('button').prop('disabled', true);
 
