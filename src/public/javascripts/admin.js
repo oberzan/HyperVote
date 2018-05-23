@@ -19,7 +19,7 @@ $(() => {
   });
 
   /** SEND TOKENS **/
-  sendTokens = (btn, title, emails) => {
+  sendTokens = (btn, title, emails, cb) => {
     btn.prop('disabled', true);
     btn.before('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
     let url = [
@@ -41,6 +41,7 @@ $(() => {
         console.log(data);
         successBar.text(data);
         successBar.show();
+        cb();
       },
       error: err => {
         console.log(err);
@@ -66,8 +67,7 @@ $(() => {
   $(document).on('click', '#mailList .tokens', e => {
     let title = $('#mailList .title').text();
     let emails = $('#mailList li').map((i, el) => $(el).text().trim()).get();
-    sendTokens($(e.target), title, emails)
-      .then(() => {
+    sendTokens($(e.target), title, emails, () => {
         $(".ballots > li > .title:contains("+title+")").siblings('.mail, .tokens').hide();
         $('#mailList').modal("hide");
       });
