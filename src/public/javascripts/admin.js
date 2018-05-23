@@ -37,7 +37,8 @@ $(() => {
       url: url,
       data: {emails: emails},
       success: data => {
-        btn.hide();
+        // btn.hide();
+        btn.prop('disabled', false);
         successBar.text(data);
         successBar.show();
         cb();
@@ -70,9 +71,9 @@ $(() => {
         let li = $('ul.ballots > li').filter((i, el) => {
           return $(el).find('.title').text().trim() === title
         }).find('.mail, .tokens').hide();
-
-        $('#mailList').modal("hide");
-      });
+      }
+    );
+    $('#mailList').modal("hide");
   });
 
   /** DATE PICKER **/ 
