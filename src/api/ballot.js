@@ -19,8 +19,8 @@ createBallot = (req, res) => {
     return res.status(400).json("Given end date is in the past");
 
   data = {
-    "title": req.body.title,
-    "description": req.body.description,
+    "title": req.body.title.trim(),
+    "description": req.body.description.trim(),
     "options": req.body.option,
     //"start": new Date().toISOString(),
     "end": moment(req.body.endTime, 'DD.MM.YYYY HH:mm').toDate(), //TODO: Fix for timezones. Cnvert on the client side
