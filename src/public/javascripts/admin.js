@@ -71,9 +71,9 @@ $(() => {
         let li = $('ul.ballots > li').filter((i, el) => {
           return $(el).find('.title').text().trim() === title
         }).find('.mail, .tokens').hide();
+        $('#mailList').modal("hide");
       }
     );
-    $('#mailList').modal("hide");
   });
 
   /** DATE PICKER **/ 
@@ -188,7 +188,6 @@ $(() => {
       url: url     
     }).done( data => {
       console.log("Successfully deleted " + option);
-      $('#deleteModal').modal('hide');
       li.remove();
       //location.reload();
     }).fail( err => {
@@ -201,6 +200,7 @@ $(() => {
         li.find('button').prop('disabled', false);
       }
     });
+    $('#deleteModal').modal('hide');
   });
 
   $(document).on('click', '#optionsUl svg', e => {
