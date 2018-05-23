@@ -145,9 +145,18 @@ li svg:hover,
   z-index: 1041;
 }
 
+.modal-body {
+  max-height: inherit;
+  overflow-y: auto;
+}
 
 .modal-content {
+  max-height: inherit;
   border-radius: 0;
+}
+
+.modal-dialog {
+  max-height: 75vh;
 }
 
 .modal-footer .btn {
