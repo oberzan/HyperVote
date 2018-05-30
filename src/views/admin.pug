@@ -30,8 +30,8 @@ block content
           //- button.btn.btn-danger( type="button" data-dismiss="modal") Close
           input.btn.btn-primary(type="submit", value=i18n.__("Authenticate"))
 
-  //- MAIL LIST MODAL
-  div.modal#mailList
+  //- ADDRESS LIST MODAL
+  div.modal#addressList
     div.modal-dialog(style="max-width: 610px; margin-top: 3%;")
       div.modal-content
 
@@ -39,7 +39,7 @@ block content
           h4.modal-titleModal
             span.title
             span - #{i18n.__("email list")}
-          div#importMails
+          div#importAddresses
             i.far.fa-file
             input(type="file" data-iconName="fa fa-upload" accept=".csv")
           //- i.far.fa-file
@@ -47,7 +47,7 @@ block content
         div.modal-body
           ul.list-group
           div.d-flex.align-items-center(style="padding: 0.1rem 1.25rem 0.1rem 0; outline: none; margin-bottom: 1px;")
-            input#addMail(type="text")
+            input#addAddress(type="text")
             i.fas.fa-plus    
 
         div.modal-footer
@@ -117,5 +117,5 @@ block content
           span.mr-auto.title= ballot.title
           if !ballot.start && moment(ballot.end) > moment()
             //- button.btn.btn-outline-secondary.tokens.mx-2(style="margin: -2px 0; padding: 3px 9px;" data-expires=ballot.end) #{i18n.__("Send tokens")}
-            i.mail.far.fa-address-book
+            i.address.far.fa-address-book
           i.delete.far.fa-trash-alt   

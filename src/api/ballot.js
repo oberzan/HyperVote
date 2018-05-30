@@ -157,10 +157,9 @@ createTokens = (req, res) => {
         return err;
       }
 
-      if(!mails)
-        addresses = fileData.split(/,|\n/)
-          .map(x => x.trim())
-          .filter(x => x !== '');      
+      addresses = fileData.split(/,|\n/)
+        .map(x => x.trim())
+        .filter(x => x !== '');      
     });    
   }
 

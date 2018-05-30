@@ -64,14 +64,14 @@ $(() => {
   //   sendTokens($(e.currentTarget), title);
   // });
 
-  $(document).on('click', '#mailList .tokens', e => {
-    let title = $('#mailList .title').text();
-    let addresses = $('#mailList li').map((i, el) => $(el).text().trim()).get();
+  $(document).on('click', '#addressList .tokens', e => {
+    let title = $('#addressList .title').text();
+    let addresses = $('#addressList li').map((i, el) => $(el).text().trim()).get();
     sendTokens($(e.target), title, addresses, () => {
         let li = $('ul.ballots > li').filter((i, el) => {
           return $(el).find('.title').text().trim() === title
-        }).find('.mail, .tokens').hide();
-        $('#mailList').modal("hide");
+        }).find('.address, .tokens').hide();
+        $('#addressList').modal("hide");
       }
     );
   });
@@ -207,34 +207,34 @@ $(() => {
     $(e.currentTarget).parent().remove();
   });
 
-  /* OPEN MAIL LIST MODAL */
-  $(document).on('click', 'ul.ballots .mail', e => {
+  /* OPEN ADDRESS LIST MODAL */
+  $(document).on('click', 'ul.ballots .address', e => {
     let title = $(e.currentTarget).siblings('.title').text().trim();
     // let button = $(e.currentTarget).siblings('button.tokens');
 
-    let titleSpan = $('#mailList .modal-header .title');
+    let titleSpan = $('#addressList .modal-header .title');
     if(titleSpan.text().trim() !== title)
-      $('#mailList ul').html("");
+      $('#addressList ul').html("");
     titleSpan.text(title);
     
     // if (button.length > 0 && button.is(':enabled')) 
-    $('#mailList .tokens').show();
+    $('#addressList .tokens').show();
     // else
-      // $('#mailList .tokens').hide();
+      // $('#addressList .tokens').hide();
 
-    $('#mailList').modal({backdrop:"true", keyboard:true});
+    $('#addressList').modal({backdrop:"true", keyboard:true});
   });
 
-  $('#mailList').on('hidden.bs.modal', () => {
-    $('#mailList input[type="file"]').val("");
+  $('#addressList').on('hidden.bs.modal', () => {
+    $('#addressList input[type="file"]').val("");
   });
 
-  $(document).on('click', '#importMails svg', () => $('#importMails input').trigger('click'));
+  $(document).on('click', '#importAddresses svg', () => $('#importAddresses input').trigger('click'));
 
   // ADD ADDRESS
   addAddress = address => {
     let adresses = 
-      $('#mailList li').map((i, li) => {
+      $('#addressList li').map((i, li) => {
         return li.innerText.trim();
       }).get();
 
@@ -243,22 +243,22 @@ $(() => {
     if(addresses.includes(address))
       return alert('Address already exists');
 
-    $('#mailList ul')
+    $('#addressList ul')
       .append('<li class="list-group-item d-flex align-items-center"> \
                 <span class="mr-auto">'+ address +'</span><i class="fas fa-minus remove"></i> \
               </li>');
   };  
-  $(document).on('click', '#mailList .fa-plus', e => {
+  $(document).on('click', '#addressList .fa-plus', e => {
     let input = $(e.currentTarget).siblings('input');
     addAddress(input.val());
     input.val("");
-    $('#mailList .tokens').prop('disabled', false);
+    $('#addressList .tokens').prop('disabled', false);
   });
 
   // REMOVE ADDRESS
-  $(document).on('click', '#mailList .remove', e => {
+  $(document).on('click', '#addressList .remove', e => {
     if ($(e.currentTarget).parent().siblings().length < 1)
-      $('#mailList .tokens').prop('disabled', true)
+      $('#addressList .tokens').prop('disabled', true)
     $(e.currentTarget).parent().remove();    
   });
 
@@ -271,15 +271,15 @@ $(() => {
     let reader = new FileReader();
     reader.onloadend = evt => {
       if (evt.target.readyState == FileReader.DONE) {
-        let mails = evt.target.result.split(",")
+        let addresses = evt.target.result.split(",")
           .map(x => x.trim())
           .filter(x => x !== '');
 
-        $('#mailList ul').html("");
-        mails.forEach(m => {
+        $('#addressList ul').html("");
+        addresses.forEach(m => {
           addAddress(m)
         });
-        if (mails.length > 0) $('#mailList .tokens').prop('disabled', false);
+        if (addresses.length > 0) $('#addressList .tokens').prop('disabled', false);
       }
       $(e.currentTarget).val("");
     }
