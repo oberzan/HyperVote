@@ -72,9 +72,12 @@ publishTokens = (ballot, emails, originUrl) => {
         let votingUrl = originUrl + '/' + ballot;
         for (let [i, token] of tokens.entries()) {
           let mailOptions = {
-            from: '"HyperVote admin" <a>',
+            from: {
+              name: config.nodemailer.from.name,
+              address: config.nodemailer.from.address
+            },
             to: emails[i],
-            subject: `[HyperVote] ${i18n.__("Voting token")} ${i18n.__("for")} ` + ballot,
+            subject: `[${config.name}] ${i18n.__("Voting token")} ${i18n.__("for")} ` + ballot,
             text: `${i18n.__("Hi")}\n` +
                   `${i18n.__("Your token for")} ${ballot}  ${"is"}: ${token}\n` + 
                   `${i18n.__("You can cast your vote at")}: ${votingUrl}`,

@@ -1,10 +1,17 @@
 {
+  "name": "HyperVote",
+  
   "secret": {
     "jwt": "",
     "admin": ""
   },
 
   "nodemailer": {
+    "from": {
+      "name": "HyperVote admin",
+      "from": ""
+    },
+    "url": "",
     "user": "",
     "password": "",
     "list_path": ""
