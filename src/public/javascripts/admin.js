@@ -233,7 +233,7 @@ $(() => {
 
   // ADD ADDRESS
   addAddress = address => {
-    let adresses = 
+    let addresses = 
       $('#addressList li').map((i, li) => {
         return li.innerText.trim();
       }).get();
