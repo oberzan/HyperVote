@@ -82,12 +82,12 @@ input.form-control:focus {
 }
 
 li svg,
-#mailList svg {
+#addressList svg {
   color: #BBB;
   font-size: 1.2em;
 }
 li svg:hover,
-#mailList svg:hover {
+#addressList svg:hover {
   color: #444;
 }
 
@@ -194,15 +194,15 @@ li svg:hover,
   padding-left: 9px;
 }
 
-#addMail {
+#addAddress {
   border-width: 0 0 0px 0;
   border-color: #1391C4;
   outline: 0;
   padding: 0.75rem 1.25rem;
   width: 100%;
 }
-#addMail:hover,
-#addMail:focus {
+#addAddress:hover,
+#addAddress:focus {
   border-bottom-width: 2px;
   border-color: #1391C4;
   margin-bottom: -2px;  
@@ -216,50 +216,50 @@ li svg:hover,
   padding-top: 1.3rem;
 }
 
-#importMails {
+#importAddresses {
   align-items: center;
   display: inline-flex;
   margin-left: 15px;
 }
 
-#importMails input {
+#importAddresses input {
   display: none;
 }
 
-#importMails svg {
+#importAddresses svg {
   font-size: 1.7em;
 }
 
-#mailList {
+#addressList {
   z-index: 1040
 }
 
-#mailList .modal-header {
+#addressList .modal-header {
   justify-content: start;
   padding-bottom: 0.5rem;
 }
 
-#mailList .modal-body {
+#addressList .modal-body {
   padding-top: 0;
   padding-bottom: 0;
   z-index: 1040
 }
 
-#mailList .modal-footer {
+#addressList .modal-footer {
   /* border: none; */
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
 
-#mailList .list-group-item {
+#addressList .list-group-item {
   /* border-bottom: 0; */
   border-right: 0;
   border-left: 0;
 }
-#mailList .list-group-item:first-child {
+#addressList .list-group-item:first-child {
   border-top: 0; 
 }
-#mailList .list-group-item:hover {
+#addressList .list-group-item:hover {
   z-index: unset
 }
 
