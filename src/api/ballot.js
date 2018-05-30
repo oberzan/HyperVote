@@ -46,9 +46,9 @@ publishTokens = (ballot, emails, originUrl) => {
 
     vote.publishTokens(ballot, tokens)
       .then(async () => {
-
+        let mailConfig;
         if(config.nodemailer.url) {
-          let mailConfig = {
+          mailConfig = {
             host: config.nodemailer.url,
             port: 587,
             secure: false, // true for 465, false for other ports
@@ -58,7 +58,7 @@ publishTokens = (ballot, emails, originUrl) => {
             // }
           };
         } else {
-          let mailConfig = {
+          mailConfig = {
             service: 'gmail',
             auth: {
               user: config.nodemailer.user, // generated ethereal user
