@@ -19,7 +19,7 @@ $(() => {
   });
 
   /** SEND TOKENS **/
-  sendTokens = (btn, title, emails, cb) => {
+  sendTokens = (btn, title, addresses, cb) => {
     btn.prop('disabled', true);
     btn.before('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
     let url = [
@@ -35,7 +35,7 @@ $(() => {
     $.ajax({
       type: "POST",
       url: url,
-      data: {emails: emails},
+      data: {addresses: addresses},
       success: data => {
         // btn.hide();
         btn.prop('disabled', false);
@@ -66,8 +66,8 @@ $(() => {
 
   $(document).on('click', '#mailList .tokens', e => {
     let title = $('#mailList .title').text();
-    let emails = $('#mailList li').map((i, el) => $(el).text().trim()).get();
-    sendTokens($(e.target), title, emails, () => {
+    let addresses = $('#mailList li').map((i, el) => $(el).text().trim()).get();
+    sendTokens($(e.target), title, addresses, () => {
         let li = $('ul.ballots > li').filter((i, el) => {
           return $(el).find('.title').text().trim() === title
         }).find('.mail, .tokens').hide();
@@ -231,38 +231,38 @@ $(() => {
 
   $(document).on('click', '#importMails svg', () => $('#importMails input').trigger('click'));
 
-  // ADD EMAIL
-  addEmail = (email) => {
-    let emails = 
+  // ADD ADDRESS
+  addAddress = address => {
+    let adresses = 
       $('#mailList li').map((i, li) => {
         return li.innerText.trim();
       }).get();
 
-    if(email.length < 1)
+    if(address.length < 1)
       return;
-    if(emails.includes(email))
-      return alert('Email already exists');
+    if(addresses.includes(address))
+      return alert('Address already exists');
 
     $('#mailList ul')
       .append('<li class="list-group-item d-flex align-items-center"> \
-                <span class="mr-auto">'+ email +'</span><i class="fas fa-minus remove"></i> \
+                <span class="mr-auto">'+ address +'</span><i class="fas fa-minus remove"></i> \
               </li>');
   };  
   $(document).on('click', '#mailList .fa-plus', e => {
     let input = $(e.currentTarget).siblings('input');
-    addEmail(input.val());
+    addAddress(input.val());
     input.val("");
     $('#mailList .tokens').prop('disabled', false);
   });
 
-  // REMOVE EMAIL
+  // REMOVE ADDRESS
   $(document).on('click', '#mailList .remove', e => {
     if ($(e.currentTarget).parent().siblings().length < 1)
       $('#mailList .tokens').prop('disabled', true)
     $(e.currentTarget).parent().remove();    
   });
 
-  // UPLOAD EMAILS FROM CSV FILE
+  // UPLOAD ADDRESSES FROM CSV FILE
   $('input[type="file"]').on('change', e => {
     let f = e.currentTarget.files[0];
     if(!f) 
@@ -277,7 +277,7 @@ $(() => {
 
         $('#mailList ul').html("");
         mails.forEach(m => {
-          addEmail(m)
+          addAddress(m)
         });
         if (mails.length > 0) $('#mailList .tokens').prop('disabled', false);
       }

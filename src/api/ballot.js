@@ -37,91 +37,109 @@ createBallot = (req, res) => {
     });
 }
 
-publishTokens = (ballot, emails, originUrl) => {
+publishTokens = (ballot, addresses, originUrl) => {
   return new Promise(async (resolve, reject) => {
-    let tokens = [];
-    for(let i = 0; i < emails.length; i++) {
+    let tokens = phoneNumbers = invalidAddresses = [];
+    for(let i = 0; i < addresses.length; i++) {
       tokens.push(uuidv4());
     }
+    addresses.forEach(x => {      
+      if (x.indexOf('@') > 0)
+        emails.push(x);
+      else {
+        let m = x.replace(/[ |-]/g,"").match(/\+?\d{9,}/);
+        if(m)
+          phoneNumbers.push(m);
+        else
+          invalidAddresses.push(x);
+      }
+    });
+    if(invalidAdresses.length) {
+      reject("The following adresses are invalid:" + invalidAddresses + ". Did not send any tokens.");
+    }
 
-    vote.publishTokens(ballot, tokens)
-      .then(async () => {
-        let mailConfig;
-        if(config.nodemailer.url) {
-          mailConfig = {
-            host: config.nodemailer.url,
-            port: 587,
-            secure: false, // true for 465, false for other ports
-            // auth: {
-            //     user: account.user, // generated ethereal user
-            //     pass: account.pass  // generated ethereal password
-            // }
-          };
-        } else {
-          mailConfig = {
-            service: 'gmail',
-            auth: {
-              user: config.nodemailer.user, // generated ethereal user
-              pass: config.nodemailer.password // generated ethereal password
-            }
-          };
+    await vote.publishTokens(ballot, tokens).catch(err => {
+      logger.error(err);
+      reject(err);
+    });
+      
+    let mailConfig;
+    if(config.nodemailer.url) {
+      mailConfig = {
+        host: config.nodemailer.url,
+        port: 587,
+        tls: { rejectUnauthorized: false },
+        secure: false, // true for 465, false for other ports
+        // auth: {
+        //     user: account.user, // generated ethereal user
+        //     pass: account.pass  // generated ethereal password
+        // }
+      };
+    } else {
+      mailConfig = {
+        service: 'gmail',
+        auth: {
+          user: config.nodemailer.user, // generated ethereal user
+          pass: config.nodemailer.password // generated ethereal password
         }
+      };
+    }
 
-        let transporter = nodemailer.createTransport(mailConfig);
-    
-        let votingUrl = originUrl + '/' + ballot;
-        for (let [i, token] of tokens.entries()) {
-          let mailOptions = {
-            from: {
-              name: config.nodemailer.from.name,
-              address: config.nodemailer.from.address
-            },
-            to: emails[i],
-            subject: `[${config.name}] ${i18n.__("Voting token")} ${i18n.__("for")} ` + ballot,
-            text: `${i18n.__("Hi")}\n` +
-                  `${i18n.__("Your token for")} ${ballot}  ${"is"}: ${token}\n` + 
-                  `${i18n.__("You can cast your vote at")}: ${votingUrl}`,
-            html: '<html>' +
-                    '<head></head>' +
-                    '<body>' +
-                      `<h4>${i18n.__("Hi")}</h4>`+
-                      `<p>${i18n.__("Your token for")} ${ballot} ${i18n.__("is")}: <b>${token}</b></p>`+
-                      `<p>${i18n.__("You can cast your vote at")}: <a href="${votingUrl}?token=${token}">${votingUrl}</a></p>`+
-                    '</body>'+
-                  '</html>'
-          };
+    let transporter = nodemailer.createTransport(mailConfig);
 
-          logger.debug("Sending email to " + emails[i]);
-          await transporter.sendMail(mailOptions)
-            .then(info => {
-              logger.info('Message sent: %s', info.messageId);
-            })
-            .catch(err => {
-              logger.error(err);
-              reject(err);
-            });
+    let votingUrl = originUrl + '/' + ballot;
+    for (let [i, token] of tokens.entries()) {
+      let email = emails.pop();
+      if (email) {
+        let mailOptions = {
+          from: {
+            name: config.nodemailer.from.name,
+            address: config.nodemailer.from.address
+          },
+          to: email,
+          subject: `[${config.name}] ${i18n.__("Voting token")} ${i18n.__("for")} ` + ballot,
+          text: `${i18n.__("Hi")}\n` +
+                `${i18n.__("Your token for")} ${ballot}  ${"is"}: ${token}\n` + 
+                `${i18n.__("You can cast your vote at")}: ${votingUrl}`,
+          html: '<html>' +
+                  '<head></head>' +
+                  '<body>' +
+                    `<h4>${i18n.__("Hi")}</h4>`+
+                    `<p>${i18n.__("Your token for")} ${ballot} ${i18n.__("is")}: <b>${token}</b></p>`+
+                    `<p>${i18n.__("You can cast your vote at")}: <a href="${votingUrl}?token=${token}">${votingUrl}</a></p>`+
+                  '</body>'+
+                '</html>'
         };
-        logger.info('Tokens successfully created.');
-        let successMessage = `${i18n.__("Tokens for")} ${ballot} ${i18n.__("successfully sent")}.`;
-        resolve(successMessage);
 
-      })
-      .catch(err => {
-        logger.error(err);
-        reject(err);
-      });
+        logger.debug("Sending email to " + email);
+        let info = await transporter.sendMail(mailOptions).catch(err => {
+          logger.error(err);
+          reject(err);
+        });
+        logger.info('Message sent: %s', info.messageId);
+      } else {
+        let phoneNumber = phoneNumbers.pop();
+        if(!phoneNumber) 
+          reject('???');
+        reject('phone numbers not yet supported');
+      }
+    };
+
+    logger.info('Tokens successfully created.');
+    let successMessage = `${i18n.__("Tokens for")} ${ballot} ${i18n.__("successfully sent")}.`;
+    resolve(successMessage);  
   });
 };
 
 createTokens = (req, res) => {
   let ballot = req.params.id;
-  let emails = req.body["emails[]"];
+  let addresses = req.body["addresses[]"];
 
-  if(!emails && !config.nodemailer.list_path) {
-    res.status(500).json("Emails were not provided and nodemailer list_path is undefined");
+  if(!addresses && !config.nodemailer.list_path) {
+    res.status(500).json("Addresses were not provided and nodemailer list_path is undefined");
     return;
   }
-  if (!config.nodemailer.url) {
+  if (!config.nodemailer.url || !config.nodemailer.from) {
     if(!config.nodemailer.user) {
       res.status(500).json("nodemailer user is undefined");
       return;
@@ -132,7 +150,7 @@ createTokens = (req, res) => {
     }
   }
 
-  if(!emails) {
+  if(!addresses) {
     fs.readFile(config.nodemailer.list_path, 'utf8', (err, fileData) => {
       if (err) {
         logger.error(err);
@@ -140,18 +158,18 @@ createTokens = (req, res) => {
       }
 
       if(!mails)
-        emails = fileData.split(/,|\n/)
+        addresses = fileData.split(/,|\n/)
           .map(x => x.trim())
           .filter(x => x !== '');      
     });    
   }
 
-  if( typeof emails === 'string' ) {
-    emails = [ emails ];
+  if( typeof addresses === 'string' ) {
+    addresses = [ addresses ];
   }
 
   let originUrl = new URL(req.headers.referer).origin;
-  publishTokens(ballot, emails, originUrl)
+  publishTokens(ballot, addresses, originUrl)
     .then(msg => {
       res.status(200).json(msg);
     })
