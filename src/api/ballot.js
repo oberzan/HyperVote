@@ -39,7 +39,7 @@ createBallot = (req, res) => {
 
 publishTokens = (ballot, addresses, originUrl) => {
   return new Promise(async (resolve, reject) => {
-    let tokens = phoneNumbers = invalidAddresses = [];
+    let tokens = emails = phoneNumbers = invalidAddresses = [];
     for(let i = 0; i < addresses.length; i++) {
       tokens.push(uuidv4());
     }
