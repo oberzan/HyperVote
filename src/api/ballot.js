@@ -46,13 +46,28 @@ publishTokens = (ballot, emails, originUrl) => {
 
     vote.publishTokens(ballot, tokens)
       .then(async () => {
-        let transporter = nodemailer.createTransport({
-          service: 'gmail',
-          auth: {
-            user: config.nodemailer.user, // generated ethereal user
-            pass: config.nodemailer.password // generated ethereal password
-          }
-        });
+
+        if(config.nodemailer.url) {
+          let mailConfig = {
+            host: config.nodemailer.url,
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            // auth: {
+            //     user: account.user, // generated ethereal user
+            //     pass: account.pass  // generated ethereal password
+            // }
+          };
+        } else {
+          let mailConfig = {
+            service: 'gmail',
+            auth: {
+              user: config.nodemailer.user, // generated ethereal user
+              pass: config.nodemailer.password // generated ethereal password
+            }
+          };
+        }
+
+        let transporter = nodemailer.createTransport(mailConfig);
     
         let votingUrl = originUrl + '/' + ballot;
         for (let [i, token] of tokens.entries()) {
@@ -103,13 +118,15 @@ createTokens = (req, res) => {
     res.status(500).json("Emails were not provided and nodemailer list_path is undefined");
     return;
   }
-  if(!config.nodemailer.user) {
-    res.status(500).json("nodemailer user is undefined");
-    return;
-  }
-  if(!config.nodemailer.password) {
-    res.status(500).json("nodemailer password is undefined");
-    return;
+  if (!config.nodemailer.url) {
+    if(!config.nodemailer.user) {
+      res.status(500).json("nodemailer user is undefined");
+      return;
+    }
+    if(!config.nodemailer.password) {
+      res.status(500).json("nodemailer password is undefined");
+      return;
+    }
   }
 
   if(!emails) {
