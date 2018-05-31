@@ -135,7 +135,16 @@ publishTokens = (ballot, addresses, originUrl) => {
     };
     
     if (failedAddresses.length) {
-      reject("Failed to send tokens to the following addresses: " + failedAddresses + "Other addresses did receive tokens.");
+      if (failedAddresses.length === addresses.length)
+        reject({
+          type: "ERROR",
+          msg: "Failed to send any tokens."
+        });
+      else
+        reject({
+          type: "WARNING",
+          msg: "Failed to send tokens to the following addresses: " + failedAddresses + "\nOther addresses did receive tokens."
+        });
       return;
     }
 

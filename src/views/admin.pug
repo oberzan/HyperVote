@@ -107,15 +107,16 @@ block content
       input.btn.btn-primary(type="submit", value=i18n.__("Create").toUpperCase())
 
     hr
-    div#ballotErrorBar.alert.alert-danger(role="alert", style="display: none")
     div#ballotSuccessBar.alert.alert-success.align-items-center(role="alert", style="display: none;")
+    div#ballotErrorBar.alert.alert-danger.align-items-center(role="alert", style="display: none")
+    div#ballotWarningBar.alert.alert-warning.align-items-center(role="alert", style="display: none;")
       span
       i.fas.fa-times(onclick="$(this).parent().hide()" style="font-size: 0.9rem")
     ul.ballots.list-group
       each ballot in ballots
         li.list-group-item.d-flex.align-items-center
           span.mr-auto.title= ballot.title
-          if !ballot.start && moment(ballot.end) > moment()
+          //-if !ballot.start && moment(ballot.end) > moment()
             //- button.btn.btn-outline-secondary.tokens.mx-2(style="margin: -2px 0; padding: 3px 9px;" data-expires=ballot.end) #{i18n.__("Send tokens")}
-            i.address.far.fa-address-book
+          i.address.far.fa-address-book(style=`display:${!ballot.start && moment(ballot.end) > moment() ? 'unset':'none'}`)
           i.delete.far.fa-trash-alt   
