@@ -59,12 +59,12 @@ publishTokens = (ballot, addresses, originUrl) => {
       }
     });
     if(invalidAddresses.length) {
-      reject("The following addresses are invalid:" + invalidAddresses + ". Did not send any tokens.");
+      return reject("The following addresses are invalid:" + invalidAddresses + ". Did not send any tokens.");
     }
 
     await vote.publishTokens(ballot, tokens).catch(err => {
       logger.error(err);
-      reject(err);
+      return reject(err);
     });
       
     let mailConfig;
@@ -118,14 +118,14 @@ publishTokens = (ballot, addresses, originUrl) => {
         logger.debug("Sending email to " + email);
         let info = await transporter.sendMail(mailOptions).catch(err => {
           logger.error(err);
-          reject(err);
+          return reject(err);
         });
         logger.info('Message sent: %s', info.messageId);
       } else {
         let phoneNumber = phoneNumbers.pop();
         if(!phoneNumber) 
           reject('???');
-        reject('phone numbers not yet supported');
+        return reject('phone numbers not yet supported');
       }
     };
 
