@@ -9,7 +9,7 @@
   "nodemailer": {
     "from": {
       "name": "HyperVote admin",
-      "from": ""
+      "address": ""
     },
     "url": "",
     "user": "",
