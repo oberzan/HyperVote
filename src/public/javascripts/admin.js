@@ -50,10 +50,10 @@ $(() => {
           window.location.replace('/authenticate');
         if(err.status >= 400) {
           if(err.responseJSON.type === "ERROR") {
-            errBar.text(err.responseJSON.msg);
+            errBar.find('span').text(err.responseJSON.msg);
             errBar.show();
           } else {
-            warningBar.text(err.responseJSON.msg);
+            warningBar.find('span').text(err.responseJSON.msg);
             warningBar.show();
           }
           $('#addressList').modal("hide");

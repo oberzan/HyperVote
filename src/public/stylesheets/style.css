@@ -208,28 +208,6 @@ li svg:hover,
   margin-bottom: -2px;  
 }
 
-#auth {
-  z-index: 1051;
-}
-
-#ballots {
-  padding-top: 1.3rem;
-}
-
-#importAddresses {
-  align-items: center;
-  display: inline-flex;
-  margin-left: 15px;
-}
-
-#importAddresses input {
-  display: none;
-}
-
-#importAddresses svg {
-  font-size: 1.7em;
-}
-
 #addressList {
   z-index: 1040
 }
@@ -261,6 +239,33 @@ li svg:hover,
 }
 #addressList .list-group-item:hover {
   z-index: unset
+}
+
+#auth {
+  z-index: 1051;
+}
+
+#ballots {
+  padding-top: 1.3rem;
+}
+
+#importAddresses {
+  align-items: center;
+  display: inline-flex;
+  margin-left: 15px;
+}
+
+#importAddresses input {
+  display: none;
+}
+
+#importAddresses svg {
+  font-size: 1.7em;
+}
+
+
+#main > .alert > i {
+  font-size: 0.9rem
 }
 
 /* Prevents flickering of the google chart tooltip */
