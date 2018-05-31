@@ -71,7 +71,7 @@ publishTokens = (ballot, addresses, originUrl) => {
     if(config.nodemailer.url) {
       mailConfig = {
         host: config.nodemailer.url,
-        port: 587,
+        port: 25,
         tls: { rejectUnauthorized: false },
         secure: false, // true for 465, false for other ports
         // auth: {
@@ -92,6 +92,7 @@ publishTokens = (ballot, addresses, originUrl) => {
     let transporter = nodemailer.createTransport(mailConfig);
 
     let votingUrl = originUrl + '/' + ballot;
+    let failedAddresses = [];
     for (let [i, token] of tokens.entries()) {
       let email = emails.pop();
       if (email) {
@@ -118,16 +119,25 @@ publishTokens = (ballot, addresses, originUrl) => {
         logger.debug("Sending email to " + email);
         let info = await transporter.sendMail(mailOptions).catch(err => {
           logger.error(err);
-          return reject(err);
+          failedAddresses.push(email);
         });
-        logger.info('Message sent: %s', info.messageId);
+        if(info)
+          logger.info('Message sent: %s', info.messageId);
+      
       } else {
         let phoneNumber = phoneNumbers.pop();
         if(!phoneNumber) 
           reject('???');
-        return reject('phone numbers not yet supported');
+
+        failedAddresses.push(phoneNumber);
+        logger.error('phone numbers not yet supported');
       }
     };
+    
+    if (failedAddresses.length) {
+      reject("Failed to send tokens to the following addresses: " + failedAddresses + "Other addresses did receive tokens.");
+      return;
+    }
 
     logger.info('Tokens successfully created.');
     let successMessage = `${i18n.__("Tokens for")} ${ballot} ${i18n.__("successfully sent")}.`;

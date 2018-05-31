@@ -47,7 +47,7 @@ $(() => {
         console.log(err);
         if(err.status === 403)
           window.location.replace('/authenticate');
-        if(err.status == 500) {
+        if(err.status >= 400) {
           errBar.text(err.responseJSON);
           errBar.show();
         }
