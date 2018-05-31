@@ -233,14 +233,17 @@ $(() => {
 
   // ADD ADDRESS
   addAddress = address => {
+    address = addressli.replace(/\s/g, "");
     let addresses = 
       $('#addressList li').map((i, li) => {
-        return li.innerText.trim();
+        let a = li.innerText.replace(/\s/g, "");
+        return a.contains('@') ? a : a.replace(/-/g, "");
       }).get();
+    tr_addr = address.contains('@') ? address : address.replace(/-/g, "");
 
-    if(address.length < 1)
+    if(tr_addr.length < 1)
       return;
-    if(addresses.includes(address))
+    if(addresses.includes(tr_addr))
       return alert('Address already exists');
 
     $('#addressList ul')
