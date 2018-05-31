@@ -233,7 +233,7 @@ $(() => {
 
   // ADD ADDRESS
   addAddress = address => {
-    address = addressli.replace(/\s/g, "");
+    address = address.replace(/\s/g, "");
     let addresses = 
       $('#addressList li').map((i, li) => {
         let a = li.innerText.replace(/\s/g, "");
