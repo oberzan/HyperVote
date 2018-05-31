@@ -39,7 +39,11 @@ createBallot = (req, res) => {
 
 publishTokens = (ballot, addresses, originUrl) => {
   return new Promise(async (resolve, reject) => {
-    let tokens = emails = phoneNumbers = invalidAddresses = [];
+    let tokens = [],
+        emails = [],
+        phoneNumbers = [],
+        invalidAddresses = [];
+        
     for(let i = 0; i < addresses.length; i++) {
       tokens.push(uuidv4());
     }
@@ -47,7 +51,7 @@ publishTokens = (ballot, addresses, originUrl) => {
       if (x.indexOf('@') > 0)
         emails.push(x);
       else {
-        let m = x.replace(/[ |-]/g,"").match(/\+?\d{9,}/);
+        let m = x.replace(/[\s|-]/g, "").match(/\+?\d{9,}/);
         if(m)
           phoneNumbers.push(m);
         else
@@ -158,7 +162,7 @@ createTokens = (req, res) => {
       }
 
       addresses = fileData.split(/,|\n/)
-        .map(x => x.trim())
+        .map(x => x.replace(/\s/g, ""))
         .filter(x => x !== '');      
     });    
   }
