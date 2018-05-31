@@ -30,8 +30,9 @@ $(() => {
       'tokens'
     ].join('/');
     
-    let errBar = $('#ballotErrorBar');
     let successBar = $('#ballotSuccessBar');
+    let errBar = $('#ballotErrorBar');
+    let warningBar = $('#ballotWarningBar');
     $.ajax({
       type: "POST",
       url: url,
@@ -48,9 +49,14 @@ $(() => {
         if(err.status === 403)
           window.location.replace('/authenticate');
         if(err.status >= 400) {
-          console.log(err);
-          errBar.text(err.responseJSON);
-          errBar.show();
+          if(err.responseJSON.type === "ERROR") {
+            errBar.text(err.responseJSON.msg);
+            errBar.show();
+          } else {
+            warningBar.text(err.responseJSON.msg);
+            warningBar.show();
+          }
+          $('#addressList').modal("hide");
         }
         btn.prop('disabled', false);
       }
