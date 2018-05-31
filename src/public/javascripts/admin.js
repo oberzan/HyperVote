@@ -233,13 +233,14 @@ $(() => {
 
   // ADD ADDRESS
   addAddress = address => {
-    address = address.replace(/\s/g, "");
+    address = address.trim();
     let addresses = 
       $('#addressList li').map((i, li) => {
         let a = li.innerText.replace(/\s/g, "");
         return a.indexOf('@') > 0 ? a : a.replace(/-/g, "");
       }).get();
-    let tr_addr = address.indexOf('@') > 0 ? address : address.replace(/-/g, "");
+    let tr_addr = address.replace(/\s/g, "");
+    tr_addr = address.indexOf('@') > 0 ? tr_addr : tr_addr.replace(/-/g, "");
 
     if(tr_addr.length < 1)
       return;
