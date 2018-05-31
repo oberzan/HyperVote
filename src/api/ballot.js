@@ -54,8 +54,8 @@ publishTokens = (ballot, addresses, originUrl) => {
           invalidAddresses.push(x);
       }
     });
-    if(invalidAdresses.length) {
-      reject("The following adresses are invalid:" + invalidAddresses + ". Did not send any tokens.");
+    if(invalidAddresses.length) {
+      reject("The following addresses are invalid:" + invalidAddresses + ". Did not send any tokens.");
     }
 
     await vote.publishTokens(ballot, tokens).catch(err => {
