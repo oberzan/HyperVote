@@ -59,10 +59,11 @@ $(() => {
           $('#addressList').modal("hide");
         }
         btn.prop('disabled', false);
+      },
+      complete: () => {
+        console.log('Done sending');
+        btn.siblings('.fa-spinner').remove();
       }
-    }).done(() => {
-      console.log('Done sending');
-      btn.siblings('.fa-spinner').remove();
     });
   };
 
