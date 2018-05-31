@@ -40,6 +40,7 @@ $(() => {
       success: data => {
         // btn.hide();
         btn.prop('disabled', false);
+        successBar.siblings('.alert').hide();
         successBar.find('span').text(data);
         successBar.show();
         cb();
@@ -49,6 +50,7 @@ $(() => {
         if(err.status === 403)
           window.location.replace('/authenticate');
         if(err.status >= 400) {
+          errBar.siblings('.alert').hide();
           if(err.responseJSON.type === "ERROR") {
             errBar.find('span').text(err.responseJSON.msg);
             errBar.show();
