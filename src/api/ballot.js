@@ -135,8 +135,9 @@ publishTokens = (ballot, addresses, originUrl) => {
           reject('???');
           failedAddresses.push(phoneNumber);
         } else {
-          sendSMS(text, phoneNumber)
-            .catch(err => {
+          await sendSMS(text, phoneNumber)
+            .catch(e => {
+              logger.error(e);
               failedAddresses.push(phoneNumber);
             });
         }
@@ -191,18 +192,12 @@ sendSMS = async (text, phoneNumber) => {
     uri: 'http://services.ts.telekom.si:80/services/SMSProxy',
     headers: {
       'Content-Type': 'text/xml; charset=utf-8',
-      // 'Content-Length': newOrder.length.toString(),
-      // 'SOAPAction': 'http://shipping_software/AddOrder',
-      // 'Host': 'myserver.com',
       'Connection': 'keep-alive'
     },
     body: body
   };
 
-  rp(options)
-    .catch(err => {
-      throw new Error(err);
-    });
+  await rp(options).catch(e => { throw e });
 }
 
 createTokens = (req, res) => {
