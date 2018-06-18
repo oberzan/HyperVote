@@ -98,8 +98,8 @@ publishTokens = (ballot, addresses, originUrl) => {
     for (let [i, token] of tokens.entries()) {
       let email = emails.pop();
       let text = `${i18n.__("Hi")}\n` +
-        `${i18n.__("Your token for")} ${ballot}  ${"is"}: ${token}\n` +
-        `${i18n.__("You can cast your vote at")}: ${votingUrl}`;
+        `${i18n.__("Your token for")} ${ballot}: ${token}\n` +
+        `${i18n.__("You can cast your vote at")}: ${encodeURIComponent(votingUrl)}`;
       
       if (email) {
         let mailOptions = {

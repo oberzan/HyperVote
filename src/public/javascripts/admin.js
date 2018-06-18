@@ -50,11 +50,12 @@ $(() => {
         if(err.status === 403)
           window.location.replace('/authenticate');
         if(err.status >= 400) {
-          errBar.siblings('.alert').hide();
           if(err.responseJSON.type === "ERROR") {
+            errBar.siblings('.alert').hide();
             errBar.find('span').text(err.responseJSON.msg);
             errBar.show();
           } else {
+            warningBar.siblings('.alert').hide();
             warningBar.find('span').text(err.responseJSON.msg);
             warningBar.show();
           }
@@ -76,7 +77,9 @@ $(() => {
 
   $(document).on('click', '#addressList .tokens', e => {
     let title = $('#addressList .title').text();
-    let addresses = $('#addressList li').map((i, el) => $(el).text().trim()).get();
+    let addresses = $('#addressList li')
+      .map((i, el) => $(el).text().trim().replace(/^(00|\+)/, ""))
+      .get();
     sendTokens($(e.target), title, addresses, () => {
         let li = $('ul.ballots > li').filter((i, el) => {
           return $(el).find('.title').text().trim() === title
