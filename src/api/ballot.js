@@ -169,8 +169,8 @@ sendSMS = async (text, phoneNumber) => {
       <soapenv:Header>
         <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
           <wsse:UsernameToken wsu:Id="XWSSGID-1349973313023-787497544" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
-              <wsse:Username>${config.sms.username, soa_ibm_sms}</wsse:Username>
-              <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">${config.sms.password}qHGUKtFWeJw</wsse:Password>
+              <wsse:Username>${config.sms.username}</wsse:Username>
+              <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">${config.sms.password}</wsse:Password>
               <!-- <wsse:Nonce>WScqanjCEAC4mQoBE07sAQ==</wsse:Nonce> -->
           </wsse:UsernameToken>
         </wsse:Security>
