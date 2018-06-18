@@ -106,7 +106,7 @@ block content
           
       input.btn.btn-primary(type="submit", value=i18n.__("Create").toUpperCase())
 
-    hr
+    hr(style=`display:${ballots.length ? 'unset':'none'}`)
     div#ballotSuccessBar.alert.alert-success.align-items-center(role="alert", style="display: none;")
       span
       i.fas.fa-times(onclick="$(this).parent().hide()")
