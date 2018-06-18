@@ -15,5 +15,11 @@
     "user": "",
     "password": "",
     "list_path": ""
+  },
+
+  "sms": {
+    "username": "",
+    "password": "",
+    "from": ""
   }
 }

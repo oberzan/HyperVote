@@ -18,6 +18,7 @@
     "morgan": "~1.9.0",
     "nodemailer": "^4.6.5",
     "pug": "2.0.3",
+    "request-promise-native": "^1.0.5",
     "serve-favicon": "~2.5.0",
     "tempusdominus-bootstrap-4": "^5.0.0-alpha18",
     "winston": "^3.0.0-rc5"

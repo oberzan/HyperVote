@@ -9,6 +9,7 @@ const vote = require('../services/vote')
 const fs = require('fs')
 const { URL } = require('url');
 const nodemailer = require('nodemailer');
+const rp = require('request-promise-native');
 const uuidv4 = require('uuid/v4');
 
 const i18n = require('../configs/i18n.js');
@@ -40,35 +41,36 @@ createBallot = (req, res) => {
 publishTokens = (ballot, addresses, originUrl) => {
   return new Promise(async (resolve, reject) => {
     let tokens = [],
-        emails = [],
-        phoneNumbers = [],
-        invalidAddresses = [];
-        
-    for(let i = 0; i < addresses.length; i++) {
+      emails = [],
+      phoneNumbers = [],
+      invalidAddresses = [];
+
+    for (let i = 0; i < addresses.length; i++) {
       tokens.push(uuidv4());
     }
-    addresses.forEach(x => {      
+    addresses.forEach(x => {
       if (x.indexOf('@') > 0)
         emails.push(x);
       else {
         let m = x.replace(/[\s|-]/g, "").match(/\+?\d{9,}/);
-        if(m)
+        if (m)
           phoneNumbers.push(m);
         else
           invalidAddresses.push(x);
       }
     });
-    if(invalidAddresses.length) {
+    if (invalidAddresses.length) {
       return reject("The following addresses are invalid:" + invalidAddresses + ". Did not send any tokens.");
     }
 
-    await vote.publishTokens(ballot, tokens).catch(err => {
+    let resp = await vote.publishTokens(ballot, tokens).catch(err => {
       logger.error(err);
       return reject(err);
     });
-      
+    logger.debug(resp);
+
     let mailConfig;
-    if(config.nodemailer.url) {
+    if (config.nodemailer.url) {
       mailConfig = {
         host: config.nodemailer.url,
         port: 25,
@@ -95,6 +97,10 @@ publishTokens = (ballot, addresses, originUrl) => {
     let failedAddresses = [];
     for (let [i, token] of tokens.entries()) {
       let email = emails.pop();
+      let text = `${i18n.__("Hi")}\n` +
+        `${i18n.__("Your token for")} ${ballot}  ${"is"}: ${token}\n` +
+        `${i18n.__("You can cast your vote at")}: ${votingUrl}`;
+      
       if (email) {
         let mailOptions = {
           from: {
@@ -103,17 +109,15 @@ publishTokens = (ballot, addresses, originUrl) => {
           },
           to: email,
           subject: `[${config.name}] ${i18n.__("Voting token")} ${i18n.__("for")} ` + ballot,
-          text: `${i18n.__("Hi")}\n` +
-                `${i18n.__("Your token for")} ${ballot}  ${"is"}: ${token}\n` + 
-                `${i18n.__("You can cast your vote at")}: ${votingUrl}`,
+          text: text,
           html: '<html>' +
-                  '<head></head>' +
-                  '<body>' +
-                    `<h4>${i18n.__("Hi")}</h4>`+
-                    `<p>${i18n.__("Your token for")} ${ballot} ${i18n.__("is")}: <b>${token}</b></p>`+
-                    `<p>${i18n.__("You can cast your vote at")}: <a href="${votingUrl}?token=${token}">${votingUrl}</a></p>`+
-                  '</body>'+
-                '</html>'
+            '<head></head>' +
+            '<body>' +
+            `<h4>${i18n.__("Hi")}</h4>` +
+            `<p>${i18n.__("Your token for")} ${ballot} ${i18n.__("is")}: <b>${token}</b></p>` +
+            `<p>${i18n.__("You can cast your vote at")}: <a href="${votingUrl}?token=${token}">${votingUrl}</a></p>` +
+            '</body>' +
+            '</html>'
         };
 
         logger.debug("Sending email to " + email);
@@ -121,19 +125,24 @@ publishTokens = (ballot, addresses, originUrl) => {
           logger.error(err);
           failedAddresses.push(email);
         });
-        if(info)
+        if (info)
           logger.info('Message sent: %s', info.messageId);
-      
+
       } else {
         let phoneNumber = phoneNumbers.pop();
-        if(!phoneNumber) 
-          reject('???');
 
-        failedAddresses.push(phoneNumber);
-        logger.error('phone numbers not yet supported');
+        if (!phoneNumber) {
+          reject('???');
+          failedAddresses.push(phoneNumber);
+        } else {
+          sendSMS(text, phoneNumber)
+            .catch(err => {
+              failedAddresses.push(phoneNumber);
+            });
+        }
       }
     };
-    
+
     if (failedAddresses.length) {
       if (failedAddresses.length === addresses.length)
         reject({
@@ -150,30 +159,72 @@ publishTokens = (ballot, addresses, originUrl) => {
 
     logger.info('Tokens successfully created.');
     let successMessage = `${i18n.__("Tokens for")} ${ballot} ${i18n.__("successfully sent")}.`;
-    resolve(successMessage);  
+    resolve(successMessage);
   });
 };
+
+sendSMS = async (text, phoneNumber) => {
+  let body =
+    `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:adm="http://mobitel.si/AdmLib/si/mobitel/mpro/administration/smsc/interf/AdmSmscInterface">
+      <soapenv:Header>
+        <wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+          <wsse:UsernameToken wsu:Id="XWSSGID-1349973313023-787497544" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+              <wsse:Username>${config.sms.username, soa_ibm_sms}</wsse:Username>
+              <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">${config.sms.password}qHGUKtFWeJw</wsse:Password>
+              <!-- <wsse:Nonce>WScqanjCEAC4mQoBE07sAQ==</wsse:Nonce> -->
+          </wsse:UsernameToken>
+        </wsse:Security>
+      </soapenv:Header>
+      <soapenv:Body>
+        <adm:smscSendSms>
+          <input>
+              <from>${config.sms.from}</from>
+              <msisdnTo>${phoneNumber}</msisdnTo>
+              <text>${text}</text>
+          </input>
+        </adm:smscSendSms>
+      </soapenv:Body>
+    </soapenv:Envelope>`;
+  
+  let options = {
+    method: 'POST',
+    uri: 'http://services.ts.telekom.si:80/services/SMSProxy',
+    headers: {
+      'Content-Type': 'text/xml; charset=utf-8',
+      // 'Content-Length': newOrder.length.toString(),
+      // 'SOAPAction': 'http://shipping_software/AddOrder',
+      // 'Host': 'myserver.com',
+      'Connection': 'keep-alive'
+    },
+    body: body
+  };
+
+  rp(options)
+    .catch(err => {
+      throw new Error(err);
+    });
+}
 
 createTokens = (req, res) => {
   let ballot = req.params.id;
   let addresses = req.body["addresses[]"];
 
-  if(!addresses && !config.nodemailer.list_path) {
+  if (!addresses && !config.nodemailer.list_path) {
     res.status(500).json("Addresses were not provided and nodemailer list_path is undefined");
     return;
   }
   if (!config.nodemailer.url || !config.nodemailer.from) {
-    if(!config.nodemailer.user) {
+    if (!config.nodemailer.user) {
       res.status(500).json("nodemailer user is undefined");
       return;
     }
-    if(!config.nodemailer.password) {
+    if (!config.nodemailer.password) {
       res.status(500).json("nodemailer password is undefined");
       return;
     }
   }
 
-  if(!addresses) {
+  if (!addresses) {
     fs.readFile(config.nodemailer.list_path, 'utf8', (err, fileData) => {
       if (err) {
         logger.error(err);
@@ -182,12 +233,12 @@ createTokens = (req, res) => {
 
       addresses = fileData.split(/,|\n/)
         .map(x => x.replace(/\s/g, ""))
-        .filter(x => x !== '');      
-    });    
+        .filter(x => x !== '');
+    });
   }
 
-  if( typeof addresses === 'string' ) {
-    addresses = [ addresses ];
+  if (typeof addresses === 'string') {
+    addresses = [addresses];
   }
 
   let originUrl = new URL(req.headers.referer).origin;
@@ -197,7 +248,7 @@ createTokens = (req, res) => {
     })
     .catch(err => {
       res.status(400).json(err);
-    }); 
+    });
 }
 
 deleteBallot = (req, res) => {
@@ -208,17 +259,17 @@ deleteBallot = (req, res) => {
     })
     .catch(err => {
       res.status(400).json(err);
-    });  
+    });
 }
 
 getResults = (req, res) => {
   logger.debug('getResults');
   ballot.getResults(req.params.id)
-    .then( data => {
+    .then(data => {
       logger.debug('getResultsResponse');
       res.status(200).json(data);
     })
-    .catch( err => {
+    .catch(err => {
       logger.debug('getResultsError');
       logger.error(err);
       res.status(400).json(err);
