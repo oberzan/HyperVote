@@ -73,17 +73,20 @@ deleteBallot = (id) => {
   });  
 }
 
-getResults = (ballot) => {
+getResults = async ballotId => {
   logger.debug('Get votes');
 
   let connection = composerClient.getConnection();
+  let ballot = await connection.getAssetRegistry('org.vote.Ballot').resolve(ballotId);
+  logger.debug("---- ----");
+  logger.debug(ballot);
 
   return new Promise((resolve, reject) => {
     let query = connection.buildQuery(`
         SELECT org.vote.Vote 
         WHERE (ballot == _$ballot)
     `);
-    let bId = encodeURI('resource:org.vote.Ballot#'+ballot);
+    let bId = encodeURI('resource:org.vote.Ballot#'+ballotId);
     logger.debug(bId);
     connection.query(query, { ballot: bId })
       .then(response => {
