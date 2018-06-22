@@ -63,10 +63,13 @@ publishTokens = (ballot, addresses, originUrl) => {
       return reject("The following addresses are invalid:" + invalidAddresses + ". Did not send any tokens.");
     }
 
+    let shouldExit = false;
     let resp = await vote.publishTokens(ballot, tokens).catch(err => {
       logger.error(err);
-      return reject(err);
+      shouldExit = true;
+      reject(err);
     });
+    if (shouldExit) return;
     logger.debug(resp);
 
     let mailConfig;
