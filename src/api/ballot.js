@@ -26,7 +26,7 @@ createBallot = (req, res) => {
     //"start": new Date().toISOString(),
     "end": moment(req.body.endTime, 'DD.MM.YYYY HH:mm').toDate(), //TODO: Fix for timezones. Cnvert on the client side
     "votes": [],
-    "voters": []
+    //"voters": []
   };
   logger.info(data);
   ballot.createBallot(data)

@@ -268,5 +268,10 @@ li svg:hover,
   font-size: 0.9rem
 }
 
+#optionInput {
+  font-size: 1.1rem;
+  padding: 0.45rem 1.25rem;
+}
+
 /* Prevents flickering of the google chart tooltip */
 svg > g > g:last-child { pointer-events: none }
