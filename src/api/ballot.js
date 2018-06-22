@@ -24,7 +24,7 @@ createBallot = (req, res) => {
     "description": req.body.description.trim(),
     "options": req.body.option,
     //"start": new Date().toISOString(),
-    "end": moment(req.body.endTime, 'DD.MM.YYYY HH:mm').toDate(), //TODO: Fix for timezones. Cnvert on the client side
+    "end": moment(req.body.endTime, 'DD.MM.YYYY HH:mm').toDate(), //TODO: Fix for timezones. Convert on the client side
     "votes": [],
     //"voters": []
   };
@@ -70,7 +70,6 @@ publishTokens = (ballot, addresses, originUrl) => {
       reject(err);
     });
     if (shouldExit) return;
-    logger.debug(resp);
 
     let mailConfig;
     if (config.nodemailer.url) {
