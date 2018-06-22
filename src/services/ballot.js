@@ -78,10 +78,16 @@ getResults = async ballotId => {
 
   let connection = composerClient.getConnection();
   let bRegistry = await connection.getAssetRegistry('org.vote.Ballot');
-  logger.debug(bRegistry);
+  let vRegistry = await connection.getAssetRegistry('org.vote.Vote');
+  
   let ballot = await bRegistry.resolve(ballotId);
+  let selections = ballot.votes.map(async v => {
+    let vote = await vRegistry.resolve(v);
+    return vote.selection;
+  });
   logger.debug("---- ----");
   logger.debug(ballot);
+  logger.debug(selections);
 
   return new Promise((resolve, reject) => {
     let query = connection.buildQuery(`
