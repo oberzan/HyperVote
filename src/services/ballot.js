@@ -77,7 +77,9 @@ getResults = async ballotId => {
   logger.debug('Get votes');
 
   let connection = composerClient.getConnection();
-  let ballot = await connection.getAssetRegistry('org.vote.Ballot').resolve(ballotId);
+  let bRegistry = connection.getAssetRegistry('org.vote.Ballot');
+  logger.debug(bRegistry);
+  let ballot = await bRegistry.resolve(ballotId);
   logger.debug("---- ----");
   logger.debug(ballot);
 
