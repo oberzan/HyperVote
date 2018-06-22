@@ -87,7 +87,7 @@ getResults = async ballotId => {
   });
   logger.debug("---- ----");
   logger.debug(ballot);
-  logger.debug(selections);
+  logger.debug(Promise.all(selections));
 
   return new Promise((resolve, reject) => {
     let query = connection.buildQuery(`
