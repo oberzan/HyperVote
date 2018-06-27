@@ -80,9 +80,18 @@ getResults = async ballotId => {
   let bRegistry = await connection.getAssetRegistry('org.vote.Ballot');
   let vRegistry = await connection.getAssetRegistry('org.vote.Vote');
   
-  let ballot = await bRegistry.resolve(ballotId);
+  let ballot = await bRegistry.resolve(ballotId)
+    .catch(e => {
+      logger.error(e);
+      throw e;
+    });
+  logger.debug(ballot);
   let selections = ballot.votes.map(async v => {
-    let vote = await vRegistry.resolve(v);
+    let vote = await vRegistry.resolve(v)
+      .catch(e => {
+        logger.error(e);
+        throw e;
+      });
     return vote.selection;
   });
   logger.debug("---- ----");
