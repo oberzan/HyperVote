@@ -54,7 +54,7 @@ app.use(
   )
 );
 
-composerClient.connect('BNadmin-org1@voting-network', 'voting-network', () => logger.info('Connection established'));
+composerClient.connect(config.connectId + '@voting-network', 'voting-network', () => logger.info('Connection established'));
 
 app.use(i18n.init);
 
