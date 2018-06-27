@@ -80,7 +80,7 @@ getResults = async ballotId => {
   let bRegistry = await connection.getAssetRegistry('org.vote.Ballot');
   let vRegistry = await connection.getAssetRegistry('org.vote.Vote');
   
-  let ballot = await bRegistry.resolve(ballotId)
+  let ballot = await bRegistry.get(ballotId)
     .catch(e => {
       logger.error(e);
       throw e;
