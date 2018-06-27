@@ -87,7 +87,7 @@ getResults = async ballotId => {
     });
   logger.debug(ballot);
   let selections = ballot.votes.map(async v => {
-    let vote = await vRegistry.resolve(v)
+    let vote = await vRegistry.get(v.getIdentifier())
       .catch(e => {
         logger.error(e);
         throw e;
@@ -96,7 +96,7 @@ getResults = async ballotId => {
   });
   logger.debug("---- ----");
   logger.debug(ballot);
-  logger.debug(Promise.all(selections));
+  logger.debug(await Promise.all(selections));
 
   return new Promise((resolve, reject) => {
     let query = connection.buildQuery(`
