@@ -21,7 +21,8 @@ $(() => {
   /** SEND TOKENS **/
   sendTokens = (btn, title, addresses, cb) => {
     btn.prop('disabled', true);
-    btn.before('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
+    btn.siblings('.fa-spinner').show();
+    
     let url = [
       window.location.origin,
       'api',
@@ -63,10 +64,13 @@ $(() => {
         }
         btn.prop('disabled', false);
       },
-      complete: () => {
-        console.log('Done sending');
-        btn.siblings('.fa-spinner').remove();
-      }
+      // complete: () => {
+      //   console.log('Sending complete');
+      //   btn.siblings('.fa-spinner').remove();
+      // }
+    }).always(() => {
+      console.log('Sending - always');
+      btn.siblings('.fa-spinner').hide();
     });
   };
 
@@ -81,9 +85,11 @@ $(() => {
       .map((i, el) => $(el).text().trim().replace(/^(00|\+)/, ""))
       .get();
     sendTokens($(e.target), title, addresses, () => {
-        let li = $('ul.ballots > li').filter((i, el) => {
+        // Hide adress book icon 
+        $('ul.ballots > li').filter((i, el) => {
           return $(el).find('.title').text().trim() === title
         }).find('.address, .tokens').hide();
+        
         $('#addressList').modal("hide");
       }
     );
@@ -178,6 +184,7 @@ $(() => {
     $('#deleteModal .title').text(title);
     $('#deleteModal').modal({backdrop:"true", keyboard:true});
   });
+  /* DELETE A BALLOT CONFIRMATION MODAL*/
   $('#deleteModal .delete').click(e => {
     let title = $('#deleteModal .title').first().text();
     let li = $('ul.ballots > li').filter((i, el) => {
@@ -223,17 +230,17 @@ $(() => {
   /* OPEN ADDRESS LIST MODAL */
   $(document).on('click', 'ul.ballots .address', e => {
     let title = $(e.currentTarget).siblings('.title').text().trim();
-    // let button = $(e.currentTarget).siblings('button.tokens');
+    let sendButton = $(e.currentTarget).siblings('button.tokens');
 
     let titleSpan = $('#addressList .modal-header .title');
     if(titleSpan.text().trim() !== title)
       $('#addressList ul').html("");
     titleSpan.text(title);
     
-    // if (button.length > 0 && button.is(':enabled')) 
-    $('#addressList .tokens').show();
-    // else
-      // $('#addressList .tokens').hide();
+    if ($('#addressList ul > li') > 0) 
+    sendButton.show();
+    else
+    sendButton.hide();
 
     $('#addressList').modal({backdrop:"true", keyboard:true});
   });
@@ -261,7 +268,7 @@ $(() => {
       return alert('Address already exists');
 
     $('#addressList ul')
-      .append('<li class="list-group-item d-flex align-items-center"> \
+      .append('<li class="list-group-item align-items-center"> \
                 <span class="mr-auto">'+ address +'</span><i class="fas fa-minus remove"></i> \
               </li>');
   };  

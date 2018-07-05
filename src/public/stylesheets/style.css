@@ -241,6 +241,10 @@ li svg:hover,
   z-index: unset
 }
 
+#addressList ul > li {
+  display: flex;
+}
+
 #auth {
   z-index: 1051;
 }
