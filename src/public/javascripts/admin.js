@@ -237,10 +237,10 @@ $(() => {
     }
     titleSpan.text(title);
    
-    if (!ballotChanged || $('#addressList ul > li').length > 0) { 
-      sendButton.prop('disabled', false);
-    } else {
+    if (ballotChanged || $('#addressList ul > li').length === 0) { 
       sendButton.prop('disabled', true);
+    } else {
+      sendButton.prop('disabled', false);
     }
 
     $('#addressList').modal({backdrop:"true", keyboard:true});
