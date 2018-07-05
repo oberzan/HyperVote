@@ -36,7 +36,7 @@ publishTokens = (ballot, tokens) => {
   logger.debug(hashes);
   let resource = serializer.fromJSON({
     '$class': 'org.vote.PublishTokens',
-    'ballot': ballot,
+    'ballot': decode(ballot),
     'hashedTokens': hashes
   });
   logger.debug(resource);
