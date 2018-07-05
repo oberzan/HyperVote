@@ -33,17 +33,9 @@ publishTokens = (ballot, tokens) => {
     hashes.push(sha.update(thash).digest('hex'));
   });
   
-  logger.debug(hashes);
-  logger.debug(ballot);
-  logger.debug(decodeURIComponent(ballot));
-  logger.debug(serializer.fromJSON({
-    '$class': 'org.vote.PublishTokens',
-    'ballot': 'Kdo bo zmagal%3F',
-    'hashedTokens': hashes
-  }));
   let resource = serializer.fromJSON({
     '$class': 'org.vote.PublishTokens',
-    'ballot': ballot,
+    'ballot': encodeURIComponent(ballot),
     'hashedTokens': hashes
   });
   logger.debug(resource);
