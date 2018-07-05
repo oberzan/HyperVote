@@ -191,11 +191,11 @@ $(() => {
     li.addClass('list-group-item-secondary');
     li.children().first().after('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
 
-    let option = li.find('.title').text();
+    //let option = li.find('.title').text();
     let url = [window.location.origin,
               'api',
               'ballot',
-               option
+               encodeURIComponent(title)
           ].join('/');
 
     console.log(url);
@@ -204,7 +204,7 @@ $(() => {
       type: "DELETE",
       url: url     
     }).done( data => {
-      console.log("Successfully deleted " + option);
+      console.log("Successfully deleted " + title);
       li.remove();
       //location.reload();
     }).fail( err => {

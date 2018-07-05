@@ -95,7 +95,7 @@ publishTokens = (ballot, addresses, originUrl) => {
 
     let transporter = nodemailer.createTransport(mailConfig);
 
-    let votingUrl = originUrl + '/' + ballot;
+    let votingUrl = (originUrl + '/' + ballot).replace(/\?/g, "%3F");
     let votingUrlEncoded = originUrl + '/' + encodeURIComponent(ballot);
     let failedAddresses = [];
     for (let [i, token] of tokens.entries()) {
@@ -118,7 +118,7 @@ publishTokens = (ballot, addresses, originUrl) => {
             '<body>' +
             `<h4>${i18n.__("Hi")}</h4>` +
             `<p>${i18n.__("Your token for")} ${ballot} ${i18n.__("is")}: <b>${token}</b></p>` +
-            `<p>${i18n.__("You can cast your vote at")}: <a href="${votingUrl}?token=${token}">${votingUrl}</a></p>` +
+            `<p>${i18n.__("You can cast your vote at")}: <a href="${votingUrlEncoded}?token=${token}">${votingUrl}</a></p>` +
             '</body>' +
             '</html>'
         };
