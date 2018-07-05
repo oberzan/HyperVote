@@ -233,14 +233,17 @@ $(() => {
     let sendButton = $(e.currentTarget).siblings('button.tokens');
 
     let titleSpan = $('#addressList .modal-header .title');
-    if(titleSpan.text().trim() !== title)
+    if(titleSpan.text().trim() !== title) {
       $('#addressList ul').html("");
+      $('#addAddress').val("");
+    }
     titleSpan.text(title);
     
-    if ($('#addressList ul > li') > 0) 
+    if ($('#addressList ul > li').length > 0) { 
       sendButton.prop('disabled', false);
-    else
+    } else {
       sendButton.prop('disabled', true);
+    }
 
     $('#addressList').modal({backdrop:"true", keyboard:true});
   });
