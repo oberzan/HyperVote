@@ -238,9 +238,9 @@ $(() => {
     titleSpan.text(title);
     
     if ($('#addressList ul > li') > 0) 
-    sendButton.show();
+      sendButton.prop('disabled', false);
     else
-    sendButton.hide();
+      sendButton.prop('disabled', true);
 
     $('#addressList').modal({backdrop:"true", keyboard:true});
   });
