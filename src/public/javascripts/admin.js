@@ -39,8 +39,6 @@ $(() => {
       url: url,
       data: {addresses: addresses},
       success: data => {
-        // btn.hide();
-        btn.prop('disabled', false);
         successBar.siblings('.alert').hide();
         successBar.find('span').text(data);
         successBar.show();
@@ -62,7 +60,6 @@ $(() => {
           }
           $('#addressList').modal("hide");
         }
-        btn.prop('disabled', false);
       },
       // complete: () => {
       //   console.log('Sending complete');
@@ -233,13 +230,15 @@ $(() => {
     let sendButton = $(e.currentTarget).siblings('button.tokens');
 
     let titleSpan = $('#addressList .modal-header .title');
-    if(titleSpan.text().trim() !== title) {
+    let ballotChanged = titleSpan.text().trim() !== title;
+    if (ballotChanged) {
       $('#addressList ul').html("");
       $('#addAddress').val("");
     }
     titleSpan.text(title);
-    
-    if ($('#addressList ul > li').length > 0) { 
+
+    console.log("li length: " + );    
+    if (!ballotChanged || $('#addressList ul > li').length > 0) { 
       sendButton.prop('disabled', false);
     } else {
       sendButton.prop('disabled', true);
