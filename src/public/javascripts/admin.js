@@ -236,8 +236,7 @@ $(() => {
       $('#addAddress').val("");
     }
     titleSpan.text(title);
-
-    console.log("li length: " + );    
+   
     if (!ballotChanged || $('#addressList ul > li').length > 0) { 
       sendButton.prop('disabled', false);
     } else {
