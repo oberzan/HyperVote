@@ -204,6 +204,7 @@ sendSMS = async (text, phoneNumber) => {
 }
 
 createTokens = (req, res) => {
+  logger.debug(req);
   let ballot = req.params.id;
   let addresses = req.body["addresses[]"];
 
