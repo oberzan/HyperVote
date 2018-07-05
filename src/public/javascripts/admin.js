@@ -27,7 +27,7 @@ $(() => {
       window.location.origin,
       'api',
       'ballot',
-       escape(title),
+       encodeURIComponent(title),
       'tokens'
     ].join('/');
     
