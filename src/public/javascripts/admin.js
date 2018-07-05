@@ -227,7 +227,7 @@ $(() => {
   /* OPEN ADDRESS LIST MODAL */
   $(document).on('click', 'ul.ballots .address', e => {
     let title = $(e.currentTarget).siblings('.title').text().trim();
-    let sendButton = $(e.currentTarget).siblings('button.tokens');
+    let sendButton = $('#addressList .tokens');
 
     let titleSpan = $('#addressList .modal-header .title');
     let ballotChanged = titleSpan.text().trim() !== title;
