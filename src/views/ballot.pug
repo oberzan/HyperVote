@@ -19,7 +19,13 @@ block content
       form(action=`api/vote/${ballot.title}` method="post" style=`display:${selected ? 'none':'unset'}`)
         div.form-group
           label #{i18n.__("Choose an option")}:
-          each option in ballot.options
+          
+          //- Shuffle options
+          - let options = ballot.options
+          - let random = ballot.options.map(Math.random);
+          - options.sort((a, b) => { return random[options.indexOf(a)] - random[options.indexOf(b)]; });
+
+          each option in options
             div.form-check
               input.form-check-input(type="radio" name="option" value=option.Name)
               label.form-check-label 
