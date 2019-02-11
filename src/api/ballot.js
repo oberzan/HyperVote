@@ -192,7 +192,7 @@ sendSMS = async (text, phoneNumber) => {
   
   let options = {
     method: 'POST',
-    uri: 'http://services.ts.telekom.si:80/services/SMSProxy',
+    uri: '**insert smsServiceUrl**',
     headers: {
       'Content-Type': 'text/xml; charset=utf-8',
       'Connection': 'keep-alive'
